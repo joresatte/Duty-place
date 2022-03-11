@@ -1,29 +1,17 @@
 import sqlite3
 
-class Contact:
-    def __init__(self, id, user_id, first_name, last_name, email, phone):
-        self.id = id
-        self.user_id = user_id
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.phone = phone
-
-    def full_name(self):
-        return self.first_name + ' ' + self.last_name
+class Categories:
+    def __init__(self, cat_id, text):
+        self.cat_id= cat_id
+        self.text = text
 
     def to_dict(self):
         return {
-            "id": self.id,
-            "user_id": self.user_id,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "full_name": self.full_name(),
-            "email": self.email,
-            "phone": self.phone,
+            "cat_id": self.cat_id,
+            "text": self.text,
         }
 
-class ContactRepository:
+class CategoriesRepository:
     def __init__(self, database_path):
         self.database_path = database_path
         self.init_tables()
