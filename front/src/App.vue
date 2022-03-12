@@ -1,47 +1,17 @@
 <template>
   <div id="nav">
-    <router-link class="home" to="/">Home</router-link>
-    <!--<router-link class="contacts" :to="{name: 'contactsPage'}">Contacts</router-link>-->
-    <!--<router-link class="newcontact" :to="{name: 'addNewContact'}">Add New Contact</router-link>-->
-    <p>{{loggedUser}} </p>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
   </div>
-  <router-view />
+  <router-view/>
 </template>
-<script>
-import { useStorage } from "@vueuse/core";
-export default{
-  data(){
-    return{
-      localUser: useStorage("user", {}),
-    }
-  },
-  computed: {
-    loggedUser() {
-      return this.localUser.name;
-    },
-  },
 
-}
-</script>
-
-
-<style scoped>  
-.home{
-  background: rgb(35, 207, 230);
-  padding: 5px;
-  text-align: center;
-  border-radius: 5px;
-}
-.contacts{
-  background: rgb(9, 79, 231);
-  padding: 5px;
-  text-align: center;
-  border-radius: 5px;
-}
-.newcontact{
-  background: rgb(226, 5, 160);
-  padding: 5px;
-  text-align: center;
-  border-radius: 5px;
-}
+<style lang="stylus">
+#app
+  font-family Avenir, Helvetica, Arial, sans-serif
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  text-align center
+  color #2c3e50
+  margin-top 60px
 </style>

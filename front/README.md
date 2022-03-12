@@ -1,23 +1,19 @@
-# Aplicación Contact List (front)
+# front
 
-## Configuración del proyecto
-
+## Project setup
 ```
 npm install
 ```
 
-### Ejecutar servidor de desarrollo
-
+### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Generar archivos de distribución
-
+### Compiles and minifies for production
 ```
 npm run build
 ```
 
 ### Customize configuration
-
 See [Configuration Reference](https://cli.vuejs.org/config/).
