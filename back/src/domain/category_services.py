@@ -74,12 +74,21 @@ class Categoryservicesepository:
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {"cat_id": category_id})
-        data = cursor.fetchone()
-        services = Category_services(**data)
-            
+        data = cursor.fetchall()
+        services = []
+        for item in data:
+            services_by_category_id = Category_services(
+                id= item["id"],
+                cat_id= item["cat_id"],
+                user_name= item["user_name"],
+                text= item["text"],
+                phone= item["phone"],
+                email= item["email"],
+                city= item["city"],
+            )
+            services.append(services_by_category_id)
         return services
-
-
+        
     def save(self, contact):
         sql = """INSERT into categories_services (id, cat_id, user_name, text, phone, email, city) values (
             :id, :cat_id, :user_name, :text, :phone, :email, :city

@@ -40,7 +40,7 @@ def test_should_return_services_list_by_category_id():
     services_repository.save(user_3)
     
     response = client.get("/api/services/by-category/category_1")
-    assert response.json == {
+    assert response.json == [{
         "id": "service_1",
         "cat_id": "category_1",
         "user_name": "vince",
@@ -49,4 +49,5 @@ def test_should_return_services_list_by_category_id():
         "email": "reinabo@vince.com",
         "city": "Bilbao",
     }
+    ]
     
