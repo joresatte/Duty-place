@@ -1,4 +1,3 @@
-from cgitb import text
 import sqlite3
 
 class Categories:
@@ -61,23 +60,19 @@ class CategoriesRepository:
                 text= item["text"],
             )
             categories.append(each_category)
-
-
         return categories
 
-
-    # def get_by_id(self, cat_id):
-    #     sql = """SELECT * FROM categories WHERE cat_id= :cat_id"""
-    #     conn = self.create_conn()
-    #     cursor = conn.cursor()
-    #     cursor.execute(sql, {"cat_id": cat_id})
-    #     data = cursor.fetchone()
-    #     if data== None:
-    #         category= None
-    #     else:
-    #         category = Categories(**data)
-            
-    #     return category
+    def get_by_cat_id(self, cat_id):
+        sql = """SELECT * FROM categories WHERE cat_id= :cat_id"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"cat_id": cat_id})
+        data = cursor.fetchone()
+        if data== None:
+            category= None
+        else:
+            category = Categories(**data)
+        return category
 
     # def deleted_contact_by_id(self, contact_deleted):
     #     sql = """ DELETE FROM categories
