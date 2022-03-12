@@ -1,6 +1,6 @@
 from src.webserver import create_app
 from src.domain.categories import CategoriesRepository
-from src.domain.users import Categoryservicesepository
+from src.domain.category_services import Categoryservicesepository
 
 
 database_path = "data/database.db"
