@@ -2,11 +2,11 @@
   <section class="home">
     {{welcome}}
   </section>
-  <form @submit.prevent="handledClickOncategory" action="">
-  <section class="categories" v-for="i in categories" :key="i">
-   <button class="category_button"><h1>{{i.text}}</h1></button>
+  <router-link v-model="selectCategory" to="/services/by-category/:category_id" >
+  <section class="categories" v-for="category in categories" :key="category.cat_id">
+   <button @click="selectedCategory" class="category_button"><h1>{{category.text}}</h1></button>
   </section>
-  </form>
+    </router-link>
 </template>
 
 <script>
@@ -20,14 +20,32 @@ export default {
     return{
       welcome:"welcome to Duty-Place",
       categories:[],
+      selectCategory:'',
+      // currentCategory: localStorage.category_id
     }
   },
   async mounted(){
     await fetch(`${config.router_Path}/categories`)
     .then(res => res.json())
     .then(data => this.categories = data)
-    .catch(err=> console.log(err.message))
+    .catch(err=> console.log(err.message));
 
+    if (localStorage.getItem('categories')) {
+      try {
+        this.categories = JSON.parse(localStorage.getItem('categories'));
+      } catch(e) {
+        localStorage.getItem('categories');
+        let category= this.selectCategory.cat_id
+        localStorage.setItem('categories', category)
+      }
+    }
+
+  },
+  methods:{
+    selectedCategory(){
+      localStorage.category= this.selectCategory.cat_id;
+
+    }
   }
 }
 </script>
