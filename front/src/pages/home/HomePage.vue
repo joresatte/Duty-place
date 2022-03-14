@@ -2,11 +2,12 @@
   <section class="home">
     {{welcome}}
   </section>
-  <router-link v-model="selectCategory" to="/services/by-category/:category_id" >
+  <form @submit.prevent="handledClickOnCatagory" action="">
   <section class="categories" v-for="category in categories" :key="category.cat_id">
    <button @click="selectedCategory" class="category_button"><h1>{{category.text}}</h1></button>
+  <router-link :to="{name: 'ServicesByCategoryPage', params:{category_id: category.cat_id}}" ></router-link>
   </section>
-    </router-link>
+  </form>
 </template>
 
 <script>
@@ -29,17 +30,6 @@ export default {
     .then(res => res.json())
     .then(data => this.categories = data)
     .catch(err=> console.log(err.message));
-
-    if (localStorage.getItem('categories')) {
-      try {
-        this.categories = JSON.parse(localStorage.getItem('categories'));
-      } catch(e) {
-        localStorage.getItem('categories');
-        let category= this.selectCategory.cat_id
-        localStorage.setItem('categories', category)
-      }
-    }
-
   },
   methods:{
     selectedCategory(){
