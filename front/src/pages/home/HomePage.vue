@@ -4,8 +4,9 @@
   </section>
   <form @submit.prevent="handledClickOnCatagory" action="">
   <section class="categories" v-for="category in categories" :key="category.cat_id">
+  <router-link :to="{name: 'ServicesByCategoryPage', params:{category_id: category.cat_id}}" >
    <button @click="selectedCategory" class="category_button"><h1>{{category.text}}</h1></button>
-  <router-link :to="{name: 'ServicesByCategoryPage', params:{category_id: category.cat_id}}" ></router-link>
+  </router-link>
   </section>
   </form>
 </template>

@@ -9,8 +9,14 @@ export default {
   props:['category_id'],
   data(){
     return{
-      category_id: this.$route.params.category_id
+      categoryServices: [],
     }
+  },
+  async mounted(){
+    await fetch(`${config.route_Path}/services/by-category/` + this.category_id)
+    .then(res => res.json())
+    .then(data => this.categoryServices = data)
+    .catch(err=> console.log(err.message))
   }
 
 }
