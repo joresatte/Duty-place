@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import {getCategories} from "../apiservices/api.js";
+import {getCategories} from "@/pages/apiservices/api.js";
 export default {
   name: 'Home',
   // components: {

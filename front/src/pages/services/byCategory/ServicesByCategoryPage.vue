@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import config from "@/config.js";
+import {getCategoriesServices} from "@/pages/apiservices/api.js";
+
 export default {
   name: 'ServicesByCategoryPage',
   props:['category_id'],
@@ -20,13 +21,16 @@ export default {
       services: [],
     }
   },
-  async mounted(){
-    console.log(config.router_Path)
-    await fetch(`${config.router_Path}/services/by-category/` + this.category_id)
-    .then(res => res.json())
-    .then(data => this.services = data)
-    .catch(err=> console.log(err.message))
-  }
+  mounted(){
+    this.loadData()
+  },
+  methods:{
+    async loadData(){
+      console.log("loadData-services")
+      let categoryId = this.$route.params.category_id;
+      this.services= await getCategoriesServices(categoryId)
+    }
+  },
 
 }
 </script>
