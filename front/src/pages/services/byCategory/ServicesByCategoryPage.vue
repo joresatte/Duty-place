@@ -1,11 +1,11 @@
 <template>
   <h1>Services By Category Page</h1>
-  <p>{{category_id}} </p>
+  <!-- <p>{{category_id}} </p> -->
   <section v-for="index in services" :key="index" class="services">
  <h2>{{index.user_name}}</h2>
-  <p>{{index.phone}}</p>
-  <p>{{index.email}}</p>
-  <p>{{index.city}}</p>
+  <p><span class="phone">Phone Number:</span> {{index.phone}}</p>
+  <p><span class="email">Email:</span> {{index.email}}</p>
+  <p><span class="city">City: </span>{{index.city}}</p>
   </section>
 
 </template>

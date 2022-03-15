@@ -9,7 +9,6 @@
   </router-link>
   </section>
   </form>
-  {{categories}}
 </template>
 
 <script>
