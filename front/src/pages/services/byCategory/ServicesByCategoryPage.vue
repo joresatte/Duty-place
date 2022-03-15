@@ -3,9 +3,9 @@
   <!-- <p>{{category_id}} </p> -->
   <section v-for="index in services" :key="index" class="services">
  <h2>{{index.user_name}}</h2>
-  <p><span class="phone">Phone Number:</span> {{index.phone}}</p>
-  <p><span class="email">Email:</span> {{index.email}}</p>
-  <p><span class="city">City: </span>{{index.city}}</p>
+  <p><span class="phone">Phone Number:</span><br> {{index.phone}}</p>
+  <p><span class="email">Email:</span><br> {{index.email}}</p>
+  <p><span class="city">City: </span><br>{{index.city}}</p>
   </section>
 
 </template>
@@ -38,7 +38,7 @@ export default {
 <style scope>
 .services{
   display: grid;
-  grid-auto-columns: 1fr 1fr 1f;
+  grid-auto-columns: auto;
   justify-content: space-around;
   padding: 2em;
   text-align:center;
@@ -47,5 +47,14 @@ export default {
   margin: 20px;
   box-shadow:  2px 2px 4px #f10889;
   background-color: #0fda9d2a;
+}
+.email{
+  font-size: 1.5rem;
+}
+.phone{
+  font-size:1.5rem;
+}
+.city{
+  font-size: 1.5rem;
 }
 </style>
