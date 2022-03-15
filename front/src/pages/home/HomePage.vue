@@ -9,10 +9,11 @@
   </router-link>
   </section>
   </form>
+  {{categories}}
 </template>
 
 <script>
-import config from "@/config.js";
+import {getCategories} from "../apiservices/api.js";
 export default {
   name: 'Home',
   // components: {
@@ -22,20 +23,17 @@ export default {
     return{
       welcome:"welcome to Duty-Place",
       categories:[],
-      selectCategory:'',
+      // selectCategory:'',
       // currentCategory: localStorage.category_id
     }
   },
-  async mounted(){
-    await fetch(`${config.router_Path}/categories`)
-    .then(res => res.json())
-    .then(data => this.categories = data)
-    .catch(err=> console.log(err.message));
+  mounted(){
+   this.loadData()
   },
   methods:{
-    selectedCategory(){
-      localStorage.category= this.selectCategory.cat_id;
-
+    async loadData(){
+      console.log("loadData")
+      this.categories= await getCategories()
     }
   }
 }

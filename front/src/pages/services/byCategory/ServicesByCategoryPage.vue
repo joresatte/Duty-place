@@ -21,7 +21,8 @@ export default {
     }
   },
   async mounted(){
-    await fetch(`${config.route_Path}/services/by-category/` + this.category_id)
+    console.log(config.router_Path)
+    await fetch(`${config.router_Path}/services/by-category/` + this.category_id)
     .then(res => res.json())
     .then(data => this.services = data)
     .catch(err=> console.log(err.message))
