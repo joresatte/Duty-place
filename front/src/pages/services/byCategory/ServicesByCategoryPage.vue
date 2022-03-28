@@ -6,6 +6,7 @@
   <p><span class="phone">Phone Number:</span><br> {{index.phone}}</p>
   <p><span class="email">Email:</span><br> {{index.email}}</p>
   <p><span class="city">City: </span><br>{{index.city}}</p>
+  <router-link :to="{ name: 'userDetailesPage', params:{id: index.id}}">details</router-link>
   </section>
 
 </template>
@@ -27,7 +28,7 @@ export default {
   methods:{
     async loadData(){
       console.log("loadData-services")
-      let categoryId = this.$route.params.category_id;
+      let categoryId = this.category_id;
       this.services= await getCategoriesServices(categoryId)
     }
   },

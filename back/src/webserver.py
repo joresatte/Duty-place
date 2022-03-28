@@ -27,6 +27,11 @@ def create_app(repositories):
         all_categories = repositories["categories_services"].get_category_services_by_cat_id(category_id)
         return object_to_json(all_categories)
 
+    @app.route("/api/services/by-category/<id>", methods=["GET"])
+    def get_all_services_by_category_id(category_id):
+        all_categories = repositories["categories_services"].get_category_services_by_cat_id(category_id)
+        return object_to_json(all_categories)
+
     # @app.route("/api/contact", methods=["POST"])
     # def contact_posted():
     #     user_id= request.headers.get("Authorization")
