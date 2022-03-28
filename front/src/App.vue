@@ -24,4 +24,7 @@
     border-radius 10px
     padding 10px
     text-shadow 3px 3px 3px yellow
+
+  *#app
+  background: black;
 </style>

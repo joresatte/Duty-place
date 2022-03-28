@@ -46,7 +46,7 @@ export default {
   border: 2px solid #2bff00;
   margin: 20px;
   box-shadow:  2px 2px 4px #f10889;
-  background-color: #0fda9d2a;
+  background-color:white;
 }
 .email{
   font-size: 1.5rem;
