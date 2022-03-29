@@ -21,7 +21,7 @@ class Category_services:
             "city": self.city,
         }
 
-class Categoryservicesepository:
+class CategoryServicesRepository:
     def __init__(self, database_path):
         self.database_path = database_path
         self.init_tables()
@@ -88,8 +88,28 @@ class Categoryservicesepository:
             )
             services.append(services_by_category_id)
         return services
+
+    def get_user_services_by_id(self, id):
+        sql = """SELECT * FROM categories_services WHERE id= :id"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"id": id})
+        data = cursor.fetchall()
+        services = []
+        for item in data:
+            user_service = Category_services(
+                id= item["id"],
+                cat_id= item["cat_id"],
+                user_name= item["user_name"],
+                text= item["text"],
+                phone= item["phone"],
+                email= item["email"],
+                city= item["city"],
+            )
+            services.append(user_service)
+        return services
         
-    def save(self, contact):
+    def save(self, user_service):
         sql = """INSERT into categories_services (id, cat_id, user_name, text, phone, email, city) values (
             :id, :cat_id, :user_name, :text, :phone, :email, :city
         ) """
@@ -97,6 +117,6 @@ class Categoryservicesepository:
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            contact.to_dict(),
+            user_service.to_dict(),
         )
         conn.commit()

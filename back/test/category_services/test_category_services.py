@@ -1,9 +1,9 @@
 from src.lib.utils import temp_file
 from src.webserver import create_app
-from src.domain.category_services import Categoryservicesepository, Category_services
+from src.domain.category_services import CategoryServicesRepository, Category_services
 
 def test_should_return_empty_services_list_by_category():
-    services_Repository = Categoryservicesepository(temp_file())
+    services_Repository = CategoryServicesRepository(temp_file())
     app = create_app(repositories={"categories_services": services_Repository})
     client = app.test_client()
 
@@ -11,7 +11,7 @@ def test_should_return_empty_services_list_by_category():
     assert response.json == []
 
 def test_should_return_services_list_by_category():
-    services_repository = Categoryservicesepository(temp_file())
+    services_repository = CategoryServicesRepository(temp_file())
     app = create_app(repositories={"categories_services": services_repository})
     client = app.test_client()
 

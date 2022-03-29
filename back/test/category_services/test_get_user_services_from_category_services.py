@@ -1,10 +1,10 @@
 from src.lib.utils import temp_file
 from src.webserver import create_app
-from src.domain.category_services import Categoryservicesepository, Category_services
+from src.domain.category_services import CategoryServicesRepository, Category_services
 
 def test_should_return_services_list_by_category_id():
-    services_repository = Categoryservicesepository(temp_file())
-    app = create_app(repositories={"categories_services": services_repository})
+    services_repository = CategoryServicesRepository(temp_file())
+    app = create_app(repositories={"services": services_repository})
     client = app.test_client()
 
     user_1= Category_services(
@@ -39,7 +39,7 @@ def test_should_return_services_list_by_category_id():
     services_repository.save(user_2)
     services_repository.save(user_3)
     
-    response = client.get("/api/services/by-category/service_1")
+    response = client.get("/api/services/user_services/service_1")
     assert response.json == [{
         "id": "service_1",
         "cat_id": "category_1",

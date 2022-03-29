@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
-from src.domain.categories import Categories
+from src.domain.categories import CategoriesRepository ,Categories
+from src.domain.category_services import CategoryServicesRepository, Category_services
 from src.lib.utils import object_to_json
 
 
@@ -27,10 +28,11 @@ def create_app(repositories):
         all_categories = repositories["categories_services"].get_category_services_by_cat_id(category_id)
         return object_to_json(all_categories)
 
-    @app.route("/api/services/by-category/<id>", methods=["GET"])
-    def get_all_services_by_category_id(category_id):
-        all_categories = repositories["categories_services"].get_category_services_by_cat_id(category_id)
-        return object_to_json(all_categories)
+    # @app.route("/api/services/by-category/<id>", methods=["GET"])
+    # def get_user_in_services_by_category_by_id(id):
+    #     user_services = repositories["categories_services"].get_user_services_by_id(id)
+    #     print(user_services)
+    #     return object_to_json(user_services)
 
     # @app.route("/api/contact", methods=["POST"])
     # def contact_posted():

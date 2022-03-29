@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, "")
 
 from src.domain.categories import CategoriesRepository, Categories
-from src.domain.category_services import Categoryservicesepository, Category_services
+from src.domain.category_services import CategoryServicesRepository, Category_services
 
 database_path = "data/database.db"
 
@@ -33,7 +33,7 @@ contact_repository.save(category_2)
 contact_repository.save(category_3)
 contact_repository.save(category_4)
 
-services_repository = Categoryservicesepository(database_path)
+services_repository = CategoryServicesRepository(database_path)
 services_repository.save(
     Category_services(
         id= "service_1",

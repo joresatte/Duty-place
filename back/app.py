@@ -1,13 +1,14 @@
 from src.webserver import create_app
 from src.domain.categories import CategoriesRepository
-from src.domain.category_services import Categoryservicesepository
+from src.domain.category_services import CategoryServicesRepository
 
 
 database_path = "data/database.db"
 
 repositories = {
     "categories": CategoriesRepository(database_path),
-    "categories_services": Categoryservicesepository(database_path),
+    "categories_services": CategoryServicesRepository(database_path),
+    # "services": Servicesepository(database_path),
 }
 
 app = create_app(repositories)
