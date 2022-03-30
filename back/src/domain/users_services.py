@@ -1,11 +1,12 @@
 import sqlite3
 
 class Services:
-    def __init__(self, id, cat_id, user_name, text, textarea, email, phone, city):
+    def __init__(self, id, cat_id, user_name, text, text1, textarea, email, phone, city):
         self.id= id
         self.cat_id= cat_id
         self.user_name= user_name
         self.text= text
+        self.text1= text1
         self.textarea= textarea
         self.email= email
         self.phone= phone
@@ -17,6 +18,7 @@ class Services:
             "cat_id": self.cat_id,
             "user_name": self.user_name,
             "text": self.text,
+            "text1": self.text1,
             "textarea": self.textarea,
             "email": self.email,
             "phone": self.phone,
@@ -40,6 +42,7 @@ class ServicesRepository:
                 cat_id varchar,
                 user_name varchar,
                 text varchar,
+                text1 varchar,
                 textarea varchar,
                 phone varchar,
                 email varchar,
@@ -65,6 +68,7 @@ class ServicesRepository:
                 cat_id= item["cat_id"],
                 user_name= item["user_name"],
                 text= item["text"],
+                text1= item["text1"],
                 textarea= item['textarea'],
                 phone= item["phone"],
                 email= item["email"],
@@ -86,6 +90,7 @@ class ServicesRepository:
                 cat_id= item["cat_id"],
                 user_name= item["user_name"],
                 text= item["text"],
+                text1= item["text1"],
                 textarea= item['textarea'],
                 phone= item["phone"],
                 email= item["email"],
@@ -95,8 +100,8 @@ class ServicesRepository:
         return services
 
     def save(self, user_service):
-        sql = """INSERT into services (id, cat_id, user_name, text, textarea, phone, email, city) values (
-            :id, :cat_id, :user_name, :text, :textarea, :phone, :email, :city
+        sql = """INSERT into services (id, cat_id, user_name, text, text1, textarea, phone, email, city) values (
+            :id, :cat_id, :user_name, :text, :text, :textarea, :phone, :email, :city
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()

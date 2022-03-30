@@ -48,6 +48,24 @@ def test_should_return_services_list_by_category_id():
         "phone": "024-639-2574",
         "email": "reinabo@vince.com",
         "city": "Bilbao",
+    },
+    {
+        "id": "service_1",
+        "cat_id": "category_1",
+        "user_name": "vince",
+        "text": "Mudanzas",
+        "phone": "024-639-2574",
+        "email": "reinabo@vince.com",
+        "city": "Bilbao",
+    },
+    {
+        "id": "service_1",
+        "cat_id": "category_1",
+        "user_name": "vince",
+        "text": "Mudanzas",
+        "phone": "024-639-2574",
+        "email": "reinabo@vince.com",
+        "city": "Bilbao",
     }
     ]
     

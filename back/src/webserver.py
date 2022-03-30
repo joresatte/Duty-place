@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from src.domain.categories import CategoriesRepository ,Categories
 from src.domain.category_services import CategoryServicesRepository, Category_services
+from src.domain.users_services import ServicesRepository, Services
 from src.lib.utils import object_to_json
 
 
@@ -20,7 +21,7 @@ def create_app(repositories):
 
     @app.route("/api/services/user_services", methods=["GET"])
     def get_all_services():
-        all_services = repositories["categories"].get_all_services()
+        all_services = repositories["ServicesRepository"].get_all_services()
         return object_to_json(all_services)
 
     @app.route("/api/services/by-category", methods=["GET"])
