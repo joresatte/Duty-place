@@ -1,21 +1,27 @@
 import sqlite3
 
 class Category_services:
-    def __init__(self, id, cat_id, user_name, text, email, phone, city):
+    def __init__(self, id, cat_id, user_name, text, intro, text_pictures, textarea, email, phone, city):
         self.id= id
         self.cat_id= cat_id
         self.user_name= user_name
         self.text= text
+        self.intro= intro
+        self.text_pictures= text_pictures
+        self.textarea= textarea
         self.email= email
         self.phone= phone
         self.city= city
 
     def to_dict(self):
         return {
-            "id": self.id,
+           "id": self.id,
             "cat_id": self.cat_id,
             "user_name": self.user_name,
             "text": self.text,
+            "intro": self.intro,
+            "text_pictures": self.text_pictures,
+            "textarea": self.textarea,
             "email": self.email,
             "phone": self.phone,
             "city": self.city,
@@ -34,10 +40,13 @@ class CategoryServicesRepository:
     def init_tables(self):
         sql = """
             create table if not exists categories_services (
-                id varchar,
+               id varchar,
                 cat_id varchar,
                 user_name varchar,
                 text varchar,
+                intro varchar,
+                text_pictures varchar,
+                textarea varchar,
                 phone varchar,
                 email varchar,
                 city varchar  
@@ -58,10 +67,13 @@ class CategoryServicesRepository:
         services = []
         for item in data:
             each_category_service = Category_services(
-                id= item["id"],
+                 id= item["id"],
                 cat_id= item["cat_id"],
                 user_name= item["user_name"],
                 text= item["text"],
+                intro= item["intro"],
+                text_pictures= item["text_pictures"],
+                textarea= item['textarea'],
                 phone= item["phone"],
                 email= item["email"],
                 city= item["city"],
@@ -78,10 +90,13 @@ class CategoryServicesRepository:
         services = []
         for item in data:
             services_by_category_id = Category_services(
-                id= item["id"],
+                 id= item["id"],
                 cat_id= item["cat_id"],
                 user_name= item["user_name"],
                 text= item["text"],
+                intro= item["intro"],
+                text_pictures= item["text_pictures"],
+                textarea= item['textarea'],
                 phone= item["phone"],
                 email= item["email"],
                 city= item["city"],
@@ -89,29 +104,9 @@ class CategoryServicesRepository:
             services.append(services_by_category_id)
         return services
 
-    # def get_user_services_by_id(self, id):
-    #     sql = """SELECT * FROM categories_services WHERE id= :id"""
-    #     conn = self.create_conn()
-    #     cursor = conn.cursor()
-    #     cursor.execute(sql, {"id": id})
-    #     data = cursor.fetchall()
-    #     services = []
-    #     for item in data:
-    #         user_service = Category_services(
-    #             id= item["id"],
-    #             cat_id= item["cat_id"],
-    #             user_name= item["user_name"],
-    #             text= item["text"],
-    #             phone= item["phone"],
-    #             email= item["email"],
-    #             city= item["city"],
-    #         )
-    #         services.append(user_service)
-    #     return services
-        
     def save(self, user_service):
-        sql = """INSERT into categories_services (id, cat_id, user_name, text, phone, email, city) values (
-            :id, :cat_id, :user_name, :text, :phone, :email, :city
+        sql = """INSERT into categories_services (id, cat_id, user_name, text, intro, text_pictures, textarea, phone, email, city) values (
+            :id, :cat_id, :user_name, :text, :intro, :text_pictures, :textarea, :phone, :email, :city
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
