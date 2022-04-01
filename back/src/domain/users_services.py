@@ -1,12 +1,13 @@
 import sqlite3
 
 class Services:
-    def __init__(self, id, cat_id, user_name, text, intro, text_pictures, textarea, email, phone, city):
+    def __init__(self, id, cat_id, user_name, text, intro, price, text_pictures, textarea, email, phone, city):
         self.id= id
         self.cat_id= cat_id
         self.user_name= user_name
         self.text= text
         self.intro= intro
+        self.price= price
         self.text_pictures= text_pictures
         self.textarea= textarea
         self.email= email
@@ -20,6 +21,7 @@ class Services:
             "user_name": self.user_name,
             "text": self.text,
             "intro": self.intro,
+            "price": self.price,
             "text_pictures": self.text_pictures,
             "textarea": self.textarea,
             "email": self.email,
@@ -45,6 +47,7 @@ class ServicesRepository:
                 user_name varchar,
                 text varchar,
                 intro varchar,
+                price varchar,
                 text_pictures varchar,
                 textarea varchar,
                 phone varchar,
@@ -72,6 +75,7 @@ class ServicesRepository:
                 user_name= item["user_name"],
                 text= item["text"],
                 intro= item["intro"],
+                price= item["price"],
                 text_pictures= item["text_pictures"],
                 textarea= item['textarea'],
                 phone= item["phone"],
@@ -95,6 +99,7 @@ class ServicesRepository:
                 user_name= item["user_name"],
                 text= item["text"],
                 intro= item["intro"],
+                price= item["price"],
                 text_pictures= item["text_pictures"],
                 textarea= item['textarea'],
                 phone= item["phone"],
@@ -105,8 +110,8 @@ class ServicesRepository:
         return services
 
     def save(self, user_service):
-        sql = """INSERT into services (id, cat_id, user_name, text, intro, text_pictures, textarea, phone, email, city) values (
-            :id, :cat_id, :user_name, :text, :intro, :text_pictures, :textarea, :phone, :email, :city
+        sql = """INSERT into services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
+            :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
