@@ -16,13 +16,11 @@ def create_app(repositories):
 
     @app.route("/api/categories", methods=["GET"])
     def get_all_categories():
-        body= request.json
         all_categories = repositories["categories"].get_all()
         return object_to_json(all_categories)
 
     @app.route("/api/services/user_services", methods=["GET"])
     def get_all_users_services():
-        body= request.json
         all_services = repositories["services"].get_all_services()
         return object_to_json(all_services)
 
@@ -33,7 +31,6 @@ def create_app(repositories):
 
     @app.route("/api/services/by-category", methods=["GET"])
     def get_all_services_by_category():
-        body= request.json
         all_categories = repositories["categories_services"].get_all_services_by_category()
         return object_to_json(all_categories)
 
