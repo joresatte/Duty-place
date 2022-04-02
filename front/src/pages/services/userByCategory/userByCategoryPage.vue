@@ -2,7 +2,7 @@
 <h1>user page</h1>
   <h2>{{id}}</h2>
   <section class="services" v-for="user in users" :key="user">
-  <!-- <img :src= "user.text_pictures" alt="" class="image_category"><br> -->
+  <img :src= "user.text_pictures" alt="" class="image_category"><br>
   <h2>{{user.user_name}}</h2>
   <p><span class="phone">Phone Number:</span><br>{{user.phone}}</p>
   <p><span class="email">Email:</span><br> {{user.email}}</p>
