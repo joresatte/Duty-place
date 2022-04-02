@@ -42,6 +42,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.services{
+  background-color: #078282FF;
+  color: #F1F4FFFF;
+}
 </style>

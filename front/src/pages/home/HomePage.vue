@@ -10,6 +10,16 @@
   </router-link>
   </section>
   </form>
+  <section class="message">
+    <pre>
+      ¿Cómo funciona nuestro servicio 
+      de cuidador/a interno/a
+       Entendemos tus necesidades,
+       definimos un servicio 
+       personalizado y damos respuesta 
+       en menos de 1 horas.
+    </pre>
+  </section>
   <footer class="down">
     <div>contact us</div>
     <div></div>
@@ -27,8 +37,6 @@ export default {
     return{
       welcome:"welcome to Services",
       categories:[],
-      // selectCategory:'',
-      // currentCategory: localStorage.category_id
     }
   },
   mounted(){
@@ -70,7 +78,7 @@ cursor:pointer;
   border: 2px solid #2bff00;
   margin: 20px;
   box-shadow:  2px 2px 4px #f10889;
-  background-color: #0fda9d2a;
+  background-color: #6E8898FF;
 }
 .home{
   margin: 0.5em;
@@ -88,5 +96,16 @@ cursor:pointer;
   grid-template-columns: auto;
   border: solid 2px;
   background-color: rgb(16, 215, 215);
+}
+.message{
+  display: flex;
+  justify-content: flex-start;
+  font-size:2em;
+  color: white;
+  border: solid;
+  background: ;
+  padding: 1em;
+  position: relative;
+  
 }
 </style>

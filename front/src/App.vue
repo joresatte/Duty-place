@@ -26,5 +26,5 @@
     text-shadow 3px 3px 3px yellow
 
   *#app
-  background:  #505160;
+  background:  #95DBE5FF;
 </style>
