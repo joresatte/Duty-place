@@ -2,6 +2,7 @@
   <h1>Services By Category Page</h1>
   <!-- <p>{{category_id}} </p> -->
   <section v-for="index in services" :key="index" class="services">
+  <img :src= "index.text_pictures" alt="" class="image_category"><br>
  <h2>{{index.user_name}}</h2>
   <p><span class="phone">Phone Number:</span><br> {{index.phone}}</p>
   <p><span class="email">Email:</span><br> {{index.email}}</p>
