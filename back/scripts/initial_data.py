@@ -6,6 +6,20 @@ from src.domain.categories import CategoriesRepository, Categories
 from src.domain.category_services import CategoryServicesRepository, Category_services
 from src.domain.users_services import ServicesRepository, Services
 from src.domain.data import cuidados, limpiezas, mudanzas, mantemientos
+from src.domain.userDataPictures import( 
+    pictures_cuidados_1,
+    pictures_cuidados_2,
+    pictures_cuidados_3,
+    pictures_mudanzas_1,
+    pictures_mudanzas_2,
+    pictures_mudanzas_3,
+    pictures_limpiezas_1,
+    pictures_limpiezas_2,
+    pictures_limpiezas_3,
+    pictures_mantenimientos_1,
+    pictures_mantenimientos_2,
+    pictures_mantenimientos_3
+)
 
 database_path = "data/database.db"
 
@@ -33,11 +47,6 @@ category_4 = Categories(
         text_pictures= mantemientos,
        
     )
-contact_repository = CategoriesRepository(database_path)
-contact_repository.save(category_1)
-contact_repository.save(category_2)
-contact_repository.save(category_3)
-contact_repository.save(category_4)
 
 services_repository = CategoryServicesRepository(database_path)
 services_repository.save(
@@ -48,7 +57,7 @@ services_repository.save(
         text= "Mudanzas",
         intro= "Realizamos mudanzas",
         price= "por 7$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mudanzas_1,
         textarea= "Mudanzas",
         phone= "024-639-2574",
         email= "reinabo@vince.com",
@@ -63,7 +72,7 @@ services_repository.save(
         text= "Mudanzas",
         intro= "Realizamos mudanzas",
         price= "por 6$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mudanzas_2,
         textarea= "Mudanzas",
         phone= "024-639-2574",
         email= "aqsdo@voiuce.com",
@@ -78,7 +87,7 @@ services_repository.save(
         text= "Mudanzas",
         intro= "Realizamos mudanzas",
         price= "por 6.5$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mudanzas_3,
         textarea= "Mudanzas",
         phone= "024-768-26544",
         email= "vhjbo@dsadce.com",
@@ -94,7 +103,7 @@ services_repository.save(
         text= "Limpiezas",
         intro= "disponible para todo tipos de limpiezas",
         price= "por 8$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_limpiezas_1,
         textarea= "Limpiezas",
         phone= "424-639-9574",
         email= "fbadland0@bizjournals.com",
@@ -110,7 +119,7 @@ services_repository.save(
         intro= "disponible para todo tipos de limpiezas",
         price= "por 7$ la hora",
         text_pictures= "foto",
-        textarea= "Limpiezas",
+        textarea= pictures_limpiezas_2,
         phone= "124-234-9574",
         email= "efmland0@bizjournals.com",
         city= "sdjnkjrove",
@@ -124,7 +133,7 @@ services_repository.save(
         text= "Limpiezas",
         intro= "todo tipos de limpiezas",
         price= "por 8$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_limpiezas_3,
         textarea= "Limpiezas",
         phone= "008-639-94374",
         email= "jnk@bizjouals.com",
@@ -140,7 +149,7 @@ services_repository.save(
         text= "Cuidados",
         intro= "disponible para todo tipos de cuidados",
         price= "por 7$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_cuidados_1,
         textarea= "cuidados",
         phone= "810-629-1584",
         email= "msisson2@disqus.com",
@@ -155,7 +164,7 @@ services_repository.save(
         text= "Cuidados",
         intro= "disponible para todo tipos de cuidados",
         price= "por 7$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_cuidados_2,
         textarea= "cuidados",
         phone= "481-201-6380",
         email= "ecardoo3@wufoo.com",
@@ -170,7 +179,7 @@ services_repository.save(
         text= "Cuidados",
         intro= "disponible para todo tipos de cuidados",
         price= "por 7$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_cuidados_3,
         textarea= "cuidados",
         phone= "382-214-1560",
         email= "msisson2@disqus.com",
@@ -186,7 +195,7 @@ services_repository.save(
         text= "Mantenimientos",
         intro= "disponible para todo tipos de Mantenimientos",
         price= "por 5$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mantenimientos_3,
         textarea= "Mantenimientos",
         phone= "562-575-0936",
         email= "dillsley5@shareasale.com",
@@ -201,7 +210,7 @@ services_repository.save(
         text= "Mantenimientos",
         intro= "disponible para todo tipos de Mantenimientos",
         price= "por 5$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mantenimientos_1,
         textarea= "Mantenimientos",
         phone= "939-267-4173",
         email= "kreisen6@earthlink.net",
@@ -216,7 +225,7 @@ services_repository.save(
         text= "Mantenimientos",
         intro= "disponible para todo tipos de Mantenimientos",
         price= "por 5$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mantenimientos_2,
         textarea= "Mantenimientos",
         phone= "843-625-9927",
         email= "grickerd7@dion.ne.jp",
@@ -226,7 +235,7 @@ services_repository.save(
 
 
 servicesRepository = ServicesRepository(database_path)
-servicesRepository.save(
+services_repository.save(
     Services(
         id= "service_1",
         cat_id= "category_1",
@@ -234,7 +243,7 @@ servicesRepository.save(
         text= "Mudanzas",
         intro= "Realizamos mudanzas",
         price= "por 7$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mudanzas_1,
         textarea= "Mudanzas",
         phone= "024-639-2574",
         email= "reinabo@vince.com",
@@ -249,7 +258,7 @@ servicesRepository.save(
         text= "Mudanzas",
         intro= "Realizamos mudanzas",
         price= "por 6$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mudanzas_2,
         textarea= "Mudanzas",
         phone= "024-639-2574",
         email= "aqsdo@voiuce.com",
@@ -264,7 +273,7 @@ servicesRepository.save(
         text= "Mudanzas",
         intro= "Realizamos mudanzas",
         price= "por 6.5$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mudanzas_3,
         textarea= "Mudanzas",
         phone= "024-768-26544",
         email= "vhjbo@dsadce.com",
@@ -280,7 +289,7 @@ servicesRepository.save(
         text= "Limpiezas",
         intro= "disponible para todo tipos de limpiezas",
         price= "por 8$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_limpiezas_1,
         textarea= "Limpiezas",
         phone= "424-639-9574",
         email= "fbadland0@bizjournals.com",
@@ -296,7 +305,7 @@ servicesRepository.save(
         intro= "disponible para todo tipos de limpiezas",
         price= "por 7$ la hora",
         text_pictures= "foto",
-        textarea= "Limpiezas",
+        textarea= pictures_limpiezas_2,
         phone= "124-234-9574",
         email= "efmland0@bizjournals.com",
         city= "sdjnkjrove",
@@ -310,7 +319,7 @@ servicesRepository.save(
         text= "Limpiezas",
         intro= "todo tipos de limpiezas",
         price= "por 8$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_limpiezas_3,
         textarea= "Limpiezas",
         phone= "008-639-94374",
         email= "jnk@bizjouals.com",
@@ -326,7 +335,7 @@ servicesRepository.save(
         text= "Cuidados",
         intro= "disponible para todo tipos de cuidados",
         price= "por 7$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_cuidados_1,
         textarea= "cuidados",
         phone= "810-629-1584",
         email= "msisson2@disqus.com",
@@ -341,7 +350,7 @@ servicesRepository.save(
         text= "Cuidados",
         intro= "disponible para todo tipos de cuidados",
         price= "por 7$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_cuidados_2,
         textarea= "cuidados",
         phone= "481-201-6380",
         email= "ecardoo3@wufoo.com",
@@ -356,7 +365,7 @@ servicesRepository.save(
         text= "Cuidados",
         intro= "disponible para todo tipos de cuidados",
         price= "por 7$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_cuidados_3,
         textarea= "cuidados",
         phone= "382-214-1560",
         email= "msisson2@disqus.com",
@@ -372,7 +381,7 @@ servicesRepository.save(
         text= "Mantenimientos",
         intro= "disponible para todo tipos de Mantenimientos",
         price= "por 5$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mantenimientos_3,
         textarea= "Mantenimientos",
         phone= "562-575-0936",
         email= "dillsley5@shareasale.com",
@@ -387,7 +396,7 @@ servicesRepository.save(
         text= "Mantenimientos",
         intro= "disponible para todo tipos de Mantenimientos",
         price= "por 5$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mantenimientos_1,
         textarea= "Mantenimientos",
         phone= "939-267-4173",
         email= "kreisen6@earthlink.net",
@@ -402,7 +411,7 @@ servicesRepository.save(
         text= "Mantenimientos",
         intro= "disponible para todo tipos de Mantenimientos",
         price= "por 5$ la hora",
-        text_pictures= "foto",
+        text_pictures= pictures_mantenimientos_2,
         textarea= "Mantenimientos",
         phone= "843-625-9927",
         email= "grickerd7@dion.ne.jp",
