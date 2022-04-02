@@ -10,15 +10,15 @@ from src.domain.userDataPictures import(
     pictures_cuidados_1,
     pictures_cuidados_2,
     pictures_cuidados_3,
-    pictures_mudanzas_1,
-    pictures_mudanzas_2,
-    pictures_mudanzas_3,
+    pictures_mantenimientos_1,
+    pictures_mantenimientos_2,
+    pictures_mantenimientos_3,
     pictures_limpiezas_1,
     pictures_limpiezas_2,
     pictures_limpiezas_3,
-    pictures_mantenimientos_1,
-    pictures_mantenimientos_2,
-    pictures_mantenimientos_3
+    pictures_mudanzas_1,
+    pictures_mudanzas_2,
+    pictures_mudanzas_3
 )
 
 database_path = "data/database.db"
@@ -123,8 +123,8 @@ services_repository.save(
         text= "Limpiezas",
         intro= "disponible para todo tipos de limpiezas",
         price= "por 7$ la hora",
-        text_pictures= "foto",
-        textarea= pictures_limpiezas_2,
+        text_pictures= pictures_limpiezas_2,
+        textarea= "foto",
         phone= "124-234-9574",
         email= "efmland0@bizjournals.com",
         city= "sdjnkjrove",
@@ -308,8 +308,8 @@ services_repository.save(
         text= "Limpiezas",
         intro= "disponible para todo tipos de limpiezas",
         price= "por 7$ la hora",
-        text_pictures= "foto",
-        textarea= pictures_limpiezas_2,
+        text_pictures= pictures_limpiezas_2,
+        textarea= "foto",
         phone= "124-234-9574",
         email= "efmland0@bizjournals.com",
         city= "sdjnkjrove",
