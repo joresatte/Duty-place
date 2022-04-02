@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 from src.domain.categories import CategoriesRepository ,Categories
 from src.domain.category_services import CategoryServicesRepository, Category_services
