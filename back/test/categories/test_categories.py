@@ -1,5 +1,3 @@
-from cgitb import text
-from unicodedata import category
 from src.lib.utils import temp_file
 from src.webserver import create_app
 from src.domain.categories import CategoriesRepository, Categories
@@ -20,6 +18,7 @@ def test_should_return_list_of_categories():
     category_1 = Categories(
         cat_id= "category_1",
         text= "Mudanzas",
+        text_pictures= "text_pictures",
        
     )
     categories_repository.save(category_1)
@@ -27,6 +26,7 @@ def test_should_return_list_of_categories():
     category_2 = Categories(
         cat_id= "category_2",
         text= "Limpiezas",
+        text_pictures= "text_pictures",
     )
     categories_repository.save(category_2)
     
@@ -34,11 +34,13 @@ def test_should_return_list_of_categories():
     assert response.json == [{
         "cat_id": "category_1",
         "text": "Mudanzas",
+        "text_pictures": "text_pictures",
         
     },
     {
         "cat_id": "category_2",
         "text": "Limpiezas",
+        "text_pictures": "text_pictures",
         
     },
     ]

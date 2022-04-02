@@ -16,7 +16,7 @@ const routes = [
     props: true
   },
   {
-    path: '/services/by-category/:category_id/:id',
+    path: '/services/user_services/:id',
     name: 'userDetailesPage',
     component: userDetailesPage,
     props: true

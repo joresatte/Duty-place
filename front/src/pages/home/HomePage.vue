@@ -5,6 +5,7 @@
   <form @submit.prevent="handledClickOnCatagory" action="">
   <section class="categories" v-for="category in categories" :key="category.cat_id">
   <router-link :to="{name: 'ServicesByCategoryPage', params:{category_id: category.cat_id}}" >
+    <img :src= "category.text_pictures" alt="" class="image_category"><br>
    <button @click="selectedCategory" class="category_button"><h1>{{category.text}}</h1></button>
   </router-link>
   </section>
@@ -74,4 +75,8 @@ cursor:pointer;
   text-shadow:  2px 2px 4px #f10889;
 }
 
+.image_category{
+  width: 30em;
+  height: 25em ;
+}
 </style>

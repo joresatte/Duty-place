@@ -5,27 +5,32 @@ sys.path.insert(0, "")
 from src.domain.categories import CategoriesRepository, Categories
 from src.domain.category_services import CategoryServicesRepository, Category_services
 from src.domain.users_services import ServicesRepository, Services
+from src.domain.data import cuidados, limpiezas, mudanzas, mantemientos
 
 database_path = "data/database.db"
 
 category_1 = Categories(
         cat_id= "category_1",
         text= "Mudanzas",
+        text_pictures= mudanzas,
        
     )
 category_2 = Categories(
     cat_id= "category_2",
     text= "Limpiezas",
+    text_pictures= limpiezas,
     
 )
 category_3 = Categories(
         cat_id= "category_3",
         text= "Cuidados",
+        text_pictures= cuidados,
        
     )
 category_4 = Categories(
         cat_id= "category_4",
         text= "Mantenimientos",
+        text_pictures= mantemientos,
        
     )
 contact_repository = CategoriesRepository(database_path)
