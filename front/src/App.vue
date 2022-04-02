@@ -1,7 +1,7 @@
 <template>
 <br>
   <div id="nav">
-    <router-link class="Home" to="/">Duty-Place</router-link>
+    <router-link class="Home" to="/">Services</router-link>
     <br><br>
     <!-- <router-link to="/about">About</router-link> -->
   </div>
@@ -26,5 +26,5 @@
     text-shadow 3px 3px 3px yellow
 
   *#app
-  background:  #AAAAAA;
+  background:  #505160;
 </style>

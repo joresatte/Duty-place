@@ -10,6 +10,10 @@
   </router-link>
   </section>
   </form>
+  <footer class="down">
+    <div>contact us</div>
+    <div></div>
+  </footer>
 </template>
 
 <script>
@@ -21,7 +25,7 @@ export default {
   // },
   data(){
     return{
-      welcome:"welcome to Duty-Place",
+      welcome:"welcome to Services",
       categories:[],
       // selectCategory:'',
       // currentCategory: localStorage.category_id
@@ -71,12 +75,18 @@ cursor:pointer;
 .home{
   margin: 0.5em;
   font-size: 2em;
-  color: #0725cc;
+  color: #53d9ed;
   text-shadow:  2px 2px 4px #f10889;
 }
 
 .image_category{
   width: 30em;
   height: 25em ;
+}
+.down{
+  display: grid;
+  grid-template-columns: auto;
+  border: solid 2px;
+  background-color: rgb(16, 215, 215);
 }
 </style>

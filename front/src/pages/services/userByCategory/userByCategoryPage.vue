@@ -1,6 +1,6 @@
 <template>
 <h1>user page</h1>
-  <h2>{{id}}</h2>
+  <!-- <h2>{{id}}</h2> -->
   <section class="services" v-for="user in users" :key="user">
   <img :src= "user.text_pictures" alt="" class="image_category"><br>
   <h2>{{user.user_name}}</h2>
