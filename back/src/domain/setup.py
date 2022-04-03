@@ -2,6 +2,7 @@ from src.lib.utils import temp_file
 from src.webserver import create_app
 from src.domain.users_services import ServicesRepository, Services
 from src.domain.category_services import CategoryServicesRepository, Category_services
+from src.domain.categories import CategoriesRepository, Categories
 
 def setup1():
     services_repository = ServicesRepository(temp_file())
@@ -109,4 +110,32 @@ def setup3():
     services_repository = CategoryServicesRepository(temp_file())
     app = create_app(repositories={"categories_services": services_repository})
     client = app.test_client()
+    return client
+
+def setup4():
+    Categories_Repository = CategoriesRepository(temp_file())
+    app = create_app(repositories={"categories": Categories_Repository})
+    client = app.test_client()
+    return client
+
+def setup5():
+    categories_repository = CategoriesRepository(temp_file())
+    app = create_app(repositories={"categories": categories_repository})
+    client = app.test_client()
+    
+    category_1 = Categories(
+        cat_id= "category_1",
+        text= "Mudanzas",
+        text_pictures= "text_pictures",
+       
+    )
+    categories_repository.save(category_1)
+
+    category_2 = Categories(
+        cat_id= "category_2",
+        text= "Limpiezas",
+        text_pictures= "text_pictures",
+    )
+    categories_repository.save(category_2)
+
     return client

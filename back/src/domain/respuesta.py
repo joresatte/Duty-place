@@ -55,3 +55,17 @@ Respuesta_2= [{
         "city": "Bilbao",
     }
 ]
+
+Respuesta_3= [{
+        "cat_id": "category_1",
+        "text": "Mudanzas",
+        "text_pictures": "text_pictures",
+        
+    },
+    {
+        "cat_id": "category_2",
+        "text": "Limpiezas",
+        "text_pictures": "text_pictures",
+        
+    },
+]
