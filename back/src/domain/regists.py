@@ -1,16 +1,16 @@
 import sqlite3
 
-class Categories:
-    def __init__(self, cat_id, text, text_pictures):
-        self.cat_id = cat_id
-        self.text = text
-        self.text_pictures = text_pictures
+class Regists:
+    def __init__(self, id, email, password):
+        self.id = id
+        self.email = email
+        self.password = password
 
     def to_dict(self):
         return {
-            "cat_id": self.cat_id,
-            "text": self.text,
-            "text_pictures": self.text_pictures,
+            "id": self.id,
+            "email": self.email,
+            "password": self.password,
         }
 
 
@@ -26,7 +26,7 @@ class CategoriesRepository:
 
     def drop_tables(self):
         sql = """
-            DROP TABLE IF EXISTS categories
+            DROP TABLE IF EXISTS registros
         """
         conn = self.create_conn()
         cursor = conn.cursor()
@@ -35,10 +35,10 @@ class CategoriesRepository:
 
     def init_tables(self):
         sql = """
-            create table if not exists categories (
-                cat_id varchar primary key,
-                text varchar,
-                text_pictures varchar
+            create table if not exists registros (
+                id varchar primary key,
+                email varchar,
+                password varchar
             )
         """
         conn = self.create_conn()
@@ -47,39 +47,39 @@ class CategoriesRepository:
         conn.commit()
 
     def get_all(self):
-        sql = """select * from categories"""
+        sql = """select * from registros"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
 
         data = cursor.fetchall()
 
-        users = [Categories(**item) for item in data]
+        users = [Regists(**item) for item in data]
         return users
 
-    def get_by_id(self, cat_id):
-        sql = """SELECT * FROM users WHERE cat_id=: cat_id"""
+    def get_by_id(self, id):
+        sql = """SELECT * FROM registros WHERE id=: id"""
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(sql, {"cat_id": cat_id})
+        cursor.execute(sql, {"id": id})
 
         data = cursor.fetchone()
         if data is None:
             return None
         else:
-            user = Categories(**data)
+            user = Regists(**data)
 
         return user
 
     def save(self, category):
-        sql = """insert into categories (cat_id, text,text_pictures) values (
-            :cat_id, :text, :text_pictures
+        sql = """insert into registros (id, email, password) values (
+            :id, :email, :password
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            {"cat_id": category.cat_id, "text": category.text, "text_pictures": category.text_pictures}
+            {"id": category.id, "email": category.email, "password": category.password}
             # { **user.to_dict(), 'password': user.password}
         )
         conn.commit()
