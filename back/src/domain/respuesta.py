@@ -92,3 +92,17 @@ Respuesta_5= {
     "email": "reinabo@vince.com",
     "password": "password1",
     }
+Respuesta_6= {
+    "email": "reinabo@vince.com",
+    "password": "password1",
+    }
+
+Respuesta_7= {
+    "email": "reinabo@vince.com",
+    "password": "password50",
+    }
+
+Respuesta_8= {
+    "email": "reinabo@vince.com",
+    "password": "password50",
+    }

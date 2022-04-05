@@ -53,6 +53,20 @@ def create_app(repositories):
         print("-----------", user)
         return '', 200
 
+    @app.route("/api/login/Authenticated", methods=["POST"])
+    def get_login():
+        Body= request.json
+        print("----aqui va el body:", Body)
+        user= repositories["regists"].get_by_email(Body['email'])
+        print("------aqui va el user:", user)
+        print('----aqui va el user password:', Body['password'])
+        if user is None or (Body['password']) != user.password:
+            return '', 401
+        else:
+            return user.to_dict()
+           
+
+
     # @app.route("/api/services/by-category/<id>", methods=["GET"])
     # def get_user_in_services_by_category_by_id(id):
     #     user_services = repositories["categories_services"].get_user_services_by_id(id)

@@ -1,3 +1,4 @@
+import email
 import sqlite3
 
 class Regists:
@@ -10,7 +11,6 @@ class Regists:
         return {
             "id": self.id,
             "email": self.email,
-            "password": self.password,
         }
 
 
@@ -58,7 +58,7 @@ class RegistsRepository:
         return users
 
     def get_by_id(self, id):
-        sql = """SELECT * FROM registros WHERE id=: id"""
+        sql = """SELECT * FROM registros WHERE id= :id"""
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {"id": id})
@@ -67,7 +67,29 @@ class RegistsRepository:
         if data is None:
             return None
         else:
-            user = Regists(**data)
+            user = Regists(
+                id= data['id'],
+                email= data['email'],
+                password= data['password']
+            )
+
+        return user
+
+    def get_by_email(self, email):
+        sql = """SELECT * FROM registros WHERE email= :email"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"email": email})
+
+        data = cursor.fetchone()
+        if data is None:
+            return None
+        else:
+            user = Regists(
+                id= data['id'],
+                email= data['email'],
+                password= data['password']
+            )
 
         return user
 
