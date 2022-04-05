@@ -1,12 +1,12 @@
-from src.domain.setup import setup4, setup5
-from src.domain.respuesta import Respuesta_3
+from src.domain.setup import setup6, setup7
+from src.domain.respuesta import Respuesta_4
 
-def test_should_return_empty_list_categories():
-    client= setup4()
-    response = client.get("/api/categories")
+def test_should_return_empty_regists_list():
+    client= setup6()
+    response = client.get("/api/regists")
     assert response.json == []
 
-def test_should_return_list_of_categories():
-    client= setup5()
-    response = client.get("/api/categories")
-    assert response.json == Respuesta_3
+def test_should_return_regists_list():
+    client= setup7()
+    response = client.get("/api/regists")
+    assert response.json == Respuesta_4

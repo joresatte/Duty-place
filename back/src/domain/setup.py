@@ -3,6 +3,7 @@ from src.webserver import create_app
 from src.domain.users_services import ServicesRepository, Services
 from src.domain.category_services import CategoryServicesRepository, Category_services
 from src.domain.categories import CategoriesRepository, Categories
+from src.domain.regists import RegistsRepository, Regists
 
 def setup1():
     services_repository = ServicesRepository(temp_file())
@@ -139,3 +140,38 @@ def setup5():
     categories_repository.save(category_2)
 
     return client
+
+def setup6():
+    regists_repository = RegistsRepository(temp_file())
+    app = create_app(repositories={"regists": regists_repository})
+    client = app.test_client()
+    return client
+
+def setup7():
+    regists_repository = RegistsRepository(temp_file())
+    app = create_app(repositories={"regists": regists_repository})
+    client = app.test_client()
+
+    user1= Regists(
+       id= "service_1",
+        email= "reinabo@vince.com",
+        password= "password1",
+    )
+    regists_repository.save(user1)
+    
+    user2= Regists(
+        id= "service_2",
+        email= "fbadland0@bizjournals.com",
+        password= "password2",
+    )
+    regists_repository.save(user2)
+
+    user3= Regists(
+        id= "service_50",
+        email= "wglenister1@latimes.com",
+        password= "password50",
+    )
+    regists_repository.save(user3)
+
+    return client
+

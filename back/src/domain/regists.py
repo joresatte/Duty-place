@@ -14,7 +14,7 @@ class Regists:
         }
 
 
-class CategoriesRepository:
+class RegistsRepository:
     def __init__(self, database_path):
         self.database_path = database_path
         self.init_tables()
@@ -46,7 +46,7 @@ class CategoriesRepository:
         cursor.execute(sql)
         conn.commit()
 
-    def get_all(self):
+    def get_all_regists(self):
         sql = """select * from registros"""
         conn = self.create_conn()
         cursor = conn.cursor()
