@@ -145,12 +145,6 @@ def setup6():
     regists_repository = RegistsRepository(temp_file())
     app = create_app(repositories={"regists": regists_repository})
     client = app.test_client()
-    return client
-
-def setup7():
-    regists_repository = RegistsRepository(temp_file())
-    app = create_app(repositories={"regists": regists_repository})
-    client = app.test_client()
 
     user1= Regists(
        id= "service_1",
@@ -159,19 +153,19 @@ def setup7():
     )
     regists_repository.save(user1)
     
-    user2= Regists(
-        id= "service_2",
-        email= "fbadland0@bizjournals.com",
-        password= "password2",
-    )
-    regists_repository.save(user2)
+    # user2= Regists(
+    #     id= "service_2",
+    #     email= "fbadland0@bizjournals.com",
+    #     password= "password2",
+    # )
+    # regists_repository.save(user2)
 
-    user3= Regists(
-        id= "service_50",
-        email= "wglenister1@latimes.com",
-        password= "password50",
-    )
-    regists_repository.save(user3)
+    # user3= Regists(
+    #     id= "service_50",
+    #     email= "wglenister1@latimes.com",
+    #     password= "password50",
+    # )
+    # regists_repository.save(user3)
 
     return client
 

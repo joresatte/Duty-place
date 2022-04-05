@@ -1,12 +1,8 @@
-from src.domain.setup import setup6, setup7
-from src.domain.respuesta import Respuesta_4
-
-def test_should_return_empty_regists_list():
-    client= setup6()
-    response = client.get("/api/regists")
-    assert response.json == []
+from src.domain.setup import setup6
+from src.domain.respuesta import Respuesta_5
 
 def test_should_return_regists_list():
-    client= setup7()
-    response = client.get("/api/regists")
-    assert response.json == Respuesta_4
+    client= setup6()
+    Body= Respuesta_5
+    response = client.post("/api/regists", json= Body)
+    assert response.status_code == 200

@@ -36,7 +36,7 @@ class RegistsRepository:
     def init_tables(self):
         sql = """
             create table if not exists registros (
-                id varchar primary key,
+                id varchar,
                 email varchar,
                 password varchar
             )
@@ -71,7 +71,7 @@ class RegistsRepository:
 
         return user
 
-    def save(self, category):
+    def save(self, user):
         sql = """insert into registros (id, email, password) values (
             :id, :email, :password
         ) """
@@ -79,7 +79,7 @@ class RegistsRepository:
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            {"id": category.id, "email": category.email, "password": category.password}
+            {"id": user.id, "email": user.email, "password": user.password}
             # { **user.to_dict(), 'password': user.password}
         )
         conn.commit()

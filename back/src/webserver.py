@@ -40,10 +40,18 @@ def create_app(repositories):
         all_categories = repositories["categories_services"].get_category_services_by_cat_id(category_id)
         return object_to_json(all_categories)
 
-    @app.route("/api/regists", methods=["GET"])
+    @app.route("/api/regists", methods=["POST"])
     def get_all_regists():
-        all_regists = repositories["regists"].get_all_regists()
-        return object_to_json(all_regists)
+        Body= request.json
+        print("-------------", Body)
+        user= Regists(
+            id= Body['id'],
+            email= Body['email'],
+            password= Body['password']
+            )
+        repositories["regists"].save(user)
+        print("-----------", user)
+        return '', 200
 
     # @app.route("/api/services/by-category/<id>", methods=["GET"])
     # def get_user_in_services_by_category_by_id(id):
