@@ -75,11 +75,11 @@ class RegistsRepository:
 
         return user
 
-    def get_by_email(self, email):
-        sql = """SELECT * FROM registros WHERE email= :email"""
+    def get_by_email_and_password(self, email, password):
+        sql = """SELECT * FROM registros WHERE email= :email AND password= :password"""
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(sql, {"email": email})
+        cursor.execute(sql, {"email": email, "password": password})
 
         data = cursor.fetchone()
         if data is None:

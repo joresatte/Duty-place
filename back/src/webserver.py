@@ -57,10 +57,10 @@ def create_app(repositories):
     def get_login():
         Body= request.json
         print("----aqui va el body:", Body)
-        user= repositories["regists"].get_by_email(Body['email'])
+        user= repositories["regists"].get_by_email_and_password(Body['email'], Body ['password'])
         print("------aqui va el user:", user)
         print('----aqui va el user password:', Body['password'])
-        if user is None or (Body['password']) != user.password:
+        if user is None or (Body['password']) != user.password or (Body['email']) != user.email:
             return '', 401
         else:
             return user.to_dict()
