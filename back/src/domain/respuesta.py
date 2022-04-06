@@ -111,3 +111,8 @@ Respuesta_9= {
     "id": "service_1",
     "email": "reinabo@vince.com",
     }
+
+Respuesta_10= {
+    "email": "fbadland0@bizjournals.com",
+    "password": "password50",
+    }
