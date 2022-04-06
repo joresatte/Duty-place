@@ -41,7 +41,7 @@ def create_app(repositories):
         return object_to_json(all_categories)
 
     @app.route("/api/regists", methods=["POST"])
-    def get_all_regists():
+    def post_regists():
         Body= request.json
         print("-------------", Body)
         user= Regists(
@@ -53,13 +53,24 @@ def create_app(repositories):
         print("-----------", user)
         return '', 200
 
+    @app.route("/api/regists", methods=["GET"])
+    def get_all_regists():
+        all_regists = repositories["regists"].get_all_regists()
+        return object_to_json(all_regists)
+
+    @app.route("/api/regists/<id>", methods=["GET"])
+    def get_regist_by_id(id):
+        regist = repositories["regists"].get_regist_by_id(id)
+        print('-----el registro:', regist)
+        return regist.to_dict()
+
     @app.route("/api/login/Authenticated", methods=["POST"])
     def get_login():
         Body= request.json
-        print("----aqui va el body:", Body)
+        # print("----aqui va el body:", Body)
         user= repositories["regists"].get_by_email_and_password(Body['email'], Body ['password'])
-        print("------aqui va el user:", user)
-        print('----aqui va el user password:', Body['password'])
+        # print("------aqui va el user:", user)
+        # print('----aqui va el user password:', Body['password'])
         if user is None or (Body['password']) != user.password or (Body['email']) != user.email:
             return '', 401
         else:

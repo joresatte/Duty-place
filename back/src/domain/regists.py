@@ -57,7 +57,7 @@ class RegistsRepository:
         users = [Regists(**item) for item in data]
         return users
 
-    def get_by_id(self, id):
+    def get_regist_by_id(self, id):
         sql = """SELECT * FROM registros WHERE id= :id"""
         conn = self.create_conn()
         cursor = conn.cursor()
