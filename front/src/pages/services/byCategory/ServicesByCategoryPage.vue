@@ -37,7 +37,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .services{
   display: grid;
   grid-auto-columns: auto;

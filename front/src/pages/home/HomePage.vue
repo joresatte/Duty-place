@@ -1,4 +1,5 @@
 <template>
+<Regists/>
   <section class="home">
     {{welcome}}
   </section>
@@ -11,14 +12,14 @@
   </section>
   </form>
   <section class="message">
-    <pre>
+    <p>
       ¿Cómo funciona nuestro servicio 
       de cuidador/a interno/a
        Entendemos tus necesidades,
        definimos un servicio 
        personalizado y damos respuesta 
        en menos de 1 horas.
-    </pre>
+    </p>
   </section>
   <footer class="down">
     <div>contact us</div>
@@ -27,12 +28,11 @@
 </template>
 
 <script>
+import Regists from "@/components/Regists.vue";
 import {getCategories} from "@/pages/apiservices/api.js";
 export default {
   name: 'Home',
-  // components: {
-  //   HelloWorld
-  // },
+  components: {Regists},
   data(){
     return{
       welcome:"welcome to Services",
@@ -87,10 +87,6 @@ cursor:pointer;
   text-shadow:  2px 2px 4px #f10889;
 }
 
-.image_category{
-  width: 30em;
-  height: 25em ;
-}
 .down{
   display: grid;
   grid-template-columns: auto;
@@ -98,14 +94,9 @@ cursor:pointer;
   background-color: rgb(16, 215, 215);
 }
 .message{
-  display: flex;
-  justify-content: flex-start;
-  font-size:2em;
   color: white;
-  border: solid;
-  background: ;
+  border: solid 1px white;
   padding: 1em;
-  position: relative;
   
 }
 </style>
