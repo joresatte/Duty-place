@@ -19,7 +19,7 @@
 
  <script>
 import { ref, watchEffect } from "vue";
-import useFormValidation from "./useFormValidation";
+import usePasswordValidation from "./usePasswordValidation";
 export default {
   props:{
     password:{
@@ -30,9 +30,9 @@ export default {
   emits:['change'],
   setup(props, context) {
     let password = ref("");
-    const { validatePasswordField, errors } = useFormValidation();
+    const {validatePasswordField, errors } = usePasswordValidation();
     const validateInput = () => {
-      validatePasswordField("password", password.value);
+        validatePasswordField("password", password.value);
     };
     watchEffect([password],(newValue)=>{
        console.log(newValue);

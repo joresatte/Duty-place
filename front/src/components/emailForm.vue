@@ -19,7 +19,7 @@
 </template>
  <script>
 import { ref, watchEffect } from "vue";
-import useFormValidation from "./useFormValidation";
+import useEmailValidation from "./useEmailValidation.js";
 export default {
   props:{
     email:{
@@ -30,7 +30,7 @@ export default {
   emits:['changed'],
   setup(props, context) {
     let email = ref("");
-    const { validateEmailField, errors } = useFormValidation();
+    const { validateEmailField, errors } = useEmailValidation();
     const validateInput = () => {
       validateEmailField("email", email.value);
     };

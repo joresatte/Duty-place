@@ -19,6 +19,7 @@ export default {
         const password= ref('')
         
         function onEmailChange(newEmail){
+            console.log(newEmail)
             email.value = newEmail
         }
         function onPasswordChange(newPassword){
