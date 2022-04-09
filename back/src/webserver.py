@@ -49,9 +49,12 @@ def create_app(repositories):
             email= Body['email'],
             password= Body['password']
             )
-        repositories["regists"].save(user)
         print("-----------", user)
-        return '', 200
+        if (Body['id'])!= '' or (Body['email'])!= '' or (Body['password'])!= '':
+            repositories["regists"].save(user)
+            return '', 200
+        else:
+            return 'invalid regist', 403
 
     @app.route("/api/regists", methods=["GET"])
     def get_all_regists():

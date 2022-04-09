@@ -3,8 +3,8 @@ import config from "@/config.js";
 import { v4 as uuidv4 } from "uuid";
 
 function getRegistPost (){
-    const email= ref('')
-    const password= ref('')
+    const email= ref(localStorage.getItem("registEmail"))
+    const password= ref(localStorage.getItem("registPassword"))
     const id = ref(uuidv4())
     const settings = reactive( {
     method: "POST",

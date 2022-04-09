@@ -1,12 +1,11 @@
 <template>
   <h1>regists page </h1>
-  <emailForm :email="email" @changed="onEmailChange"/>
-  <passwordForm :password="password" @change="onPasswordChange"/>
+  <emailForm :email="email" @onEmailChanged="onChangedEmail"/>
+  <passwordForm :password="password" @onPasswordChanged="onChangedPassword"/>
   <button @click="saveClicked">CREATE ACCOUNT</button>
 </template>
 
 <script>
-import {ref} from 'vue'
 import emailForm from './emailForm.vue';
 import passwordForm from './passwordForm.vue';
 import getRegistPost from '@/pages/apiservices/getRegistPost.js'
@@ -15,21 +14,22 @@ export default {
     name: 'registsPage',
     components:{emailForm, passwordForm},
     setup(){
-        const email= ref('')
-        const password= ref('')
+        const {email, password}= getRegistPost()
         
-        function onEmailChange(newEmail){
+        const onChangedEmail= (newEmail)=>{
             console.log(newEmail)
-            email.value = newEmail
+            // email.value = newEmail
         }
-        function onPasswordChange(newPassword){
-             password.value= newPassword
+        const onChangedPassword=(newPassword)=>{
+            console.log(newPassword )
+            //  password.value= newPassword
         }
         const saveClicked= async ()=> {
             await getRegistPost()
+            console.log(getRegistPost)
         }
 
-        return {email, password, onEmailChange, onPasswordChange, saveClicked}
+        return {email, password, onChangedEmail, onChangedPassword, saveClicked}
     }
 
 }

@@ -6,10 +6,10 @@
         type="email"
         placeholder="Email"
         autocomplete="off"
-        :value="email.email"
+        :value="newEmail"
         @keyup="validateInput"
         @blur="validateInput"
-        @changed="onEmailChanged"
+        @change="onChangedEmail"
       />
     </div>
     <div class="ui basic label pointing red" v-if="errors.email">
@@ -18,30 +18,28 @@
   </div>
 </template>
  <script>
-import { ref, watchEffect } from "vue";
+import { ref} from "vue";
 import useEmailValidation from "./useEmailValidation.js";
 export default {
   props:{
-    email:{
+    newEmail:{
       type: String,
       required: true,
     }
   },
-  emits:['changed'],
+  emits:['change'],
   setup(props, context) {
     let email = ref("");
     const { validateEmailField, errors } = useEmailValidation();
     const validateInput = () => {
       validateEmailField("email", email.value);
     };
-    watchEffect([email], (newVal) => {
-        console.log(newVal);
-        onEmailChanged=()=>{
-          context.emit("changed", {newVal})
-       }
-    })
-    
-    return { email, errors, validateInput };
+    const onChangedEmail= (event)=>{
+        console.log(event)
+        context.emit('onEmailChanged', localStorage.setItem("registEmail", event.target.value))
+
+    }
+    return { email, errors, onChangedEmail, validateInput };
   },
 };
 </script>

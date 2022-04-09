@@ -5,10 +5,10 @@
         type="password"
         placeholder="Password"
         autocomplete="off"
-        :value="password.password"
+        :value="newPassword"
         @keyup="validateInput"
         @blur="validateInput"
-        @change="onPasswordChanged"
+        @change="onChangedPassword"
       />
     </div>
     <div class="ui basic label pointing red" v-if="errors.password">
@@ -18,11 +18,11 @@
 </template>
 
  <script>
-import { ref, watchEffect } from "vue";
+import { ref} from "vue";
 import usePasswordValidation from "./usePasswordValidation";
 export default {
   props:{
-    password:{
+    newPassword:{
        type: String,
        required: true,
     }
@@ -34,13 +34,11 @@ export default {
     const validateInput = () => {
         validatePasswordField("password", password.value);
     };
-    watchEffect([password],(newValue)=>{
-       console.log(newValue);
-       onPasswordChanged=()=>{
-            context.emit('change', newValue)
-       }
-    })
-     return { password, errors, validateInput };
+    const onChangedPassword=(event)=>{
+        console.log(event)
+        context.emit('onPasswordChanged', localStorage.setItem("registPassword", event.target.value))
+    }
+     return { password, errors, onChangedPassword, validateInput };
   },
 };
 </script>
