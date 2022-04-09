@@ -1,3 +1,4 @@
+from pyparsing import Regex
 from flask import Flask, request
 from flask_cors import CORS
 from src.domain.categories import CategoriesRepository ,Categories
@@ -5,6 +6,9 @@ from src.domain.category_services import CategoryServicesRepository, Category_se
 from src.domain.users_services import ServicesRepository, Services
 from src.domain.regists import RegistsRepository, Regists
 from src.lib.utils import object_to_json
+import re
+
+Regex= r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 
 
 def create_app(repositories):
@@ -12,7 +16,7 @@ def create_app(repositories):
     CORS(app)
 
     @app.route("/", methods=["GET"])
-    def hello_world():
+    def hello_world(): 
         return "...magic!"
 
     @app.route("/api/categories", methods=["GET"])
