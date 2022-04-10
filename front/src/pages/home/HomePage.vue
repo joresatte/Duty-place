@@ -1,12 +1,13 @@
 <template>
-<section class="regist-login">
+  <router-link class="Home" to="/">Services</router-link>
+  <br><br>  
   <button @click="onBtnCliked" class="btn-regist"> Sign up
     <section v-show="showRegist" class="show-regist">
-       <emailForm :newEmail="email" @onEmailChanged="onChangedEmail($event)"/>
+       <emailForm :newEmail="email" @onEmailChanged="onChangedEmail"/>
         <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword($event)"/>
       <button @click="ClickToRegist">CREATE ACCOUNT</button>
       </section>
-  </button>|
+  </button>
   <button @click="BtnCliked" class="btn-login"> Log in
     <section v-show="showLogin" class="show-login">
        <emailForm :newEmail="email" @onEmailChanged="onChangedEmail($event)"/>
@@ -14,8 +15,8 @@
       <button @click="ClickToLogIn">Log in</button>
       </section>
   </button>
-</section>
-  <section class="home">
+
+  <section class="welcome">
     {{welcome}}
   </section>
   <form @submit.prevent="handledClickOnCatagory" action="">
@@ -69,32 +70,55 @@ export default {
       console.log("loadData")
       this.categories= await getCategories()
     },
-    onChangedEmail(newEmail){
-            console.log(newEmail)
-            // email.value = newEmail
+    onChangedEmail(event){
+            console.log(event)
+            // email.value = event
       },
     onChangedPassword(newPassword){
           console.log(newPassword )
           //  password.value= newPassword
       },
     async ClickToRegist (){
-          await getRegistPost()
-          console.log(getRegistPost)
-          this.email='';
-          this.password=''
-          this.$router.push('/')
+      if (this.email=='' || this.password==''){
+        alert('the email and password fields are required')
+        // await getRegistPost()
+        // console.log(getRegistPost)
+        // alert('sign up successfully')
+      }else{
+        // alert('the email and password fields are required')
+        await getRegistPost()
+        console.log(getRegistPost)
+        alert('sign up successfully')
+      }
+      this.email='';
+      this.password= '';
+      this.$router.push('/')
       },
       onBtnCliked(){
-        this.showRegist= !this.showRegist
+        this.showRegist= true
       },
       BtnCliked(){
-        this.showLogin= !this.showLogin
+        this.showLogin= true
       },
       async ClickToLogIn(){
+        if (this.email!='' || this.password!=''){
         await getLoginPost()
         console.log(getLoginPost)
-        this.email='';
+        const loginStatusCode= response.status
+
+        if(loginStatusCode== 403){
+           alert('invalid login')
+        }else{
+          const user= localStorage.setItem('user', await response.json())
+          Json.strignyfy(user)
+        alert('log in successfully')
+        console.log(user)
+        }
+      }else{
+        alert('the email and password fields are required')
+      }
         this.password=''
+        this.email= '';
         this.$router.push('/')
       }
 
@@ -102,11 +126,6 @@ export default {
 }
 </script>
 <style scoped>
- .regist-login{
-   display: flex;
-   float: right;
-   
- }
  .category_button{
   border: 2px solid #FFE600;
   border-radius: 10px;
@@ -128,7 +147,7 @@ export default {
   box-shadow:  2px 2px 4px #f10889;
   background-color: #6E8898FF;
 }
-.home{
+.welcome{
   margin: 0.5em;
   font-size: 2em;
   color: #53d9ed;
@@ -146,5 +165,16 @@ export default {
   border: solid 1px white;
   padding: 1em;
   
+}
+
+.Home{
+  color:white;
+  background-color:#0725cc;
+  font-size:2em;
+  border-radius:10px;
+  padding:10px;
+  text-shadow:3px 3px 3px yellow;
+  margin-top: 0;
+  margin-left: ;
 }
 </style>
