@@ -47,17 +47,24 @@ export default {
           console.log(newPassword )
           //  password.value= newPassword
       },
+      isValid(){
+        console.log('es valido', this.isValid)
+        if(
+          this.email || this.password !=''
+        ){
+          return true
+        }else{
+          return false
+        }
+      },
     async ClickToRegist (){
-      if (this.email=='' || this.password==''){
-        alert('the email and password fields are required')
-        // await getRegistPost()
-        // console.log(getRegistPost)
-        // alert('sign up successfully')
-      }else{
-        // alert('the email and password fields are required')
+      if (this.isValid()== true){
         await getRegistPost()
         console.log(getRegistPost)
         alert('sign up successfully')
+      }else{
+        alert('the email and password fields are required')
+       
       }
       this.email='';
       this.password= '';
@@ -70,7 +77,7 @@ export default {
         this.showLogin= true
       },
       async ClickToLogIn(){
-        if (this.email!='' || this.password!=''){
+        if (this.isValid()== true){
         await getLoginPost()
         console.log(getLoginPost)
         const loginStatusCode= response.status
