@@ -1,22 +1,6 @@
 <template>
-  <router-link class="Home" to="/">Services</router-link>
   <br><br>  
-  <button @click="onBtnCliked" class="btn-regist"> Sign up
-    <section v-show="showRegist" class="show-regist">
-       <emailForm :newEmail="email" @onEmailChanged="onChangedEmail"/>
-        <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword($event)"/>
-      <button @click="ClickToRegist">CREATE ACCOUNT</button>
-      </section>
-  </button>
-  <button @click="BtnCliked" class="btn-login"> Log in
-    <section v-show="showLogin" class="show-login">
-       <emailForm :newEmail="email" @onEmailChanged="onChangedEmail($event)"/>
-        <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword($event)"/>
-      <button @click="ClickToLogIn">Log in</button>
-      </section>
-  </button>
-
-  <section class="welcome">
+  <section class="page">
     {{welcome}}
   </section>
   <form @submit.prevent="handledClickOnCatagory" action="">
@@ -27,7 +11,7 @@
   </router-link>
   </section>
   </form>
-  <section class="message">
+  <section class="text_style">
     <p>
       ¿Cómo funciona nuestro servicio 
       de cuidador/a interno/a
@@ -37,29 +21,21 @@
        en menos de 1 horas.
     </p>
   </section>
-  <footer class="down">
+  <footer class="footer_style">
     <div>contact us</div>
     <div></div>
   </footer>
 </template>
 
 <script>
-import emailForm from '../../components/emailForm.vue'
-import passwordForm from '../../components/passwordForm.vue';
-import getRegistPost from '@/pages/apiservices/getRegistPost.js'
-import getLoginPost from '@/pages/apiservices/getLoginPost.js'
 import {getCategories} from "@/pages/apiservices/api.js";
 export default {
   name: 'Home',
-  components: {emailForm, passwordForm},
   data(){
     return{
       welcome:"welcome to Services",
       categories:[],
-      email:'',
-      password: '',
-      showRegist: false,
-      showLogin: false,
+     
     }
   },
   mounted(){
@@ -70,58 +46,6 @@ export default {
       console.log("loadData")
       this.categories= await getCategories()
     },
-    onChangedEmail(event){
-            console.log(event)
-            // email.value = event
-      },
-    onChangedPassword(newPassword){
-          console.log(newPassword )
-          //  password.value= newPassword
-      },
-    async ClickToRegist (){
-      if (this.email=='' || this.password==''){
-        alert('the email and password fields are required')
-        // await getRegistPost()
-        // console.log(getRegistPost)
-        // alert('sign up successfully')
-      }else{
-        // alert('the email and password fields are required')
-        await getRegistPost()
-        console.log(getRegistPost)
-        alert('sign up successfully')
-      }
-      this.email='';
-      this.password= '';
-      this.$router.push('/')
-      },
-      onBtnCliked(){
-        this.showRegist= true
-      },
-      BtnCliked(){
-        this.showLogin= true
-      },
-      async ClickToLogIn(){
-        if (this.email!='' || this.password!=''){
-        await getLoginPost()
-        console.log(getLoginPost)
-        const loginStatusCode= response.status
-
-        if(loginStatusCode== 403){
-           alert('invalid login')
-        }else{
-          const user= localStorage.setItem('user', await response.json())
-          Json.strignyfy(user)
-        alert('log in successfully')
-        console.log(user)
-        }
-      }else{
-        alert('the email and password fields are required')
-      }
-        this.password=''
-        this.email= '';
-        this.$router.push('/')
-      }
-
   }
 }
 </script>
@@ -145,36 +69,31 @@ export default {
   border: 2px solid #2bff00;
   margin: 20px;
   box-shadow:  2px 2px 4px #f10889;
-  background-color: #6E8898FF;
+  background: linear-gradient(90deg, rgba(3,3,27,0.33703903924851186) 14%, 
+            rgba(10,10,142,0.33703903924851186) 23%, 
+            rgba(8,17,37,1) 96%);
 }
-.welcome{
+.page{
   margin: 0.5em;
   font-size: 2em;
   color: #53d9ed;
   text-shadow:  2px 2px 4px #f10889;
 }
 
-.down{
+.footer_style{
+  color: white;
   display: grid;
   grid-template-columns: auto;
   border: solid 2px;
-  background-color: rgb(16, 215, 215);
+  background: linear-gradient(90deg, rgba(3,3,27,0.33703903924851186) 14%, 
+            rgba(10,10,142,0.33703903924851186) 23%, 
+            rgba(8,17,37,1) 96%);
 }
-.message{
-  color: white;
-  border: solid 1px white;
+.text_style{
+  color: linear-gradient(90deg, rgba(10,10,142,0.33703903924851186) 75%, rgba(8,17,37,1) 96%);;
+  border: solid 1px rgb(3, 17, 100);
   padding: 1em;
   
 }
 
-.Home{
-  color:white;
-  background-color:#0725cc;
-  font-size:2em;
-  border-radius:10px;
-  padding:10px;
-  text-shadow:3px 3px 3px yellow;
-  margin-top: 0;
-  margin-left: ;
-}
 </style>
