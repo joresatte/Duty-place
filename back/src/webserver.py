@@ -9,7 +9,12 @@ from src.lib.utils import object_to_json
 import re
 
 Regex= r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-
+re_email= "[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
+# def valid_email(email_addr: str):
+#     # if re.match(re_email, email_addr.lower()):
+#     #   return True
+#     # else:
+#     #    return False
 
 def create_app(repositories):
     app = Flask(__name__)
