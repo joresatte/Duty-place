@@ -8,9 +8,9 @@ export default function useValidators() {
         return fieldValue.length < min ? `The ${fieldName} field must be atleast ${min} characters long` : "";
     }
 
-    const isEmail = (fieldName, fieldValue) => {
+    const isEmail = (email, newEmail) => {
         let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return !re.test(fieldValue) ? "This email is not a valid " + fieldName + " address" : "";
+        return !re.test(newEmail) ? "This email is not a valid " + email + " address" : "";
     }
     return { isEmpty, minLength, isEmail }
 }

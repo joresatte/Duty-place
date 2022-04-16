@@ -8,14 +8,14 @@
 <button @click="onBtnCliked" class="btn-regist"> Sign up
     <section v-show="showRegist" class="show-regist">
        <emailForm :newEmail="email" @onEmailChanged="onChangedEmail"/>
-        <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword($event)"/>
+        <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword"/>
       <button @click="ClickToRegist">CREATE ACCOUNT</button>
       </section>
   </button>
   <button @click="BtnCliked" class="btn-login"> Log in
     <section v-show="showLogin" class="show-login">
-       <emailForm :newEmail="email" @onEmailChanged="onChangedEmail($event)"/>
-        <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword($event)"/>
+       <emailForm :newEmail="email" @onEmailChanged="onChangedEmail"/>
+        <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword"/>
       <button @click="ClickToLogIn">Log in</button>
       </section>
   </button>

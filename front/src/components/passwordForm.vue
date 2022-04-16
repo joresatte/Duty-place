@@ -27,7 +27,7 @@ export default {
        required: true,
     }
   },
-  emits:['change'],
+  emits:['change', 'onPasswordChanged'],
   setup(props, context) {
     let password = ref("");
     const {validatePasswordField, errors } = usePasswordValidation();
@@ -36,7 +36,7 @@ export default {
     };
     const onChangedPassword=(event)=>{
         console.log(event)
-        context.emit('onPasswordChanged', localStorage.setItem("registPassword", event.target.value))
+        context.emit('onPasswordChanged', event.target.value)
     }
      return { password, errors, onChangedPassword, validateInput };
   },

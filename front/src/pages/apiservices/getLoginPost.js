@@ -1,9 +1,10 @@
 import { reactive, ref } from "vue";
 import config from "@/config.js";
 
+
 function getLoginPost (){
-    const email= ref(localStorage.getItem("loginEmail"))
-    const password= ref(localStorage.getItem("loginPassword"))
+    const email= onChangedEmail()
+    const password= onChangedPassword()
     const settings = reactive( {
     method: "POST",
     headers: {

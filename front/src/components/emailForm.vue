@@ -21,7 +21,7 @@
 import { ref} from "vue";
 import useEmailValidation from "./useEmailValidation.js";
 export default {
-  emits:['newEmailchanged'],
+  emits:['newEmailchanged', 'onEmailChanged'],
   props:{
     newEmail:{
       type: String,
@@ -36,7 +36,7 @@ export default {
     };
     const onNewEmailChanged= (event)=>{
         console.log(event.target.value)
-        context.emit('onEmailChanged', localStorage.setItem("registEmail", event.target.value))
+        context.emit('onEmailChanged', event.target.value)
 
     }
     return { email, errors, onNewEmailChanged, validateInput };
