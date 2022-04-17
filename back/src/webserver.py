@@ -36,8 +36,8 @@ def create_app(repositories):
 
     @app.route("/api/services/user_services/<id>", methods=["GET"])
     def get_user_services_by_id(id):
-        all_services = repositories["services"].get_user_services_by_id(id)
-        return object_to_json(all_services)
+        services = repositories["services"].get_user_services_by_id(id)
+        return object_to_json(services)
 
     @app.route("/api/services/by-category", methods=["GET"])
     def get_all_services_by_category():

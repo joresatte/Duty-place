@@ -40,17 +40,19 @@ export default {
   },
   methods:{
     onChangedEmail(event){
-            console.log(event)
-            // email.value = event
+          console.log(event)
+          this.email = event
+          JSON.stringify(localStorage.setItem('registEmail', event))
       },
     onChangedPassword(newPassword){
           console.log(newPassword )
-          //  password.value= newPassword
+          this.password= newPassword
+          JSON.stringify(localStorage.setItem('registPassword', newPassword))
       },
       isValid(){
-        console.log('es valido', this.isValid)
+        console.log('es valido?', this.isValid)
         if(
-          this.email || this.password !=''
+          this.email && this.password!==''
         ){
           return true
         }else{
@@ -58,9 +60,9 @@ export default {
         }
       },
     async ClickToRegist (){
+      console.log(this.ClickToRegist)
       if (this.isValid()== true){
         await getRegistPost()
-        console.log(getRegistPost)
         alert('sign up successfully')
       }else{
         alert('the email and password fields are required')
@@ -86,7 +88,6 @@ export default {
            alert('invalid login')
         }else{
           const user= localStorage.setItem('user', await response.json())
-          Json.strignyfy(user)
         alert('log in successfully')
         console.log(user)
         }

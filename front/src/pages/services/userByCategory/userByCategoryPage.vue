@@ -1,29 +1,13 @@
 <template>
-<div class="service-detail-page">
-  <h1 class="page">user page</h1>
-    <!-- <h2>{{id}}</h2> -->
-    <section class="services" v-for="user in users" :key="user">
-    <img :src= "user.text_pictures" alt="" class="image_category"><br>
-    <h2>{{user.user_name}}</h2>
-    <p><span class="phone">Phone Number:</span><br>{{user.phone}}</p>
-    <p><span class="email">Email:</span><br> {{user.email}}</p>
-    <p><span class="city">City: </span><br>{{user.city}}</p>
-    <p class="intro">{{user.intro}}</p>
-    <h4 class="price">{{user.price}}</h4>
-    <p class="textarea">{{user.textarea}}</p>
-    </section>
-  
-</div>
-  
-  
- 
-
+<userForm :users="users"/>
 </template>
 
 <script>
-import {getUserServices} from '@/pages/apiservices/api.js'
+import {getUserServices} from '@/pages/apiservices/api.js';
+import userForm from '@/components/userForm.vue'
 export default {
   name:'userDetailesPage',
+  components:{userForm},
   props:['id'],
   data(){
     return{
@@ -45,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-.services{
+/* .services{
   display: grid;
   grid-auto-columns: auto;
   justify-content: space-around;
@@ -70,5 +54,5 @@ export default {
   font-size: 2em;
   color: #53d9ed;
   text-shadow:  2px 2px 4px #f10889;
-}
+} */
 </style>
