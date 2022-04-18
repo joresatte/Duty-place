@@ -3,8 +3,8 @@ import config from "@/config.js";
 
 
 function getLoginPost (){
-    const email= onChangedEmail()
-    const password= onChangedPassword()
+    const email= ref(localStorage.getItem('loginEmail'))
+    const password= ref(localStorage.getItem('loginPassword'))
     const settings = reactive( {
     method: "POST",
     headers: {

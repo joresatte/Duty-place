@@ -34,7 +34,7 @@ category_2 = Categories(
     text= "Limpiezas",
     text_pictures= limpiezas,
     
-)
+    )
 category_3 = Categories(
         cat_id= "category_3",
         text= "Cuidados",

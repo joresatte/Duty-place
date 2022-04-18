@@ -11,14 +11,14 @@
       class="btn-regist"
       @click="clickedToSwitchOnModal"
     >
-      Sign up
+      Sign Up
     </button>
     <button  @click="clickedToSwitchOffModal" v-show="showRegist">
         <div class="modal-backdrop">
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-          feel all camps to regist
+          feel all camps to Regist
         </slot>
       </header>
 
@@ -32,7 +32,7 @@
       <footer class="modal-footer">
         <slot name="footer">
           <br>
-          close Modal
+        <button @click="closeModal">close Modal</button>
         </slot>
         
       </footer>
@@ -48,28 +48,28 @@
       class="btn-login"
       @click="onModalOnclicked"
     >
-      login
+      Log In
     </button>
     <button  @click="offModalOnclicked" v-show="showLogin">
         <div class="modal-backdrop">
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-          feel all camps to log in
+          feel all camps to Log In
         </slot>
       </header>
 
       <section class="modal-body">
-       <emailForm :newEmail="email" @onEmailChanged="onChangedEmail"/>
+       <LoginEmail :renewEmail="email" @EmailChanged="onEmailChanged"/>
        </section>
        <section class="modal-body">
-        <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword"/>
+        <LoginPassword :renewPassword="password" @ChangedPassword="onPasswordChanged"/>
        </section>
-      <button class="btn-regist-login" @click="ClickToLogIn">Log in</button>
+      <button class="btn-regist-login" @click="ClickToLogIn">Log In</button>
       <footer class="modal-footer">
         <slot name="footer">
           <br>
-          close Modal
+          <button @click="closeModal">close Modal</button>
         </slot>
         
       </footer>
@@ -80,14 +80,16 @@
   <router-view/>
 </template>
 <script>
-import emailForm from '@/components/emailForm.vue'
-import passwordForm from '@/components/passwordForm.vue';
+import emailForm from '@/components/RegistEmailForm.vue'
+import passwordForm from '@/components/RegistPasswordForm.vue';
+import LoginEmail from '@/components/LoginEmailForm.vue'
+import LoginPassword from '@/components/LoginPasswordForm.vue';
 import getRegistPost from '@/pages/apiservices/getRegistPost.js'
 import getLoginPost from '@/pages/apiservices/getLoginPost.js'
 import headerNav from '@/components/headerNavForm.vue'
 export default {
   name: 'app',
-  components:{emailForm, passwordForm, headerNav},
+  components:{emailForm, passwordForm, headerNav, LoginEmail, LoginPassword},
   data(){
     return{
       email:'',
@@ -107,6 +109,16 @@ export default {
           this.password= newPassword
           JSON.stringify(localStorage.setItem('registPassword', newPassword))
       },
+    onEmailChanged(newEvent){
+          console.log(newEvent)
+          this.email = newEvent
+          JSON.stringify(localStorage.setItem('loginEmail', newEvent))
+      },
+    onPasswordChanged(PasswordValue){
+          console.log(PasswordValue )
+          this.password= PasswordValue
+          JSON.stringify(localStorage.setItem('loginPassword', PasswordValue))
+      },
       // isValid(){
       //   console.log('es valido?', this.isValid)
       //   if(
@@ -123,7 +135,7 @@ export default {
         await getRegistPost()
         alert('sign up successfully')
         this.$forceUpdate()
-         this.$router.push({
+         this.$router.go({
                             path: '/',
                             name: 'Home',
                           })
@@ -132,22 +144,30 @@ export default {
       }
       },
       onModalOnclicked(){this.showLogin = true},
-      offModalOnclicked(){this.showLogin = false},
+      // offModalOnclicked(){this.showLogin = false},
+
       clickedToSwitchOnModal(){this.showRegist = true},
-      clickedToSwitchOffModal(){this.showRegist = false},
+      // clickedToSwitchOffModal(){this.showRegist = false},
+      closeModal(){
+        console.log(this.closeModal)
+        this.$router.go({
+        name: 'Home',
+      })},
       async ClickToLogIn(){
         if (this.email!='' || this.password!=''){
-        await getLoginPost()
+        const response= await getLoginPost()
         console.log(getLoginPost)
         const loginStatusCode= response.status
 
         if(loginStatusCode== 403){
            alert('invalid login')
         }else{
-          const user= localStorage.setItem('user', await response.json())
+          const user= await response.json();
+          console.log(user)
+          localStorage.setItem('user', user)
           alert('log in successfully')
           console.log(user)
-          this.$router.push({
+          this.$router.go({
              path: '/user',
              name: 'usersPage',
           })
@@ -274,7 +294,9 @@ background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
   color: #4AAE9B;
   background: transparent;
 }
-
+.btn-regist-login:hover{
+  color: blue
+}
 .btn-green {
   color: white;
   background: #4AAE9B;

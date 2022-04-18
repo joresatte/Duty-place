@@ -1,4 +1,7 @@
 <template>
+<section class="page">
+    {{welcome}}
+  </section>
 <div class="container">
   <div class="box">
     <span>Cuidados</span>
@@ -18,9 +21,6 @@
   </div>
 </div>
   <br><br> 
-  <section class="page">
-    {{welcome}}
-  </section>
   <form @submit.prevent="handledClickOnCatagory" action="">
   <section class="categories" v-for="category in categories" :key="category.cat_id">
   <router-link :to="{name: 'ServicesByCategoryPage', params:{category_id: category.cat_id}}" >
