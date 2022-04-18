@@ -1,13 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/pages/home/HomePage.vue'
-import ServicesByCategoryPage from '@/pages/services/byCategory/ServicesByCategoryPage.vue'
-import userDetailesPage from '@/pages/services/userByCategory/userByCategoryPage.vue'
+// import home from '@/pages/home/HomePage.vue'
+// import ServicesByCategoryPage from '@/pages/services/byCategory/ServicesByCategoryPage.vue'
+// import userDetailesPage from '@/pages/services/userByCategory/userByCategoryPage.vue'
+const home = () => import('@/pages/home/HomePage.vue')
+const ServicesByCategoryPage = () => import('@/pages/services/byCategory/ServicesByCategoryPage.vue')
+const userDetailesPage = () => import('@/pages/services/userByCategory/userByCategoryPage.vue')
+const usersPage = () => import('@/pages/users/UsersPage.vue')
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: home
+  },
+  {
+    path: '/user',
+    name: 'usersPage',
+    component: usersPage
   },
   {
     path: '/services/by-category/:category_id',

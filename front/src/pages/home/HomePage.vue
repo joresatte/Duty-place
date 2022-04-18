@@ -1,5 +1,23 @@
 <template>
-  <br><br>  
+<div class="container">
+  <div class="box">
+    <span>Cuidados</span>
+    <img src="@/assets/images/cuidadoMa.jpg">
+  </div>
+  <div class="box">
+    <span>Mantenimientos</span>
+    <img src="@/assets/images/images1.jpg">
+  </div>
+  <div class="box">
+    <span>Limpiezas</span>
+    <img src="@/assets/images/images4.jpg">
+  </div>
+  <div class="box">
+    <span>Mudanzas</span>
+    <img src="@/assets/images/images.png">
+  </div>
+</div>
+  <br><br> 
   <section class="page">
     {{welcome}}
   </section>
@@ -73,13 +91,6 @@ export default {
             rgba(10,10,142,0.33703903924851186) 23%, 
             rgba(8,17,37,1) 96%);
 }
-.page{
-  margin: 0.5em;
-  font-size: 2em;
-  color: #53d9ed;
-  text-shadow:  2px 2px 4px #f10889;
-}
-
 .footer_style{
   color: white;
   display: grid;
@@ -93,7 +104,44 @@ export default {
   color: linear-gradient(90deg, rgba(10,10,142,0.33703903924851186) 75%, rgba(8,17,37,1) 96%);;
   border: solid 1px rgb(3, 17, 100);
   padding: 1em;
-  
+}
+.container {
+  display: flex;
+  width: 100%;
+  padding: 4% 2%;
+  box-sizing: border-box;
+  height: 50vh;
+}
+
+.box {
+  flex: 1;
+  overflow: hidden;
+  transition: .5s;
+  margin: 0 2%;
+  box-shadow: 0 20px 30px rgba(0,0,0,.1);
+  line-height: 0;
+}
+
+.box > img {
+  width: 100%;
+  height: calc(100% - 5vh);
+  object-fit: cover; 
+  transition: .5s;
+}
+
+.box:hover { flex: 1 1 30%; }
+.box:hover {
+  width: 100%;
+  height: 100%;
+}
+span{
+  font-size: 1.5em;
+  display: block;
+  text-align: center;
+  height: 10vh;
+  line-height: 2.6;
+  color: #53d9ed;
+  text-shadow:  2px 2px 4px #f10889;
 }
 
 </style>

@@ -9,7 +9,7 @@
         :value="newEmail"
         @keyup="validateInput"
         @blur="validateInput"
-        @newEmailchanged="onNewEmailChanged"
+        @change="onNewEmailChanged"
       />
     </div>
     <div class="ui basic label pointing red" v-if="errors.email">
@@ -21,7 +21,7 @@
 import { ref} from "vue";
 import useEmailValidation from "./useEmailValidation.js";
 export default {
-  emits:['newEmailchanged', 'onEmailChanged'],
+  emits:['change', 'onEmailChanged'],
   props:{
     newEmail:{
       type: String,
