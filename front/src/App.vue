@@ -155,6 +155,8 @@ export default {
           text: 'Something went wrong!',
           footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
         })
+        this.email= '';
+        this.password='';
       }
       },
       onModalOnclicked(){this.showLogin = true},
@@ -199,6 +201,8 @@ export default {
               footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
             })
           } 
+          this.email= '';
+          this.password='';
       }
   }
 }
