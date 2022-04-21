@@ -14,9 +14,10 @@ const routes = [
     component: home
   },
   {
-    path: '/user',
+    path: '/user/:id',
     name: 'usersPage',
-    component: usersPage
+    component: usersPage,
+    props: true
   },
   {
     path: '/services/by-category/:category_id',

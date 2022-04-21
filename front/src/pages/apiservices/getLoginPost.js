@@ -1,22 +1,19 @@
-import { reactive, ref } from "vue";
 import config from "@/config.js";
 
-
-function getLoginPost (){
-    const email= ref(localStorage.getItem('loginEmail'))
-    const password= ref(localStorage.getItem('loginPassword'))
-    const settings = reactive( {
+function getLoginPost (email, password){
+    const settings = {
     method: "POST",
     headers: {
         "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        email: email.value,
-        password: password.value,
+        email: email,
+        password: password,
     }),
-  })
-  const response = ref( fetch(`${config.login_Path}/login/Authenticated`, settings));
-  return {response, email, password}
-
+  }
+  return fetch(`${config.login_Path}/login/Authenticated`, settings)
+            .then(async response => await response.json())
+            .catch(err=> console.log(err.message))
 }
 export default getLoginPost
+

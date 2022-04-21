@@ -2,6 +2,7 @@ import sys
 
 sys.path.insert(0, "")
 
+from src.domain.regists import RegistsRepository, Regists
 from src.domain.categories import CategoriesRepository, Categories
 from src.domain.category_services import CategoryServicesRepository, Category_services
 from src.domain.users_services import ServicesRepository, Services
@@ -22,6 +23,15 @@ from src.domain.userDataPictures import(
 )
 
 database_path = "data/database.db"
+
+regist_1= Regists(
+    id= "service_1",
+    email= "reinabo@vince.com",
+    password= "password1",
+)
+regist_repository= RegistsRepository(database_path)
+regist_repository.save(regist_1)
+
 
 category_1 = Categories(
         cat_id= "category_1",

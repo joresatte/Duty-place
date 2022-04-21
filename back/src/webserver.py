@@ -86,7 +86,7 @@ def create_app(repositories):
         if user is None or (Body['password']) != user.password or (Body['email']) != user.email:
             return '', 401
         else:
-            return user.to_dict()
+            return object_to_json(user)
            
 
 

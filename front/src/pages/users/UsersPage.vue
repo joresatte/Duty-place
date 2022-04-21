@@ -1,23 +1,29 @@
 <template>
-<userForm :users="user"/>
-  <h1> users pages</h1>
+<userForm :users="users"/>
 </template>
 
 <script>
-import { ref, onMounted } from '@vue/reactivity'
+import loginFetch from '@/pages/apiservices/loginFetch.js'
 import userForm from '@/components/userForm.vue'
 export default {
+  props:['id'],
   name: 'userPage',
   components:{userForm},
-  setup(){
-    const user= ref([])
-    const loadData= async()=>{
-      user.value= await loginFetch()
+  data(){
+    return{
+      users:[],
     }
-    onMounted(()=> loadData)
-    return {user, loadData}
+  }, 
+  mounted(){
+    this.loadData()
+  },
+  methods:{
+    async loadData(){
+      console.log(this.loadData)
+      this.users= await loginFetch()
+      console.log(this.users)
+    },
   }
-
 }
 </script>
 

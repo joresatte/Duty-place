@@ -80,6 +80,8 @@
   <router-view/>
 </template>
 <script>
+// import axios from 'axios';
+// import config from "@/config.js";
 import emailForm from '@/components/RegistEmailForm.vue'
 import passwordForm from '@/components/RegistPasswordForm.vue';
 import LoginEmail from '@/components/LoginEmailForm.vue'
@@ -87,6 +89,7 @@ import LoginPassword from '@/components/LoginPasswordForm.vue';
 import getRegistPost from '@/pages/apiservices/getRegistPost.js'
 import getLoginPost from '@/pages/apiservices/getLoginPost.js'
 import headerNav from '@/components/headerNavForm.vue'
+import Swal from 'sweetalert2'
 export default {
   name: 'app',
   components:{emailForm, passwordForm, headerNav, LoginEmail, LoginPassword},
@@ -96,6 +99,7 @@ export default {
       password: '',
       showRegist: false,
       showLogin: false,
+      userId: [],
     }
   },
   methods:{
@@ -133,14 +137,24 @@ export default {
       console.log(this.ClickToRegist)
       if (this.email!='' || this.password!=''){
         await getRegistPost()
-        alert('sign up successfully')
-        this.$forceUpdate()
-         this.$router.go({
+        // alert('saved successfully')
+        Swal.fire(
+          'success',
+          'Sign Up successfully',
+          'Saved'
+        )
+         this.$router.push({
                             path: '/',
                             name: 'Home',
                           })
+         this.showRegist= false
       }else{
-        alert('the email and password fields are required')
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+          footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
+        })
       }
       },
       onModalOnclicked(){this.showLogin = true},
@@ -150,31 +164,41 @@ export default {
       // clickedToSwitchOffModal(){this.showRegist = false},
       closeModal(){
         console.log(this.closeModal)
-        this.$router.go({
+        this.$router.push({
         name: 'Home',
       })},
       async ClickToLogIn(){
         if (this.email!='' || this.password!=''){
-        const response= await getLoginPost()
-        console.log(getLoginPost)
-        const loginStatusCode= response.status
+          this.userId= await getLoginPost(this.email, this.password)
+          localStorage.setItem('dataUser', JSON.stringify(this.userId))
+          console.log(this.userId)
+          const loginStatusCode= this.userId.status
+          console.log(this.userId)
 
-        if(loginStatusCode== 403){
-           alert('invalid login')
-        }else{
-          const user= await response.json();
-          console.log(user)
-          localStorage.setItem('user', user)
-          alert('log in successfully')
-          console.log(user)
-          this.$router.go({
-             path: '/user',
-             name: 'usersPage',
-          })
-        }
-      }else{
-        alert('the email and password fields are required')
-      } 
+          if(loginStatusCode== 401){
+            // alert('invalid login')
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'invalid login!',
+              footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
+            })
+          }else{
+            this.$router.push({
+              name: 'usersPage',
+              params:{id: this.userId},
+              })
+              this.showLogin= false
+            }
+          }else{
+            // alert('the email and password fields are required')
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong!',
+              footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
+            })
+          } 
       }
   }
 }
