@@ -166,8 +166,9 @@ export default {
       // clickedToSwitchOffModal(){this.showRegist = false},
       closeModal(){
         console.log(this.closeModal)
-        this.$router.push({
-        name: 'Home',
+        this.$router.go({
+         path: '/',
+         name: 'Home',
       })},
       async ClickToLogIn(){
         if (this.email!='' || this.password!=''){
