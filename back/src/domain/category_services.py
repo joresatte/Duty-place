@@ -94,7 +94,7 @@ class CategoryServicesRepository:
         services = []
         for item in data:
             services_by_category_id = Category_services(
-                 id= item["id"],
+                id= item["id"],
                 cat_id= item["cat_id"],
                 user_name= item["user_name"],
                 text= item["text"],

@@ -169,3 +169,15 @@ def setup6():
 
     return client
 
+def setup7():
+    services_repository = ServicesRepository(temp_file())
+    app = create_app(repositories={"services": services_repository})
+    client = app.test_client()
+    return client
+
+def setup8():
+    services_repository = CategoryServicesRepository(temp_file())
+    app = create_app(repositories={"categories_services": services_repository})
+    client = app.test_client()
+    return client
+

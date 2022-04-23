@@ -39,6 +39,25 @@ def create_app(repositories):
         services = repositories["services"].get_user_services_by_id(id)
         return object_to_json(services)
 
+    @app.route("/api/services/user_services", methods=["POST"])
+    def post_user_services():
+        data= request.json
+        user_services = Services(
+            id= data[0]["id"],
+            cat_id= data[0]["cat_id"],
+            user_name= data[0]["user_name"],
+            text= data[0]["text"],
+            intro= data[0]["intro"],
+            price= data[0]["price"],
+            text_pictures= data[0]["text_pictures"],
+            textarea= data[0]['textarea'],
+            phone= data[0]["phone"],
+            email= data[0]["email"],
+            city= data[0]["city"],
+        )
+        repositories["services"].save(user_services)
+        return '', 200
+
     @app.route("/api/services/by-category", methods=["GET"])
     def get_all_services_by_category():
         all_categories = repositories["categories_services"].get_all_services_by_category()
@@ -49,17 +68,36 @@ def create_app(repositories):
         all_categories = repositories["categories_services"].get_category_services_by_cat_id(category_id)
         return object_to_json(all_categories)
 
+    @app.route("/api/services/by-category", methods=["POST"])
+    def post_category_services():
+        data= request.json
+        services_by_category = Category_services(
+            id= data[0]["id"],
+            cat_id= data[0]["cat_id"],
+            user_name= data[0]["user_name"],
+            text= data[0]["text"],
+            intro= data[0]["intro"],
+            price= data[0]["price"],
+            text_pictures= data[0]["text_pictures"],
+            textarea= data[0]['textarea'],
+            phone= data[0]["phone"],
+            email= data[0]["email"],
+            city= data[0]["city"],
+        )
+        repositories["categories_services"].save(services_by_category)
+        return '', 200
+
     @app.route("/api/regists", methods=["POST"])
     def post_regists():
-        Body= request.json
-        print("-------------", Body)
+        data= request.json
+        print("-------------", data)
         user= Regists(
-            id= Body['id'],
-            email= Body['email'],
-            password= Body['password']
+            id= data['id'],
+            email= data['email'],
+            password= data['password']
             )
         print("-----------", user)
-        if (Body['id'])!= '' or (Body['email'])!= '' or (Body['password'])!= '':
+        if (data['id'])!= '' or (data['email'])!= '' or (data['password'])!= '':
             repositories["regists"].save(user)
             return '', 200
         else:
@@ -78,12 +116,12 @@ def create_app(repositories):
 
     @app.route("/api/login/Authenticated", methods=["POST"])
     def get_login():
-        Body= request.json
-        # print("----aqui va el body:", Body)
-        user= repositories["regists"].get_by_email_and_password(Body['email'], Body ['password'])
+        data= request.json
+        # print("----aqui va el data:", data)
+        user= repositories["regists"].get_by_email_and_password(data['email'], data ['password'])
         # print("------aqui va el user:", user)
-        # print('----aqui va el user password:', Body['password'])
-        if user is None or (Body['password']) != user.password or (Body['email']) != user.email:
+        # print('----aqui va el user password:', data['password'])
+        if user is None or (data['password']) != user.password or (data['email']) != user.email:
             return '', 401
         else:
             return object_to_json(user)
@@ -99,8 +137,8 @@ def create_app(repositories):
     # @app.route("/api/contact", methods=["POST"])
     # def contact_posted():
     #     user_id= request.headers.get("Authorization")
-    #     body = request.json
-    #     contact = Contact(**body)
+    #     data = request.json
+    #     contact = Contact(**data)
     #     repositories["contact"].save(contact)
     #     return ''   
     
