@@ -4,80 +4,79 @@
     <div class="modal">
       <header class="modal-header">
         <slot name="header">
-          login the default title!
+          all camps are required!
         </slot>
-        <button
-          type="button"
-          class="btn-close"
-          @click="closeModal"
-        >
-          x
-        </button>
       </header>
 
       <section class="modal-body">
         <slot name="body">
-          login the default body!
+          Upload picture!
           <input type="file" 
                   accept="image/png, image/jpeg"
                   required 
                   :value="ObjServices.text_pictures" 
                   @change="onServices"
+                  title="Select file"
                 >
+                <label for="select file"></label>
         </slot>
        </section>
-       <br>
        <section class="modal-body">
         <slot name="body">
-          login the default body!
           <input type="password" 
                   required 
                   :value="ObjServices.user_name" 
                   @change="onServices"
-                 >    
+                  placeholder="User Name"
+                 > <br>   
           <input type="password" 
                   required 
                   :value="ObjServices.intro" 
                   @change="onServices"
-                 >
+                  placeholder="introduce your service"
+                 ><br>
           <input type="password" 
                   required 
                   :value="ObjServices.price" 
                   @change="onServices"
-                 >
-          <input type="password" 
-                  required 
-                  :value="ObjServices.textarea" 
-                  @change="onServices"
-                 >
+                  placeholder="service price by hour"
+                 ><br>
           <input type="password" 
                   required 
                   :value="ObjServices.email" 
                   @change="onServices"
-                 >
+                  placeholder="Add email"
+                 ><br>
           <input type="password" 
                   required 
                   :value="ObjServices.phone" 
                   @change="onServices"
-                 >
+                  placeholder="Add phone"
+                 ><br>
           <input type="password" 
                   required 
                   :value="ObjServices.city" 
                   @change="onServices"
-                 >                             
+                  placeholder="Add city"
+                 >
+                 <br><br>
+          <textarea type="password" 
+                  required 
+                  :value="ObjServices.textarea" 
+                  @change="onServices"
+                  placeholder="describe your services"
+                 ></textarea><br>                             
         </slot>
        </section>
-       <br>
        <section class="modal-body">
         <slot name="body">
-          login the default body!
-          <v-select 
-          v-model="selectedCategory"
-          :options='ObjServices.cat_id'
-          :reduce='name => name.code'
-          aria-placeholder="select category services">
-
-          </v-select>
+          select category services!
+          <select name="" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'> 
+            <option value="">select Category service</option>
+            <option v-for="item in ObjServices.cat_id" :value="item" :key="item">
+              {{item}}
+            </option>
+        </select>
         </slot>
        </section>
       <footer class="modal-footer">
@@ -89,9 +88,8 @@
           class="btn-green"
           @click="handleClick"
         >
-          log in 
+          Save services
         </button>
-        <br>
         <br>
         <button
           type="button"
@@ -125,20 +123,60 @@
       },
       onServices(event){
         console.log(event.target.value)
-        this.$emit('changedEmailPassword', {
-          email: event.target.value,
-          password: this.SignUp.email
+        this.$emit('changedObjServices', {
+          text_pictures: event.target.value,
         })
       },
       onServices(event){
         console.log(event.target.value)
-        this.$emit('changedEmail', {
-          email: this.SignUp.email,
-          password: event.target.value
+        this.$emit('changedObjServices', {
+          intro: this.event.target.value,
+        })
+      },
+      onServices(event){
+        console.log(event.target.value)
+        this.$emit('changedObjServices', {
+          price: this.event.target.value,
+        })
+      },
+       onServices(event){
+        console.log(event.target.value)
+        this.$emit('changedObjServices', {
+          textarea: this.event.target.value,
+        })
+      },
+      onServices(event){
+        console.log(event.target.value)
+        this.$emit('changedObjServices', {
+          email: this.event.target.value,
+        })
+      },
+      onServices(event){
+        console.log(event.target.value)
+        this.$emit('changedObjServices', {
+          phone: this.event.target.value,
+        })
+      },
+      onServices(event){
+        console.log(event.target.value)
+        this.$emit('changedObjServices', {
+          city: this.event.target.value,
+        })
+      },
+      onServices(event){
+        console.log(event.target.value)
+        this.$emit('changedObjServices', {
+          user_name: this.event.target.value,
+        })
+      },
+      onServices(event){
+        console.log(event.target.value)
+        this.$emit('changedObjServices', {
+          cat_id: this.event.target.value,
         })
       },
       handleClick(){
-        console.log(this.handleRegist)
+        console.log(this.handleClick)
         this.$router.go({
           path: '/about',
           name: 'About',
@@ -170,7 +208,7 @@
 
   .modal-header,
   .modal-footer {
-    padding: 15px;
+    padding: 1.5em;
     display: flex;
   }
 
@@ -189,7 +227,7 @@
 
   .modal-body {
     position: relative;
-    padding: 20px 10px;
+    padding: 2em 2em;
   }
 
   .btn-close {
@@ -197,8 +235,8 @@
     top: 0;
     right: 0;
     border: none;
-    font-size: 20px;
-    padding: 10px;
+    font-size: 2em;
+    padding: 2em;
     cursor: pointer;
     font-weight: bold;
     color: #4AAE9B;
@@ -210,5 +248,6 @@
     background: #4AAE9B;
     border: 1px solid #4AAE9B;
     border-radius: 2px;
+    height: 2em;
   }
 </style>

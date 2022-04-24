@@ -10,7 +10,8 @@
     <publish-services-form-modal 
     :ObjServices="UserServices" 
     @closeModal='shutDown'
-    v-show="displayingModal"/>
+    v-show="displayingModal"
+    @changedObjServices='onObjServicesChanged'/>
     </div>
 <br><br>
 <userForm :users="users"/>
@@ -70,6 +71,10 @@ export default {
     },
     closeModal() {
         this.displayingModal = false;
+    },
+    onObjServicesChanged(UserServicesValues){
+      console.table(UserServicesValues)
+      this.UserServices= UserServicesValues
     },
   }
 }
