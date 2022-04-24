@@ -32,7 +32,7 @@
       <footer class="modal-footer">
         <slot name="footer">
           <br>
-        <button @click="closeModal">close Modal</button>
+        <button @click="closeRegistModal">close Modal</button>
         </slot>
         
       </footer>
@@ -69,7 +69,7 @@
       <footer class="modal-footer">
         <slot name="footer">
           <br>
-          <button @click="closeModal">close Modal</button>
+          <button @click="closeLoginModal">close Modal</button>
         </slot>
         
       </footer>
@@ -164,12 +164,20 @@ export default {
 
       clickedToSwitchOnModal(){this.showRegist = true},
       // clickedToSwitchOffModal(){this.showRegist = false},
-      closeModal(){
-        console.log(this.closeModal)
-        this.$router.go({
-         path: '/',
-         name: 'Home',
-      })},
+      closeLoginModal(){
+        this.showLogin= false
+      //   this.$router.go({
+      //    path: '/',
+      //    name: 'Home',
+      // })
+      },
+      closeRegistModal(){
+        this.showRegist= false
+      //   this.$router.go({
+      //    path: '/',
+      //    name: 'Home',
+      // })
+      },
       async ClickToLogIn(){
         if (this.email!='' || this.password!=''){
           this.userId= await getLoginPost(this.email, this.password)
