@@ -183,7 +183,7 @@ export default {
           this.userId= await getLoginPost(this.email, this.password)
           localStorage.setItem('dataUser', JSON.stringify(this.userId))
           console.log(this.userId)
-          const loginStatusCode= this.userId.status
+          const loginStatusCode= this.userId.status_code
           console.log(this.userId)
 
           if(loginStatusCode== 401){

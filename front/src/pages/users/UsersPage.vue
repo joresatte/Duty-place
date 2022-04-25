@@ -15,7 +15,7 @@
     </div>
 <br><br>
 <userForm :users="users"/>
-
+{{UserServices[0][cat_id]}}
 </template>
 
 <script>

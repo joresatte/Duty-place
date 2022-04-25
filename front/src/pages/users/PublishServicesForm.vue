@@ -71,9 +71,9 @@
        <section class="modal-body">
         <slot name="body">
           select category services!
-          <select name="" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'> 
+          <select name="name" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'> 
             <option value="">select Category service</option>
-            <option v-for="item in ObjServices.cat_id" :value="item" :key="item">
+            <option v-for="item in ObjServices.cat_id" :value="item" :key="item" :selected="name==item">
               {{item}}
             </option>
         </select>
