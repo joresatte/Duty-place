@@ -45,7 +45,7 @@ export default {
           {code: 'category_3', name:'Cuidados'},
           {code: 'category_4', name:'Mantenimientos'},
           ]},
-          {text:[
+        {text:[
           {code: 'category_1', name:'Mudanzas'},
           {code: 'category_2', name:'Limpiezas'},
           {code: 'category_3', name:'Cuidados'},
