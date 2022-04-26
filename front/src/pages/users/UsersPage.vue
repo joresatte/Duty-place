@@ -15,7 +15,7 @@
     </div>
 <br><br>
 <userForm :users="users"/>
-{{UserServices[0][cat_id]}}
+{{UserServices.cat_id}}
 </template>
 
 <script>
@@ -30,28 +30,28 @@ export default {
     return{
       displayingModal: false,
       users:[],
-      UserServices:[
-        {text_pictures: ''},
-        {intro:''},
-        {price:''},
-        {textarea:''},
-        {email:''},
-        {phone:''},
-        {city:''},
-        {user_name:''},
-        {cat_id:[
+      UserServices:{
+        text_pictures: '',
+        intro:'',
+        price:'',
+        textarea:'',
+        email:'',
+        phone:'',
+        city:'',
+        user_name:'',
+        cat_id:[
           {code: 'category_1', name:'Mudanzas'},
           {code: 'category_2', name:'Limpiezas'},
           {code: 'category_3', name:'Cuidados'},
           {code: 'category_4', name:'Mantenimientos'},
-          ]},
-        {text:[
+          ],
+        text:[
           {code: 'category_1', name:'Mudanzas'},
           {code: 'category_2', name:'Limpiezas'},
           {code: 'category_3', name:'Cuidados'},
           {code: 'category_4', name:'Mantenimientos'},
-          ]}, 
-      ],
+          ], 
+      },
     }
   }, 
   mounted(){
