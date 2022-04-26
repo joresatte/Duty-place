@@ -69,15 +69,24 @@
         </slot>
        </section>
        <section class="modal-body">
+         {{ObjServices.cat_id}}
         <slot name="body">
           select category services!
-          <select name="name" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'> 
+          <!-- <select name="" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'> 
             <option value="">select Category service</option>
-            <option v-for="item in ObjServices.cat_id" :value="item" :key="item" :selected="name==item">
-              {{item}}
+            <option v-for="index in ObjServices[8]" :value="index.code" :key="index">
+              {{index}}
             </option>
-        </select>
-        </slot>
+           </select> -->
+           <section>
+           <select name="name" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'>
+          <option value="">select Category service</option>
+          <option v-for="index in ObjServices.cat_id" :key="index.code" :value="index" :selected="name=index" >
+          {{index.name}}
+          </option>
+          </select>
+           </section>
+        </slot> 
        </section>
       <footer class="modal-footer">
         <slot name="footer">
@@ -114,7 +123,7 @@
     },
     data(){
       return{
-        selectedCategory:''
+        selectedCategory:'',
       }
     },
     methods: {
