@@ -114,7 +114,7 @@
 <script>
   export default {
     name: 'PublishServicesFormModal',
-    emits:['change', 'changedPasswordEmail', 'closeModal'],
+    emits:['change', 'changedPasswordEmail', 'changedObjServices', 'closeModal'],
     props:{
       ObjServices:{
         type:Object,
@@ -134,54 +134,126 @@
         console.log(event.target.value)
         this.$emit('changedObjServices', {
           text_pictures: event.target.value,
+          cat_id: this.ObjServices.cat_id,
+          intro: this.ObjServices.intro,
+          price: this.ObjServices.price,
+          textarea: this.ObjServices.textarea,
+          email: this.ObjServices.email,
+          phone: this.ObjServices.phone,
+          city: this.ObjServices.city,
+          user_name: this.ObjServices.user_name,
         })
       },
       onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
-          intro: this.event.target.value,
+          intro: event.target.value,
+          text_pictures: this.ObjServices.text_pictures,
+          cat_id: this.ObjServices.cat_id,
+          price: this.ObjServices.price,
+          textarea: this.ObjServices.textarea,
+          email: this.ObjServices.email,
+          phone: this.ObjServices.phone,
+          city: this.ObjServices.city,
+          user_name: this.ObjServices.user_name
         })
       },
       onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
-          price: this.event.target.value,
+          price: event.target.value,
+          intro: this.ObjServices.intro,
+          text_pictures: ObjServices.text_pictures,
+          cat_id: this.ObjServices.cat_id,
+          textarea: this.ObjServices.textarea,
+          email: this.ObjServices.email,
+          phone: this.ObjServices.phone,
+          city: this.ObjServices.city,
+          user_name: this.ObjServices.user_name
         })
       },
        onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
-          textarea: this.event.target.value,
+          textarea: event.target.value,
+          price: this.ObjServices.price,
+          intro: this.ObjServices.intro,
+          text_pictures: ObjServices.text_pictures,
+          cat_id: this.ObjServices.cat_id,
+          email: this.ObjServices.email,
+          phone: this.ObjServices.phone,
+          city: this.ObjServices.city,
+          user_name: this.ObjServices.user_name
         })
       },
       onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
-          email: this.event.target.value,
+          email: event.target.value,
+          textarea: this.ObjServices.textarea,
+          price: this.ObjServices.price,
+          intro: this.ObjServices.intro,
+          text_pictures: ObjServices.text_pictures,
+          cat_id: this.ObjServices.cat_id,
+          phone: this.ObjServices.phone,
+          city: this.ObjServices.city,
+          user_name: this.ObjServices.user_name
         })
       },
       onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
-          phone: this.event.target.value,
+          phone: event.target.value,
+          email: this.ObjServices.email,
+          textarea: this.ObjServices.textarea,
+          price: this.ObjServices.price,
+          intro: this.ObjServices.intro,
+          text_pictures: ObjServices.text_pictures,
+          cat_id: this.ObjServices.cat_id,
+          city: this.ObjServices.city,
+          user_name: this.ObjServices.user_name
         })
       },
       onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
-          city: this.event.target.value,
+          city: event.target.value,
+          phone: this.ObjServices.phone,
+          email: this.ObjServices.email,
+          textarea: this.ObjServices.textarea,
+          price: this.ObjServices.price,
+          intro: this.ObjServices.intro,
+          text_pictures: ObjServices.text_pictures,
+          cat_id: this.ObjServices.cat_id,
+          user_name: this.ObjServices.user_name
         })
       },
       onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
-          user_name: this.event.target.value,
+          user_name: event.target.value,
+          city: this.ObjServices.city,
+          phone: this.ObjServices.phone,
+          email: this.ObjServices.email,
+          textarea: this.ObjServices.textarea,
+          price: this.ObjServices.price,
+          intro: this.ObjServices.intro,
+          text_pictures: ObjServices.text_pictures,
+          cat_id: this.ObjServices.cat_id,
         })
       },
       onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
-          cat_id: this.event.target.value,
+          cat_id: event.target.value,
+          user_name: this.ObjServices.user_name,
+          city: this.ObjServices.city,
+          phone: this.ObjServices.phone,
+          email: this.ObjServices.email,
+          textarea: this.ObjServices.textarea,
+          price: this.ObjServices.price,
+          intro: this.ObjServices.intro,
+          text_pictures: this.ObjServices.text_pictures,
         })
       },
       handleClick(){

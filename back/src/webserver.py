@@ -24,6 +24,11 @@ def create_app(repositories):
     def hello_world(): 
         return "...magic!"
 
+    @app.route("/api/object_services", methods=["GET"])
+    def get_object_services():
+        object_service=''
+        return object_to_json(object_service)
+
     @app.route("/api/categories", methods=["GET"])
     def get_all_categories():
         all_categories = repositories["categories"].get_all()
