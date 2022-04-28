@@ -22,17 +22,3 @@ function loginFetch(){
    
 }
 export default loginFetch
-
-
-// const userId= getUserId()
-// const settings = {
-//   method: "GET",
-//   headers: {
-//      "Content-Type": "application/json",
-//   },
-// };
-// const response = await fetch(`${config.userService_Path}/user_services/${userId}`, settings);
-// this.users = await response.json();
-// this.$forceUpdate({ path: '/user/:id',
-//                     name: 'usersPage',})
-// },

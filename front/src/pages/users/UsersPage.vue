@@ -21,6 +21,7 @@
 <script>
 import PublishServicesFormModal from './PublishServicesForm.vue'
 import loginFetch from '@/pages/apiservices/loginFetch.js'
+import objectUserServices from '@/pages/apiservices/getObjectUserServices.js'
 import userForm from '@/components/userForm.vue'
 export default {
   props:['id'],
@@ -30,38 +31,23 @@ export default {
     return{
       displayingModal: false,
       users:[],
-      UserServices:{
-        text_pictures: '',
-        intro:'',
-        price:'',
-        textarea:'',
-        email:'',
-        phone:'',
-        city:'',
-        user_name:'',
-        cat_id:[
-          {code: 'category_1', name:'Mudanzas'},
-          {code: 'category_2', name:'Limpiezas'},
-          {code: 'category_3', name:'Cuidados'},
-          {code: 'category_4', name:'Mantenimientos'},
-          ],
-        text:[
-          {code: 'category_1', name:'Mudanzas'},
-          {code: 'category_2', name:'Limpiezas'},
-          {code: 'category_3', name:'Cuidados'},
-          {code: 'category_4', name:'Mantenimientos'},
-          ], 
-      },
+      UserServices:{},
     }
   }, 
   mounted(){
-    this.loadData()
+    this.loadData();
+    this.loadObjectUserServices()
   },
   methods:{
     async loadData(){
       console.log(this.loadData)
       this.users= await loginFetch()
       console.log(this.users)
+    },
+    async loadObjectUserServices(){
+      console.log(this.loadObjectUserServices)
+      this.UserServices= await objectUserServices()
+      console.log(this.UserServices)
     },
     shutDown() {
         this.displayingModal = false;

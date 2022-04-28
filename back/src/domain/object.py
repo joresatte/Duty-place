@@ -1,6 +1,6 @@
 import sqlite3
 
-class Categories:
+class Object:
     def __init__(self, cat_id, user_name, text, intro, price, text_pictures, textarea, email, phone, city):
         self.cat_id= cat_id
         self.user_name= user_name
@@ -51,8 +51,15 @@ class ObjectServicesRepository:
         sql = """
             create table if not exists objectservices (
                 cat_id varchar primary key,
+                user_name varchar,
+                text_pictures varchar,
                 text varchar,
-                text_pictures varchar
+                intro varchar,
+                price varchar,
+                textarea varchar,
+                email varchar,
+                phone varchar,
+                city varchar
             )
         """
         conn = self.create_conn()
@@ -68,21 +75,5 @@ class ObjectServicesRepository:
 
         data = cursor.fetchall()
 
-        users = [Categories(**item) for item in data]
+        users = [Object(**item) for item in data]
         return users
-
-    def save(self, category):
-        sql = """insert into categories (cat_id, text,text_pictures) values (
-            :cat_id, :text, :text_pictures
-        ) """
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute(
-            sql,
-            {"cat_id": category.cat_id, "text": category.text, "text_pictures": category.text_pictures}
-            # { **user.to_dict(), 'password': user.password}
-        )
-        conn.commit()
-
-
-

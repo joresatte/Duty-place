@@ -116,3 +116,26 @@ Respuesta_10= {
     "email": "fbadland0@bizjournals.com",
     "password": "password50",
     }
+
+respuesta_11={
+        'text_pictures': '',
+        'intro':'',
+        'price':'',
+        'textarea':'',
+        'email':'',
+        'phone':'',
+        'city':'',
+        'user_name':'',
+        'cat_id':[
+          {'code': 'category_1', 'name':'Mudanzas'},
+          {'code': 'category_2', 'name':'Limpiezas'},
+          {'code': 'category_3', 'name':'Cuidados'},
+          {'code': 'category_4',' name':'Mantenimientos'},
+          ],
+        'text':[
+          {'code': 'category_1', 'name':'Mudanzas'},
+          {'code': 'category_2', 'name':'Limpiezas'},
+          {'code': 'category_3', 'name':'Cuidados'},
+          {'code': 'category_4',' name':'Mantenimientos'},
+          ], 
+}

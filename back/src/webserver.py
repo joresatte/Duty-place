@@ -1,12 +1,14 @@
 from pyparsing import Regex
 from flask import Flask, request
 from flask_cors import CORS
+from src.domain.respuesta import respuesta_11
 from src.domain.categories import CategoriesRepository ,Categories
 from src.domain.category_services import CategoryServicesRepository, Category_services
 from src.domain.users_services import ServicesRepository, Services
 from src.domain.regists import RegistsRepository, Regists
 from src.lib.utils import object_to_json
 import re
+import json
 
 Regex= r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 re_email= "[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
@@ -26,8 +28,8 @@ def create_app(repositories):
 
     @app.route("/api/object_services", methods=["GET"])
     def get_object_services():
-        object_service=''
-        return object_to_json(object_service)
+        object_service= respuesta_11
+        return object_service
 
     @app.route("/api/categories", methods=["GET"])
     def get_all_categories():
