@@ -15,7 +15,7 @@
     </div>
 <br><br>
 <userForm :users="users"/>
-{{UserServices.cat_id}}
+<!-- {{UserServices.cat_id}} -->
 </template>
 
 <script>
@@ -31,12 +31,33 @@ export default {
     return{
       displayingModal: false,
       users:[],
-      UserServices:{},
+      UserServices:{
+        text_pictures: '',
+        intro:'',
+        price:'',
+        textarea:'',
+        email:'',
+        phone:'',
+        city:'',
+        user_name:'',
+        cat_id:[
+          {code: 'category_1', name:'Mudanzas'},
+          {code: 'category_2', name:'Limpiezas'},
+          {code: 'category_3', name:'Cuidados'},
+          {code: 'category_4', name:'Mantenimientos'},
+          ],
+        text:[
+          {code: 'category_1', name:'Mudanzas'},
+          {code: 'category_2', name:'Limpiezas'},
+          {code: 'category_3', name:'Cuidados'},
+          {code: 'category_4', name:'Mantenimientos'},
+          ],
+      }
     }
   }, 
   mounted(){
     this.loadData();
-    this.loadObjectUserServices()
+    // this.loadObjectUserServices()
   },
   methods:{
     async loadData(){
@@ -44,11 +65,11 @@ export default {
       this.users= await loginFetch()
       console.log(this.users)
     },
-    async loadObjectUserServices(){
-      console.log(this.loadObjectUserServices)
-      this.UserServices= await objectUserServices()
-      console.log(this.UserServices)
-    },
+    // async loadObjectUserServices(){
+    //   console.log(this.loadObjectUserServices)
+    //   this.UserServices= await objectUserServices()
+    //   console.log(this.UserServices)
+    // },
     shutDown() {
         this.displayingModal = false;
     },

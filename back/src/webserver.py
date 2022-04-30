@@ -1,11 +1,10 @@
 from pyparsing import Regex
 from flask import Flask, request
 from flask_cors import CORS
-from src.domain.respuesta import respuesta_11
-from src.domain.categories import CategoriesRepository ,Categories
-from src.domain.category_services import CategoryServicesRepository, Category_services
-from src.domain.users_services import ServicesRepository, Services
-from src.domain.regists import RegistsRepository, Regists
+
+from src.domain.category_services import  Category_services
+from src.domain.users_services import  Services
+from src.domain.regists import  Regists
 from src.lib.utils import object_to_json
 import re
 import json
@@ -28,8 +27,8 @@ def create_app(repositories):
 
     @app.route("/api/object_services", methods=["GET"])
     def get_object_services():
-        object_service= respuesta_11
-        return object_service
+        obj_service= repositories["object_services"].get_all_object_services()
+        return obj_service
 
     @app.route("/api/categories", methods=["GET"])
     def get_all_categories():

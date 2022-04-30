@@ -3,7 +3,7 @@ from src.domain.categories import CategoriesRepository
 from src.domain.category_services import CategoryServicesRepository
 from src.domain.users_services import ServicesRepository
 from src.domain.regists import RegistsRepository
-from src.domain.object import ObjectServicesRepository
+# from src.domain.object import ObjectServicesRepository
 
 
 database_path = "data/database.db"
@@ -13,7 +13,7 @@ repositories = {
     "categories_services": CategoryServicesRepository(database_path),
     "services": ServicesRepository(database_path),
     "regists": RegistsRepository(database_path),
-    "object_services": ObjectServicesRepository(database_path),
+    # "object_services": ObjectServicesRepository(database_path),
 }
 
 app = create_app(repositories)

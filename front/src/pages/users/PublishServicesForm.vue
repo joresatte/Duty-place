@@ -22,75 +22,64 @@
         </slot>
        </section>
        <section class="modal-body">
-        <slot name="body">
-          <input type="password" 
+          <input type="text" 
                   required 
-                  :value="ObjServices.user_name" 
+                  v-model="ObjServices.user_name" 
                   @change="onServices"
                   placeholder="User Name"
                  > <br>   
-          <input type="password" 
+          <input type="text" 
                   required 
-                  :value="ObjServices.intro" 
+                  v-model="ObjServices.intro" 
                   @change="onServices"
                   placeholder="introduce your service"
                  ><br>
-          <input type="password" 
+          <input type="text" 
                   required 
-                  :value="ObjServices.price" 
+                  v-model="ObjServices.price" 
                   @change="onServices"
                   placeholder="service price by hour"
                  ><br>
-          <input type="password" 
+          <input type="email" 
                   required 
-                  :value="ObjServices.email" 
+                  v-model="ObjServices.email" 
                   @change="onServices"
                   placeholder="Add email"
                  ><br>
-          <input type="password" 
+          <input type="number" 
                   required 
-                  :value="ObjServices.phone" 
+                  v-model="ObjServices.phone" 
                   @change="onServices"
                   placeholder="Add phone"
                  ><br>
-          <input type="password" 
+          <input type="text" 
                   required 
-                  :value="ObjServices.city" 
+                  v-model="ObjServices.city" 
                   @change="onServices"
                   placeholder="Add city"
                  >
                  <br><br>
-          <textarea type="password" 
+          <textarea name="textarea" 
                   required 
-                  :value="ObjServices.textarea" 
+                  v-model="ObjServices.textarea" 
                   @change="onServices"
                   placeholder="describe your services"
-                 ></textarea><br>                             
-        </slot>
+                 ></textarea>                            
        </section>
        <section class="modal-body">
-         {{ObjServices.cat_id}}
-        <slot name="body">
+         <!-- {{ObjServices.cat_id}} -->
           select category services!
-          <!-- <select name="" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'> 
-            <option value="">select Category service</option>
-            <option v-for="index in ObjServices[8]" :value="index.code" :key="index">
-              {{index}}
-            </option>
-           </select> -->
            <section>
-           <select name="name" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'>
+           <select class="select" name="name" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'>
           <option value="">select Category service</option>
           <option v-for="index in ObjServices.cat_id" :key="index.code" :value="index" :selected="name=index" >
           {{index.name}}
           </option>
           </select>
            </section>
-        </slot> 
        </section>
       <footer class="modal-footer">
         <slot name="footer">
-          This is the default footer!
         </slot>
         <button
           type="button"
@@ -330,5 +319,10 @@
     border: 1px solid #4AAE9B;
     border-radius: 2px;
     height: 2em;
+  }
+  .select{
+    position: absolute;
+    top: 0em;
+    left: 6em;
   }
 </style>

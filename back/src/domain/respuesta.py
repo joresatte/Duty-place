@@ -117,25 +117,55 @@ Respuesta_10= {
     "password": "password50",
     }
 
-respuesta_11={
-        'text_pictures': '',
-        'intro':'',
-        'price':'',
-        'textarea':'',
-        'email':'',
-        'phone':'',
-        'city':'',
-        'user_name':'',
-        'cat_id':[
+respuesta_11=[
           {'code': 'category_1', 'name':'Mudanzas'},
           {'code': 'category_2', 'name':'Limpiezas'},
           {'code': 'category_3', 'name':'Cuidados'},
           {'code': 'category_4',' name':'Mantenimientos'},
-          ],
-        'text':[
+    ]
+
+respuesta_12=[
           {'code': 'category_1', 'name':'Mudanzas'},
           {'code': 'category_2', 'name':'Limpiezas'},
           {'code': 'category_3', 'name':'Cuidados'},
-          {'code': 'category_4',' name':'Mantenimientos'},
-          ], 
-}
+    ]
+
+# {
+#     'id': user_service.id,
+#     'cat_id': user_service.cat_id,
+#     'user_name': user_service.user_name,
+#     'text': user_service.text,
+#     'intro': user_service.intro,
+#     'price': user_service.price,
+#     'text_pictures': user_service.text_pictures,
+#     'textarea': user_service.textarea,
+#     'phone': user_service.phone,
+#     'email': user_service.email,
+#     'city': user_service.city
+# },
+
+#  json.loads( 
+#                 cat_id= item["cat_id"],
+#                 user_name= item["user_name"],
+#                 text= item["text"],
+#                 intro= item["intro"],
+#                 price= item["price"],
+#                 text_pictures= item["text_pictures"],
+#                 textarea= item['textarea'],
+#                 phone= item["phone"],
+#                 email= item["email"],
+#                 city= item["city"],)
+#             )
+
+#  {
+#                 'cat_id': json.dumps(user_service['cat_id']),
+#                 'user_name': json.dumps(user_service['user_name']),
+#                 'text': json.dumps(user_service['text']),
+#                 'intro': json.dumps(user_service['intro']),
+#                 'price': json.dumps(user_service['price']),
+#                 'text_pictures': json.dumps(user_service['text_pictures']),
+#                 'textarea': json.dumps(user_service['textarea']),
+#                 'phone': json.dumps(user_service['phone']),
+#                 'email': json.dumps(user_service['email']),
+#                 'city': json.dumps(user_service['city'])
+# },
