@@ -17,7 +17,7 @@
   </div>
   <div class="box">
     <span>Mudanzas</span>
-    <img src="@/assets/images/images.png">
+    <img @click="onClick" src="@/assets/images/images.png">
   </div>
 </div>
   <br><br> 
@@ -63,6 +63,12 @@ export default {
     async loadData(){
       console.log("loadData")
       this.categories= await getCategories()
+    },
+    onClick(){
+      this.$router.push({
+        name: 'ServicesByCategoryPage',
+        params:{category_id: this.categories.category_1}
+      })
     },
   }
 }

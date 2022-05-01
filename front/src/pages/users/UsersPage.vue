@@ -9,19 +9,24 @@
     </button>
     <publish-services-form-modal 
     :ObjServices="UserServices" 
+    :uploadPicture="text_pictures"
+    :ObjCategory="cat_id"
     @closeModal='shutDown'
     v-show="displayingModal"
-    @changedObjServices='onObjServicesChanged'/>
+    @changedObjServices='onObjServicesChanged'
+    @uploaded="text_pictures= $event"
+    @changedObj="cat_id= $event"
+    @handleClick="handleClick"/>
     </div>
 <br><br>
 <userForm :users="users"/>
-<!-- {{UserServices.cat_id}} -->
 </template>
 
 <script>
 import PublishServicesFormModal from './PublishServicesForm.vue'
 import loginFetch from '@/pages/apiservices/loginFetch.js'
-import objectUserServices from '@/pages/apiservices/getObjectUserServices.js'
+// import objectUserServices from '@/pages/apiservices/getObjectUserServices.js'
+import PublishServices from '@/pages/apiservices/PublishServicesPost.js'
 import userForm from '@/components/userForm.vue'
 export default {
   props:['id'],
@@ -31,8 +36,14 @@ export default {
     return{
       displayingModal: false,
       users:[],
+      text_pictures: '',
+      cat_id:[
+          {code: 'category_1', name:'Mudanzas'},
+          {code: 'category_2', name:'Limpiezas'},
+          {code: 'category_3', name:'Cuidados'},
+          {code: 'category_4', name:'Mantenimientos'},
+      ],
       UserServices:{
-        text_pictures: '',
         intro:'',
         price:'',
         textarea:'',
@@ -40,18 +51,12 @@ export default {
         phone:'',
         city:'',
         user_name:'',
-        cat_id:[
-          {code: 'category_1', name:'Mudanzas'},
-          {code: 'category_2', name:'Limpiezas'},
-          {code: 'category_3', name:'Cuidados'},
-          {code: 'category_4', name:'Mantenimientos'},
-          ],
         text:[
           {code: 'category_1', name:'Mudanzas'},
           {code: 'category_2', name:'Limpiezas'},
           {code: 'category_3', name:'Cuidados'},
           {code: 'category_4', name:'Mantenimientos'},
-          ],
+        ],
       }
     }
   }, 
@@ -82,6 +87,28 @@ export default {
     onObjServicesChanged(UserServicesValues){
       console.table(UserServicesValues)
       this.UserServices= UserServicesValues
+    },
+    getUserId() {
+      const userJson = localStorage.getItem("dataUser");
+      const user = JSON.parse(userJson);
+      return user.id;
+    },
+    async handleClick(){
+      console.log(this.handleClick)
+      await PublishServices(
+        this.id= this.getUserId,
+        this.intro,
+        this.text_pictures,
+        this.cat_id,
+        this.textarea,
+        this.text= localStorage.getItem('cat_name'),
+        this.phone,
+        this.email,
+        this.user_name,
+        this.price,
+        this.city
+
+      )
     },
   }
 }

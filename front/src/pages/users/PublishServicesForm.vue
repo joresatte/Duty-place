@@ -14,11 +14,10 @@
           <input type="file" 
                   accept="image/png, image/jpeg"
                   required 
-                  :value="ObjServices.text_pictures" 
-                  @change="onServices"
+                  :value="uploadPicture.text_pictures" 
+                  @changed="upload"
                   title="Select file"
                 >
-                <label for="select file"></label>
         </slot>
        </section>
        <section class="modal-body">
@@ -67,12 +66,11 @@
                  ></textarea>                            
        </section>
        <section class="modal-body">
-         <!-- {{ObjServices.cat_id}} -->
           select category services!
-           <section>
-           <select class="select" name="name" @change="onServices" v-model="selectedCategory" :reduce='name => name.code'>
+          <section>
+          <select class="select" @onchanged="CategoryObj" v-model="selectedCategory">
           <option value="">select Category service</option>
-          <option v-for="index in ObjServices.cat_id" :key="index.code" :value="index" :selected="name=index" >
+          <option v-for="(index) in CategoryObj.cat_id" :key="index.code" :value="index.code">
           {{index.name}}
           </option>
           </select>
@@ -103,12 +101,25 @@
 <script>
   export default {
     name: 'PublishServicesFormModal',
-    emits:['change', 'changedPasswordEmail', 'changedObjServices', 'closeModal'],
+    emits:[
+      'change', 'changedPasswordEmail', 
+      'changedObjServices', 'closeModal', 
+      'changed', 'uploaded', 'onchanged', 
+      'changedObj', 'handleClick'
+    ],
     props:{
       ObjServices:{
         type:Object,
         required: true
       },
+      uploadPicture:{
+        type: String,
+        default:''
+      },
+      CategoryObj:{
+        type: Array,
+       default:[]
+      }
     },
     data(){
       return{
@@ -119,26 +130,26 @@
       closeModal() {
         this.$emit('closeModal');
       },
-      onServices(event){
+      upload(event){
+        console.log('image',  event.target.value)
+        this.$emit('uploaded', event.target.value)
+        console.table('Image', event.target.files[0])
+        const reader= new FileReader()
+        reader.readAsDataURL(event.target.files[0])
+        reader.onload= (e)=>{
+          this.uploadPicture= e.target.result
+        }
+      },
+      ObjCategory(event){
         console.log(event.target.value)
-        this.$emit('changedObjServices', {
-          text_pictures: event.target.value,
-          cat_id: this.ObjServices.cat_id,
-          intro: this.ObjServices.intro,
-          price: this.ObjServices.price,
-          textarea: this.ObjServices.textarea,
-          email: this.ObjServices.email,
-          phone: this.ObjServices.phone,
-          city: this.ObjServices.city,
-          user_name: this.ObjServices.user_name,
-        })
+        this.$emit('changedObj', JSON.stringify(event.target.value))
+        localStorage.setItem('cat_name', this.selectedCategory.name)
+        console.log(this.selectedCategory.name)
       },
       onServices(event){
         console.log(event.target.value)
         this.$emit('changedObjServices', {
           intro: event.target.value,
-          text_pictures: this.ObjServices.text_pictures,
-          cat_id: this.ObjServices.cat_id,
           price: this.ObjServices.price,
           textarea: this.ObjServices.textarea,
           email: this.ObjServices.email,
@@ -152,8 +163,6 @@
         this.$emit('changedObjServices', {
           price: event.target.value,
           intro: this.ObjServices.intro,
-          text_pictures: ObjServices.text_pictures,
-          cat_id: this.ObjServices.cat_id,
           textarea: this.ObjServices.textarea,
           email: this.ObjServices.email,
           phone: this.ObjServices.phone,
@@ -167,8 +176,6 @@
           textarea: event.target.value,
           price: this.ObjServices.price,
           intro: this.ObjServices.intro,
-          text_pictures: ObjServices.text_pictures,
-          cat_id: this.ObjServices.cat_id,
           email: this.ObjServices.email,
           phone: this.ObjServices.phone,
           city: this.ObjServices.city,
@@ -182,8 +189,6 @@
           textarea: this.ObjServices.textarea,
           price: this.ObjServices.price,
           intro: this.ObjServices.intro,
-          text_pictures: ObjServices.text_pictures,
-          cat_id: this.ObjServices.cat_id,
           phone: this.ObjServices.phone,
           city: this.ObjServices.city,
           user_name: this.ObjServices.user_name
@@ -197,8 +202,6 @@
           textarea: this.ObjServices.textarea,
           price: this.ObjServices.price,
           intro: this.ObjServices.intro,
-          text_pictures: ObjServices.text_pictures,
-          cat_id: this.ObjServices.cat_id,
           city: this.ObjServices.city,
           user_name: this.ObjServices.user_name
         })
@@ -212,8 +215,6 @@
           textarea: this.ObjServices.textarea,
           price: this.ObjServices.price,
           intro: this.ObjServices.intro,
-          text_pictures: ObjServices.text_pictures,
-          cat_id: this.ObjServices.cat_id,
           user_name: this.ObjServices.user_name
         })
       },
@@ -227,30 +228,11 @@
           textarea: this.ObjServices.textarea,
           price: this.ObjServices.price,
           intro: this.ObjServices.intro,
-          text_pictures: ObjServices.text_pictures,
-          cat_id: this.ObjServices.cat_id,
-        })
-      },
-      onServices(event){
-        console.log(event.target.value)
-        this.$emit('changedObjServices', {
-          cat_id: event.target.value,
-          user_name: this.ObjServices.user_name,
-          city: this.ObjServices.city,
-          phone: this.ObjServices.phone,
-          email: this.ObjServices.email,
-          textarea: this.ObjServices.textarea,
-          price: this.ObjServices.price,
-          intro: this.ObjServices.intro,
-          text_pictures: this.ObjServices.text_pictures,
         })
       },
       handleClick(){
         console.log(this.handleClick)
-        this.$router.go({
-          path: '/about',
-          name: 'About',
-        })
+        this.$emit('handleClick')
       },
     },
   };
