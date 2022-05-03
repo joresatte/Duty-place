@@ -10,7 +10,7 @@
     <publish-services-form-modal 
     :ObjServices="UserServices" 
     :uploadPicture="text_pictures"
-    :ObjCategory="cat_id"
+    :CategoryObj="cat_id"
     @closeModal='shutDown'
     v-show="displayingModal"
     @changedObjServices='onObjServicesChanged'
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import config from "@/config.js";
 import PublishServicesFormModal from './PublishServicesForm.vue'
 import loginFetch from '@/pages/apiservices/loginFetch.js'
 // import objectUserServices from '@/pages/apiservices/getObjectUserServices.js'
@@ -37,6 +38,7 @@ export default {
       displayingModal: false,
       users:[],
       text_pictures: '',
+      text:'',
       cat_id:[
           {code: 'category_1', name:'Mudanzas'},
           {code: 'category_2', name:'Limpiezas'},
@@ -44,6 +46,7 @@ export default {
           {code: 'category_4', name:'Mantenimientos'},
       ],
       UserServices:{
+        id:'',
         intro:'',
         price:'',
         textarea:'',
@@ -51,12 +54,6 @@ export default {
         phone:'',
         city:'',
         user_name:'',
-        text:[
-          {code: 'category_1', name:'Mudanzas'},
-          {code: 'category_2', name:'Limpiezas'},
-          {code: 'category_3', name:'Cuidados'},
-          {code: 'category_4', name:'Mantenimientos'},
-        ],
       }
     }
   }, 
@@ -96,18 +93,17 @@ export default {
     async handleClick(){
       console.log(this.handleClick)
       await PublishServices(
-        this.id= this.getUserId,
-        this.intro,
-        this.text_pictures,
+        this.UserServices.id= this.getUserId(), 
         this.cat_id,
-        this.textarea,
+        this.UserServices.user_name,
         this.text= localStorage.getItem('cat_name'),
-        this.phone,
-        this.email,
-        this.user_name,
-        this.price,
-        this.city
-
+        this.UserServices.intro,
+        this.UserServices.price,
+        this.text_pictures,
+        this.UserServices.textarea,
+        this.UserServices.phone,
+        this.UserServices.email,
+        this.UserServices.city
       )
     },
   }

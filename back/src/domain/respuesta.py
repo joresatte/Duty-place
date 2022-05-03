@@ -117,18 +117,25 @@ Respuesta_10= {
     "password": "password50",
     }
 
-respuesta_11=[
-          {'code': 'category_1', 'name':'Mudanzas'},
-          {'code': 'category_2', 'name':'Limpiezas'},
-          {'code': 'category_3', 'name':'Cuidados'},
-          {'code': 'category_4',' name':'Mantenimientos'},
-    ]
+Respuesta_11={
+         "id": "service_1",
+        "cat_id": "category_1",
+        "user_name": "vince",
+        "text": "Mudanzas",
+        "intro": "Realizamos mudanzas",
+        "price": "por 7$ la hora",
+        "text_pictures": "foto",
+        "textarea": "Mudanzas",
+        "phone": "024-639-2574",
+        "email": "reinabo@vince.com",
+        "city": "Bilbao",
+    }
 
-respuesta_12=[
-          {'code': 'category_1', 'name':'Mudanzas'},
-          {'code': 'category_2', 'name':'Limpiezas'},
-          {'code': 'category_3', 'name':'Cuidados'},
-    ]
+# respuesta_12=[
+#           {'code': 'category_1', 'name':'Mudanzas'},
+#           {'code': 'category_2', 'name':'Limpiezas'},
+#           {'code': 'category_3', 'name':'Cuidados'},
+#     ]
 
 # {
 #     'id': user_service.id,

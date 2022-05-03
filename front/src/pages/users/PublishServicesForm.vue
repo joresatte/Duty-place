@@ -65,12 +65,12 @@
                   placeholder="describe your services"
                  ></textarea>                            
        </section>
-       <section class="modal-body">
+       <section class="ObjCategorymodal-body">
           select category services!
           <section>
           <select class="select" @onchanged="CategoryObj" v-model="selectedCategory">
           <option value="">select Category service</option>
-          <option v-for="(index) in CategoryObj.cat_id" :key="index.code" :value="index.code">
+          <option v-for="(index) in CategoryObj" :key="index.code" :value="index.code">
           {{index.name}}
           </option>
           </select>
@@ -118,7 +118,7 @@
       },
       CategoryObj:{
         type: Array,
-       default:[]
+       required: true
       }
     },
     data(){
@@ -302,9 +302,9 @@
     border-radius: 2px;
     height: 2em;
   }
-  .select{
+  /* .select{
     position: absolute;
     top: 0em;
     left: 6em;
-  }
+  } */
 </style>

@@ -49,17 +49,17 @@ def create_app(repositories):
     def post_user_services():
         data= request.json
         user_services = Services(
-            id= data[0]["id"],
-            cat_id= data[0]["cat_id"],
-            user_name= data[0]["user_name"],
-            text= data[0]["text"],
-            intro= data[0]["intro"],
-            price= data[0]["price"],
-            text_pictures= data[0]["text_pictures"],
-            textarea= data[0]['textarea'],
-            phone= data[0]["phone"],
-            email= data[0]["email"],
-            city= data[0]["city"],
+            id= data["id"],
+            cat_id= data["cat_id"],
+            user_name= data["user_name"],
+            text= data["text"],
+            intro= data["intro"],
+            price= data["price"],
+            text_pictures= data["text_pictures"],
+            textarea= data['textarea'],
+            phone= data["phone"],
+            email= data["email"],
+            city= data["city"],
         )
         repositories["services"].save(user_services)
         return '', 200
