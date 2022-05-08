@@ -5,6 +5,15 @@
 </nav>
 <div class="header_nav">
 </div>
+
+<button
+    id="logout-button"
+    @click.prevent="handleLogout"
+    :disabled="isLoggedOut"
+  >
+    Log out
+</button>
+
 <div id="app">
     <button
       type="button"
@@ -102,6 +111,11 @@ export default {
       userId: [],
     }
   },
+  computed: {
+  isLoggedOut() {
+    return ;
+  },
+},
   methods:{
     onChangedEmail(event){
           console.log(event)
@@ -184,7 +198,7 @@ export default {
           localStorage.setItem('dataUser', JSON.stringify(this.userId))
           console.log(this.userId)
           const loginStatusCode= this.userId.status_code
-          console.log(this.userId)
+          console.log(loginStatusCode)
 
           if(loginStatusCode== 401){
             // alert('invalid login')

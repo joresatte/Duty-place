@@ -14,7 +14,7 @@
           <input type="file" 
                   accept="image/png, image/jpeg"
                   required 
-                  :value="uploadPicture.text_pictures" 
+                  :value="formPicture" 
                   @changed="upload"
                   title="Select file"
                 >
@@ -68,9 +68,9 @@
        <section class="ObjCategorymodal-body">
           select category services!
           <section>
-          <select class="select" @onchanged="CategoryObj" v-model="selectedCategory">
+          <select class="select" @change="selectedOption" v-model="selectedCategory">
           <option value="">select Category service</option>
-          <option v-for="(index) in CategoryObj" :key="index.code" :value="index.code">
+          <option v-for="(index) in CategoryObj" :key="index.code" :value="index">
           {{index.name}}
           </option>
           </select>
@@ -104,7 +104,7 @@
     emits:[
       'change', 'changedPasswordEmail', 
       'changedObjServices', 'closeModal', 
-      'changed', 'uploaded', 'onchanged', 
+      'changed', 'uploaded', 'change', 
       'changedObj', 'handleClick'
     ],
     props:{
@@ -114,7 +114,7 @@
       },
       uploadPicture:{
         type: String,
-        default:''
+        required: true
       },
       CategoryObj:{
         type: Array,
@@ -124,6 +124,7 @@
     data(){
       return{
         selectedCategory:'',
+        formPicture: this.uploadPicture,
       }
     },
     methods: {
@@ -137,14 +138,14 @@
         const reader= new FileReader()
         reader.readAsDataURL(event.target.files[0])
         reader.onload= (e)=>{
-          this.uploadPicture= e.target.result
+          this.formPicture= e.target.result
         }
       },
-      ObjCategory(event){
+      selectedOption(event){
         console.log(event.target.value)
-        this.$emit('changedObj', JSON.stringify(event.target.value))
-        localStorage.setItem('cat_name', this.selectedCategory.name)
-        console.log(this.selectedCategory.name)
+        this.$emit('changedObj', event.target.value)
+        localStorage.setItem('cat_name', JSON.stringify(this.selectedCategory))
+        console.log(this.selectedCategory)
       },
       onServices(event){
         console.log(event.target.value)

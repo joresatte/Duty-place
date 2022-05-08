@@ -10,7 +10,7 @@
     <publish-services-form-modal 
     :ObjServices="UserServices" 
     :uploadPicture="text_pictures"
-    :CategoryObj="cat_id"
+    :CategoryObj="categoryId"
     @closeModal='shutDown'
     v-show="displayingModal"
     @changedObjServices='onObjServicesChanged'
@@ -38,8 +38,7 @@ export default {
       displayingModal: false,
       users:[],
       text_pictures: '',
-      text:'',
-      cat_id:[
+      categoryId:[
           {code: 'category_1', name:'Mudanzas'},
           {code: 'category_2', name:'Limpiezas'},
           {code: 'category_3', name:'Cuidados'},
@@ -48,6 +47,7 @@ export default {
       UserServices:{
         id:'',
         intro:'',
+        text:'',
         price:'',
         textarea:'',
         email:'',
@@ -90,13 +90,23 @@ export default {
       const user = JSON.parse(userJson);
       return user.id;
     },
+     getCategoryID() {
+      const categoryIdJson = localStorage.getItem("cat_name");
+      const categoryId = JSON.parse(categoryIdJson);
+      return categoryId.code;
+    },
+     getCategoryName() {
+      const categoryNameJson = localStorage.getItem("cat_name");
+      const categoryName = JSON.parse(categoryNameJson);
+      return categoryName.name;
+    },
     async handleClick(){
       console.log(this.handleClick)
       await PublishServices(
         this.UserServices.id= this.getUserId(), 
-        this.cat_id,
+        this.cat_id= this.getCategoryID(),
         this.UserServices.user_name,
-        this.text= localStorage.getItem('cat_name'),
+        this.text= this.getCategoryName(),
         this.UserServices.intro,
         this.UserServices.price,
         this.text_pictures,

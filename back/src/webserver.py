@@ -78,17 +78,17 @@ def create_app(repositories):
     def post_category_services():
         data= request.json
         services_by_category = Category_services(
-            id= data[0]["id"],
-            cat_id= data[0]["cat_id"],
-            user_name= data[0]["user_name"],
-            text= data[0]["text"],
-            intro= data[0]["intro"],
-            price= data[0]["price"],
-            text_pictures= data[0]["text_pictures"],
-            textarea= data[0]['textarea'],
-            phone= data[0]["phone"],
-            email= data[0]["email"],
-            city= data[0]["city"],
+            id= data["id"],
+            cat_id= data["cat_id"],
+            user_name= data["user_name"],
+            text= data["text"],
+            intro= data["intro"],
+            price= data["price"],
+            text_pictures= data["text_pictures"],
+            textarea= data['textarea'],
+            phone= data["phone"],
+            email= data["email"],
+            city= data["city"],
         )
         repositories["categories_services"].save(services_by_category)
         return '', 200
@@ -128,7 +128,7 @@ def create_app(repositories):
         # print("------aqui va el user:", user)
         # print('----aqui va el user password:', data['password'])
         if user is None or (data['password']) != user.password or (data['email']) != user.email:
-            return '', 401
+            return 'invalid log In', 401
         else:
             return object_to_json(user)
            
