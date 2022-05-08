@@ -10,6 +10,7 @@
     id="logout-button"
     @click.prevent="handleLogout"
     :disabled="isLoggedOut"
+    v-show="LoggedOut"
   >
     Log out
 </button>
@@ -108,6 +109,7 @@ export default {
       password: '',
       showRegist: false,
       showLogin: false,
+      LoggedOut: false,
       userId: [],
     }
   },
@@ -192,15 +194,19 @@ export default {
       //    name: 'Home',
       // })
       },
+      getUserId() {
+      const userJson = localStorage.getItem("dataUser");
+      const user = JSON.parse(userJson);
+      return user.id;
+      },
       async ClickToLogIn(){
         if (this.email!='' || this.password!=''){
           this.userId= await getLoginPost(this.email, this.password)
           localStorage.setItem('dataUser', JSON.stringify(this.userId))
-          console.log(this.userId)
-          const loginStatusCode= this.userId.status_code
+          const loginStatusCode= this.getUserId()
           console.log(loginStatusCode)
 
-          if(loginStatusCode== 401){
+          if(loginStatusCode!= this.getUserId()){
             // alert('invalid login')
             Swal.fire({
               icon: 'error',
@@ -209,11 +215,13 @@ export default {
               footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
             })
           }else{
+            this.showRegist= false
+            this.showLogin= false
+            this.LoggedOut= true
             this.$router.push({
               name: 'usersPage',
               params:{id: this.userId},
               })
-              this.showLogin= false
             }
           }else{
             // alert('the email and password fields are required')
