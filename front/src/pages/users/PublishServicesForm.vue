@@ -64,7 +64,7 @@
                   @change="onServices"
                   placeholder="describe your services"
                  ></textarea>                            
-       </section>reinabo@vince.com
+       </section>
        <section class="ObjCategorymodal-body">
           select category services!
           <section>
