@@ -7,10 +7,10 @@
 </div>
 
 <button
-    id="logout-button"
+    class="btn-logout"
     @click.prevent="handleLogout"
     :disabled="isLoggedOut"
-    v-show="LoggedOut"
+    v-if="LoggedOut"
   >
     Log out
 </button>
@@ -20,6 +20,7 @@
       type="button"
       class="btn-regist"
       @click="clickedToSwitchOnModal"
+      v-if="SignUp"
     >
       Sign Up
     </button>
@@ -57,6 +58,7 @@
       type="button"
       class="btn-login"
       @click="onModalOnclicked"
+      v-if="LogIn"
     >
       Log In
     </button>
@@ -109,6 +111,8 @@ export default {
       password: '',
       showRegist: false,
       showLogin: false,
+      LogIn:true,
+      SignUp: true,
       LoggedOut: false,
       userId: [],
     }
@@ -199,6 +203,16 @@ export default {
       const user = JSON.parse(userJson);
       return user.id;
       },
+      handleLogout(){
+        localStorage.removeItem('dataUser')
+        this.$router.push({
+           path: '/',
+           name: 'Home',
+        })
+        this.SignUp= true
+        this.LogIn= true
+        this.LoggedOut= false
+      },
       async ClickToLogIn(){
         if (this.email!='' || this.password!=''){
           this.userId= await getLoginPost(this.email, this.password)
@@ -215,9 +229,11 @@ export default {
               footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
             })
           }else{
-            this.showRegist= false
-            this.showLogin= false
+            this.SignUp= false
+            this.LogIn= false
             this.LoggedOut= true
+            this.showLogin= false
+            
             this.$router.push({
               name: 'usersPage',
               params:{id: this.userId},
@@ -270,6 +286,19 @@ img {
   text-shadow:3px 3px 3px yellow;
   margin-top: 2em;
 }
+.btn-logout{
+  background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
+              rgba(11,11,157,0.33703903924851186) 28%,
+              rgba(26,47,51,0.8076272745426296) 55%);
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  font-size: 1em;
+  border-radius: 2px;
+  text-decoration: none;
+  padding: 0.2em;
+}
 .btn-regist{
 background: linear-gradient(90deg, rgba(8,17,37,1) 0%, 
             rgba(10,10,142,0.33703903924851186) 59%, 
@@ -284,17 +313,17 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
  padding: 0.2em;
 }
 .btn-login{
-background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
-            rgba(11,11,157,0.33703903924851186) 28%,
-            rgba(26,47,51,0.8076272745426296) 55%);
- position: absolute;
- top: 0;
- right: 0;
- color: white;
- font-size: 1em;
- border-radius: 2px;
- text-decoration: none;
- padding: 0.2em;
+  background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
+              rgba(11,11,157,0.33703903924851186) 28%,
+              rgba(26,47,51,0.8076272745426296) 55%);
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  font-size: 1em;
+  border-radius: 2px;
+  text-decoration: none;
+  padding: 0.2em;
 }
 .page{
   margin: 0.5em;

@@ -15,7 +15,7 @@
                   accept="image/png, image/jpeg"
                   required 
                   :value="formPicture" 
-                  @changed="upload"
+                  @click="upload"
                   title="Select file"
                 >
         </slot>
@@ -64,7 +64,7 @@
                   @change="onServices"
                   placeholder="describe your services"
                  ></textarea>                            
-       </section>
+       </section>reinabo@vince.com
        <section class="ObjCategorymodal-body">
           select category services!
           <section>
@@ -133,13 +133,14 @@
       },
       upload(event){
         console.log('image',  event.target.value)
-        this.$emit('uploaded', event.target.value)
         console.table('Image', event.target.files[0])
         const reader= new FileReader()
         reader.readAsDataURL(event.target.files[0])
         reader.onload= (e)=>{
           this.formPicture= e.target.result
+          console.log('onload',this.formPicture)
         }
+        this.$emit('uploaded', event.target.value)
       },
       selectedOption(event){
         console.log(event.target.value)
