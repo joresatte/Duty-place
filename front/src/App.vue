@@ -203,6 +203,13 @@ export default {
       const user = JSON.parse(userJson);
       return user.id;
       },
+      getLoggedOut(){
+          this.SignUp= false
+          this.LogIn= false
+          this.LoggedOut= true
+          this.showLogin= false
+          localStorage.setItem('logOut', this.getLoggedOut())
+      },
       handleLogout(){
         localStorage.removeItem('dataUser')
         this.$router.push({
@@ -229,15 +236,12 @@ export default {
               footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
             })
           }else{
-            this.SignUp= false
-            this.LogIn= false
-            this.LoggedOut= true
-            this.showLogin= false
-            
             this.$router.push({
               name: 'usersPage',
               params:{id: this.userId},
               })
+              this.getLoggedOut()
+
             }
           }else{
             // alert('the email and password fields are required')

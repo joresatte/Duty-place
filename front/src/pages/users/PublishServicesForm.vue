@@ -15,7 +15,7 @@
                   accept="image/png, image/jpeg"
                   required 
                   :value="formPicture" 
-                  @click="upload"
+                  @input="upload"
                   title="Select file"
                 >
         </slot>
@@ -104,8 +104,8 @@
     emits:[
       'change', 'changedPasswordEmail', 
       'changedObjServices', 'closeModal', 
-      'changed', 'uploaded', 'change', 
-      'changedObj', 'handleClick'
+      'uploaded','changedObj', 'handleClick',
+      'input'
     ],
     props:{
       ObjServices:{
@@ -139,8 +139,9 @@
         reader.onload= (e)=>{
           this.formPicture= e.target.result
           console.log('onload',this.formPicture)
+          this.$emit('uploaded', event.target.value)
         }
-        this.$emit('uploaded', event.target.value)
+        
       },
       selectedOption(event){
         console.log(event.target.value)
