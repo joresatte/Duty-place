@@ -94,6 +94,7 @@
 <script>
 // import axios from 'axios';
 // import config from "@/config.js";
+import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
 import emailForm from '@/components/RegistEmailForm.vue'
 import passwordForm from '@/components/RegistPasswordForm.vue';
 import LoginEmail from '@/components/LoginEmailForm.vue'
@@ -107,6 +108,7 @@ export default {
   components:{emailForm, passwordForm, headerNav, LoginEmail, LoginPassword},
   data(){
     return{
+      currentUser: getCurrentUser(),
       email:'',
       password: '',
       showRegist: false,
@@ -115,6 +117,11 @@ export default {
       SignUp: true,
       LoggedOut: false,
       userId: [],
+    }
+  },
+  mounted(){
+    if(this.currentUser){
+      return this.getLoggedOut()
     }
   },
   computed: {
@@ -208,7 +215,6 @@ export default {
           this.LogIn= false
           this.LoggedOut= true
           this.showLogin= false
-          localStorage.setItem('logOut', this.getLoggedOut())
       },
       handleLogout(){
         localStorage.removeItem('dataUser')
