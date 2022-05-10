@@ -115,6 +115,7 @@ export default {
         this.UserServices.email,
         this.UserServices.city
       )
+      this.displayingModal= false
     },
   }
 }
