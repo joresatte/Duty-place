@@ -108,7 +108,7 @@ export default {
   components:{emailForm, passwordForm, headerNav, LoginEmail, LoginPassword},
   data(){
     return{
-      currentUser: getCurrentUser(),
+      reset:false,
       email:'',
       password: '',
       showRegist: false,
@@ -120,9 +120,14 @@ export default {
     }
   },
   mounted(){
-    if(this.currentUser){
-      return this.getLoggedOut()
+    if(window.localStorage){
+     if(localStorage.getItem('dataUser')!== undefined && localStorage.getItem('dataUser') ){
+       return this.getLoggedOut()
+     }else{
+       return this.getBackToHome()
+     }
     }
+    
   },
   computed: {
   isLoggedOut() {
@@ -150,21 +155,10 @@ export default {
           this.password= PasswordValue
           JSON.stringify(localStorage.setItem('loginPassword', PasswordValue))
       },
-      // isValid(){
-      //   console.log('es valido?', this.isValid)
-      //   if(
-      //     this.email || this.password!==''
-      //   ){
-      //     return true
-      //   }else{
-      //     return false
-      //   }
-      // },
     async ClickToRegist (){
       console.log(this.ClickToRegist)
       if (this.email!='' || this.password!=''){
         await getRegistPost()
-        // alert('saved successfully')
         Swal.fire(
           'success',
           'Sign Up successfully',
@@ -187,23 +181,13 @@ export default {
       }
       },
       onModalOnclicked(){this.showLogin = true},
-      // offModalOnclicked(){this.showLogin = false},
-
       clickedToSwitchOnModal(){this.showRegist = true},
-      // clickedToSwitchOffModal(){this.showRegist = false},
       closeLoginModal(){
         this.showLogin= false
-      //   this.$router.go({
-      //    path: '/',
-      //    name: 'Home',
-      // })
       },
       closeRegistModal(){
         this.showRegist= false
-      //   this.$router.go({
-      //    path: '/',
-      //    name: 'Home',
-      // })
+      
       },
       getUserId() {
       const userJson = localStorage.getItem("dataUser");
@@ -213,18 +197,25 @@ export default {
       getLoggedOut(){
           this.SignUp= false
           this.LogIn= false
-          this.LoggedOut= true
           this.showLogin= false
+          this.LoggedOut= true
+      },
+      getBackToHome(){
+        this.SignUp= true
+        this.LogIn= true
+        this.LoggedOut= false
+        this.$router.push({
+                            path: '/',
+                            name: 'Home',
+                          })
       },
       handleLogout(){
-        localStorage.removeItem('dataUser')
+        localStorage.clear('dataUser')
         this.$router.push({
            path: '/',
            name: 'Home',
         })
-        this.SignUp= true
-        this.LogIn= true
-        this.LoggedOut= false
+       this.getBackToHome()
       },
       async ClickToLogIn(){
         if (this.email!='' || this.password!=''){
