@@ -5,19 +5,19 @@
 <div class="container">
   <div class="box">
     <span>Cuidados</span>
-    <img src="@/assets/images/cuidadoMa.jpg">
+    <img @click="onClick('category_3')" src="@/assets/images/cuidadoMa.jpg">
   </div>
   <div class="box">
     <span>Mantenimientos</span>
-    <img src="@/assets/images/images1.jpg">
+    <img @click="onClick('category_4')" src="@/assets/images/images1.jpg">
   </div>
   <div class="box">
     <span>Limpiezas</span>
-    <img src="@/assets/images/images4.jpg">
+    <img @click="onClick('category_2')" src="@/assets/images/images4.jpg">
   </div>
   <div class="box">
     <span>Mudanzas</span>
-    <img @click="onClick" src="@/assets/images/images.png">
+    <img @click="onClick('category_1')" src="@/assets/images/images.png">
   </div>
 </div>
   <br><br> 
@@ -63,11 +63,12 @@ export default {
     async loadData(){
       console.log("loadData")
       this.categories= await getCategories()
+      console.log(this.categories)
     },
-    onClick(){
+    onClick(catId){
       this.$router.push({
         name: 'ServicesByCategoryPage',
-        params:{category_id: this.categories.category_1}
+        params:{category_id: catId}
       })
     },
   }
