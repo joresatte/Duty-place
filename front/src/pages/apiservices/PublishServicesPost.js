@@ -1,12 +1,6 @@
 import config from "@/config.js";
 import { reactive, ref } from "vue";
 
-// function getUserId() {
-//     const userJson = localStorage.getItem("dataUser");
-//     const user = JSON.parse(userJson);
-//     return user.id;
-// }
-
 async function PublishServices(
     id,
     cat_id,

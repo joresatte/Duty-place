@@ -23,11 +23,10 @@
 </template>
 
 <script>
-import config from "@/config.js";
 import PublishServicesFormModal from './PublishServicesForm.vue'
 import loginFetch from '@/pages/apiservices/loginFetch.js'
-// import objectUserServices from '@/pages/apiservices/getObjectUserServices.js'
 import PublishServices from '@/pages/apiservices/PublishServicesPost.js'
+import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
 import userForm from '@/components/userForm.vue'
 export default {
   props:['id'],
@@ -82,11 +81,6 @@ export default {
       console.table(UserServicesValues)
       this.UserServices= UserServicesValues
     },
-    getUserId() {
-      const userJson = localStorage.getItem("dataUser");
-      const user = JSON.parse(userJson);
-      return user.id;
-    },
      getCategoryID() {
       const categoryIdJson = localStorage.getItem("cat_name");
       const categoryId = JSON.parse(categoryIdJson);
@@ -100,7 +94,7 @@ export default {
     async handleClick(){
       console.log(this.handleClick)
       await PublishServices(
-        this.UserServices.id= this.getUserId(), 
+        this.UserServices.id= getCurrentUser(), 
         this.cat_id= this.getCategoryID(),
         this.UserServices.user_name,
         this.text= this.getCategoryName(),
