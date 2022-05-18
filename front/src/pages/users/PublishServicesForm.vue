@@ -70,7 +70,7 @@
           <section>
           <select class="select" @change="selectedOption" v-model="selectedCategory">
           <option value="">select Category service</option>
-          <option v-for="(index) in CategoryObj" :key="index.code" :value="index">
+          <option v-for="index in CategoryObj" :key="index.code" :value="index">
           {{index.name}}
           </option>
           </select>
@@ -124,7 +124,7 @@
     data(){
       return{
         selectedCategory:'',
-        formPicture: this.uploadPicture,
+        formPicture: '',
       }
     },
     methods: {
@@ -138,6 +138,7 @@
         reader.readAsDataURL(event.target.files[0])
         reader.onload= (e)=>{
           this.formPicture= e.target.result
+          localStorage.setItem('upload', this.formPicture)
           console.log('onload',this.formPicture)
           this.$emit('uploaded', event.target.value)
         }

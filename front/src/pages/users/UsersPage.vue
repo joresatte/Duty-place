@@ -109,7 +109,7 @@ export default {
         this.text= this.getCategoryName(),
         this.UserServices.intro,
         this.UserServices.price,
-        this.text_pictures,
+        this.text_pictures= localStorage.getItem('upload'),
         this.UserServices.textarea,
         this.UserServices.phone,
         this.UserServices.email,
