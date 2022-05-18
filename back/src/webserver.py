@@ -132,14 +132,14 @@ def create_app(repositories):
         else:
             return object_to_json(user)
 
-    @app.route("/api/services/by-category/<cat_id>", methods=["DELETE"])
-    def delete_category_service(cat_id):
-        user = repositories["categories_services"].delete_category_services(cat_id)
+    @app.route("/api/services/by-category/<id>/<cat_id>", methods=["DELETE"])
+    def delete_category_service(id, cat_id):
+        user = repositories["categories_services"].delete_category_services(id, cat_id)
         return "", 200
 
-    @app.route("/api/services/user_services/<cat_id>", methods=["DELETE"])
-    def delete_service(cat_id):
-        service = repositories["services"].delete_services(cat_id)
+    @app.route("/api/services/user_services/<id>/<cat_id>", methods=["DELETE"])
+    def delete_service(id, cat_id):
+        service = repositories["services"].delete_services(id, cat_id)
         return "", 200
 
     # @app.route("/api/services/by-category/<id>", methods=["GET"])

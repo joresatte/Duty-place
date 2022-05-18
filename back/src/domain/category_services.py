@@ -109,14 +109,16 @@ class CategoryServicesRepository:
             services.append(services_by_category_id)
         return services
 
-    def delete_category_services(self, category_service):
+    def delete_category_services(self, id, cat_id):
         sql = """ DELETE FROM categories_services
-                  WHERE cat_id = :cat_id 
+                  WHERE id = :id and cat_id = :cat_id 
               """
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
-            sql, {"cat_id": category_service}
+            sql, {"id": id,
+                  "cat_id": cat_id,
+                  }
         )
         conn.commit()
     

@@ -109,14 +109,16 @@ class ServicesRepository:
             services.append(user_service)
         return services
 
-    def delete_services(self, service):
+    def delete_services(self, id, cat_id):
         sql = """ DELETE FROM services
-                  WHERE cat_id = :cat_id 
+                  WHERE id = :id and cat_id = :cat_id 
               """
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
-            sql, {"cat_id": service}
+            sql, {"id": id,
+                  "cat_id": cat_id,
+                  }
         )
         conn.commit()
     
