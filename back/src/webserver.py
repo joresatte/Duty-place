@@ -131,8 +131,16 @@ def create_app(repositories):
             return 'invalid log In', 401
         else:
             return object_to_json(user)
-           
 
+    @app.route("/api/services/by-category/<cat_id>", methods=["DELETE"])
+    def delete_category_service(cat_id):
+        user = repositories["categories_services"].delete_category_services(cat_id)
+        return "", 200
+
+    @app.route("/api/services/user_services/<cat_id>", methods=["DELETE"])
+    def delete_service(cat_id):
+        service = repositories["services"].delete_services(cat_id)
+        return "", 200
 
     # @app.route("/api/services/by-category/<id>", methods=["GET"])
     # def get_user_in_services_by_category_by_id(id):
@@ -156,7 +164,6 @@ def create_app(repositories):
     #        return object_to_json(contact), 200
     #     else:
     #         return '', 403
-
 
     # @app.route("/api/contact/<id>", methods=["DELETE"])
     # def delete_contact_by_id(id):
@@ -191,6 +198,5 @@ def create_app(repositories):
     #     )
     #     repositories["contact"].modify_contact_by_id(contact)
     #     return '', 200
-
 
     return app

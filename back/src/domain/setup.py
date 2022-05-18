@@ -152,21 +152,6 @@ def setup6():
         password= "password1",
     )
     regists_repository.save(user1)
-    
-    # user2= Regists(
-    #     id= "service_2",
-    #     email= "fbadland0@bizjournals.com",
-    #     password= "password2",
-    # )
-    # regists_repository.save(user2)
-
-    # user3= Regists(
-    #     id= "service_50",
-    #     email= "wglenister1@latimes.com",
-    #     password= "password50",
-    # )
-    # regists_repository.save(user3)
-
     return client
 
 def setup7():

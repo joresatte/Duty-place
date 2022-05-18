@@ -1,5 +1,7 @@
 import sqlite3
 
+from requests import delete
+
 class Category_services:
     def __init__(self, id, cat_id, user_name, text, intro, price, text_pictures, textarea, email, phone, city):
         self.id= id
@@ -42,7 +44,7 @@ class CategoryServicesRepository:
     def init_tables(self):
         sql = """
             create table if not exists categories_services (
-               id varchar,
+               id varchar primary key ,
                 cat_id varchar,
                 user_name varchar,
                 text varchar,
@@ -108,6 +110,41 @@ class CategoryServicesRepository:
             )
             services.append(services_by_category_id)
         return services
+
+    def delete_category_services(self, category_service):
+        sql = """ DELETE FROM categories_services
+                  WHERE cat_id = :cat_id 
+              """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(
+            sql, {"cat_id": category_service}
+        )
+        conn.commit()
+    
+    def modify_category_service(self, category_service):
+        sql = """ UPDATE categories_services
+                    SET
+                    id= :id,
+                    cat_id= item["cat_id"],
+                    user_name= "user_name",
+                    text= "text",
+                    intro= "intro",
+                    price= "price",
+                    text_pictures= "text_pictures",
+                    textarea= 'textarea',
+                    phone= "phone",
+                    email= "email",
+                    city= "city",
+             """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(
+            sql, category_service.to_dict()
+        )
+        conn.commit()
+
+
 
     def save(self, user_service):
         sql = """INSERT into categories_services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
