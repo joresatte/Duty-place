@@ -42,7 +42,7 @@ class ServicesRepository:
     def init_tables(self):
         sql = """
             create table if not exists services (
-                id varchar,
+                id varchar primary key ,
                 cat_id varchar,
                 user_name varchar,
                 text varchar,
@@ -108,6 +108,39 @@ class ServicesRepository:
             )
             services.append(user_service)
         return services
+
+    def delete_services(self, service):
+        sql = """ DELETE FROM services
+                  WHERE cat_id = :cat_id 
+              """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(
+            sql, {"cat_id": service}
+        )
+        conn.commit()
+    
+    def modify_category_service(self, service):
+        sql = """ UPDATE services
+                    SET
+                    id= :id,
+                    cat_id= item["cat_id"],
+                    user_name= "user_name",
+                    text= "text",
+                    intro= "intro",
+                    price= "price",
+                    text_pictures= "text_pictures",
+                    textarea= 'textarea',
+                    phone= "phone",
+                    email= "email",
+                    city= "city",
+             """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(
+            sql, service.to_dict()
+        )
+        conn.commit()
 
     def save(self, user_service):
         sql = """INSERT into services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (

@@ -36,7 +36,7 @@ class RegistsRepository:
     def init_tables(self):
         sql = """
             create table if not exists registros (
-                id varchar,
+                id varchar primary key,
                 email varchar,
                 password varchar
             )
@@ -94,7 +94,7 @@ class RegistsRepository:
         return user
 
     def save(self, user):
-        sql = """insert into registros (id, email, password) values (
+        sql = """insert or replace into registros (id, email, password) values (
             :id, :email, :password
         ) """
         conn = self.create_conn()
