@@ -19,7 +19,7 @@
     @handleClick="handleClick"/>
     </div>
 <br><br>
-<userForm :users="users"/>
+<userForm :users="users" @remove="remove(serviceId, serviceCatId)"/>
 </template>
 
 <script>
@@ -59,19 +59,16 @@ export default {
   }, 
   mounted(){
     this.loadData();
-    // this.loadObjectUserServices()
   },
   methods:{
+    remove(serviceId, serviceCatId){
+      console.log(this.remove)
+    },
     async loadData(){
       console.log(this.loadData)
       this.users= await loginFetch()
       console.log(this.users)
     },
-    // async loadObjectUserServices(){
-    //   console.log(this.loadObjectUserServices)
-    //   this.UserServices= await objectUserServices()
-    //   console.log(this.UserServices)
-    // },
     shutDown() {
         this.displayingModal = false;
     },

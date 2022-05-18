@@ -11,6 +11,7 @@
     <p class="intro">{{user.intro}}</p>
     <h4 class="price">{{user.price}}</h4>
     <p class="textarea">{{user.textarea}}</p>
+    <button @click="remove(serviceId, serviceCatId )">Remove</button>
     </section>
   
 </div>
@@ -24,6 +25,18 @@ export default {
             type: Object,
             required: true
         }
+    },
+    emits:['remove'],
+    data(){
+      return{
+
+      }
+    },
+    methods:{
+      remove(){
+        console.log(this.remove)
+        this.$emit('remove')
+      },
     }
 }
 </script>
