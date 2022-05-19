@@ -162,8 +162,8 @@ span{
   text-align: center;
   height: 10vh;
   line-height: 2.6;
-  color: #53d9ed;
-  text-shadow:  2px 2px 4px #f10889;
+  color: #2fa8ba;
+  text-shadow:  1px 1px 3px #f10889;
 }
 
 </style>

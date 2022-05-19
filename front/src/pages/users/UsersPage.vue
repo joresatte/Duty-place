@@ -19,7 +19,9 @@
     @handleClick="handleClick"/>
     </div>
 <br><br>
-<userForm :users="users" @remove="remove(serviceId, serviceCatId)"/>
+<p><userForm :users="users" @remove="remove(serviceId, serviceCatId)"/>
+<button class="btn-remove" @click="remove(serviceId, serviceCatId )">Remove</button></p>
+
 </template>
 
 <script>
@@ -28,6 +30,7 @@ import loginFetch from '@/pages/apiservices/loginFetch.js'
 import PublishServices from '@/pages/apiservices/PublishServicesPost.js'
 import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
 import userForm from '@/components/userForm.vue'
+import { deleteService } from '../apiservices/deleteService'
 export default {
   props:['id'],
   name: 'userPage',
@@ -60,8 +63,12 @@ export default {
     this.loadData();
   },
   methods:{
-    remove(serviceId, serviceCatId){
+    async remove(serviceId, serviceCatId){
       console.log(this.remove)
+      const serviceId= getCurrentUser()
+      await deleteService(
+
+      )
     },
     async loadData(){
       console.log(this.loadData)
@@ -126,4 +133,5 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
  text-decoration: none;
  padding: 0.2em;
 }
+
 </style>
