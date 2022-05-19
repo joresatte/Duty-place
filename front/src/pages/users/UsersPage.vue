@@ -20,7 +20,7 @@
     </div>
 <br><br>
 <p><userForm :users="users" @remove="remove(serviceId, serviceCatId)"/>
-<button class="btn-remove" @click="remove(serviceId, serviceCatId )">Remove</button></p>
+<button class="btn-remove" @click="remove()">Remove</button></p>
 
 </template>
 
@@ -63,11 +63,11 @@ export default {
     this.loadData();
   },
   methods:{
-    async remove(serviceId, serviceCatId){
+    async remove(){
       console.log(this.remove)
       const serviceId= getCurrentUser()
       await deleteService(
-
+           serviceId, serviceCatId
       )
     },
     async loadData(){
