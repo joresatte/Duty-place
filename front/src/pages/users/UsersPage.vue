@@ -19,9 +19,7 @@
     @handleClick="handleClick"/>
     </div>
 <br><br>
-<p><userForm :users="users" @remove="remove(serviceId, serviceCatId)"/>
-<button class="btn-remove" @click="remove()">Remove</button></p>
-
+<userServiceForm :User="users" @removeService="remove()"/>
 </template>
 
 <script>
@@ -29,16 +27,16 @@ import PublishServicesFormModal from './PublishServicesForm.vue'
 import loginFetch from '@/pages/apiservices/loginFetch.js'
 import PublishServices from '@/pages/apiservices/PublishServicesPost.js'
 import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
-import userForm from '@/components/userForm.vue'
+import userServiceForm from './userServiceForm.vue'
 import { deleteService } from '../apiservices/deleteService'
 export default {
   props:['id'],
   name: 'userPage',
-  components:{userForm, PublishServicesFormModal},
+  components:{userServiceForm, PublishServicesFormModal},
   data(){
     return{
       displayingModal: false,
-      users:[],
+      users:[ ],
       text_pictures: '',
       categoryId:[
           {code: 'category_1', name:'Mudanzas'},
@@ -63,12 +61,10 @@ export default {
     this.loadData();
   },
   methods:{
-    async remove(){
+    async remove(userCatId){
       console.log(this.remove)
       const serviceId= getCurrentUser()
-      await deleteService(
-           serviceId, serviceCatId
-      )
+      await deleteService(serviceId, userCatId)
     },
     async loadData(){
       console.log(this.loadData)
@@ -114,6 +110,10 @@ export default {
         this.UserServices.city
       )
       this.displayingModal= false
+      this.$router.resolve({
+        path: '/user/:id',
+        name: 'usersPage',
+      })
     },
   }
 }
