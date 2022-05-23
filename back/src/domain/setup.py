@@ -166,3 +166,45 @@ def setup8():
     client = app.test_client()
     return client
 
+def setup9():
+    services_repository = CategoryServicesRepository(temp_file())
+    app = create_app(repositories={"categories_services": services_repository})
+    client = app.test_client()
+
+    user_1= Category_services(
+       id= "service_1",
+        cat_id= "category_1",
+        user_name= "vince",
+        text= "Mudanzas",
+        intro= "Realizamos mudanzas",
+        price= "por 7$ la hora",
+        text_pictures= "foto",
+        textarea= "Mudanzas",
+        phone= "024-639-2574",
+        email= "reinabo@vince.com",
+        city= "Bilbao",
+    )
+    services_repository.save(user_1)
+    return client
+
+def setup10():
+    services_repository = ServicesRepository(temp_file())
+    app = create_app(repositories={"services": services_repository})
+    client = app.test_client()
+
+    user_1= Services(
+       id= "service_1",
+        cat_id= "category_1",
+        user_name= "vince",
+        text= "Mudanzas",
+        intro= "Realizamos mudanzas",
+        price= "por 7$ la hora",
+        text_pictures= "foto",
+        textarea= "Mudanzas",
+        phone= "024-639-2574",
+        email= "reinabo@vince.com",
+        city= "Bilbao",
+    )
+    services_repository.save(user_1)
+    return client
+

@@ -121,31 +121,9 @@ class ServicesRepository:
                   }
         )
         conn.commit()
-    
-    def modify_category_service(self, service):
-        sql = """ UPDATE services
-                    SET
-                    id= :id,
-                    cat_id= item["cat_id"],
-                    user_name= "user_name",
-                    text= "text",
-                    intro= "intro",
-                    price= "price",
-                    text_pictures= "text_pictures",
-                    textarea= 'textarea',
-                    phone= "phone",
-                    email= "email",
-                    city= "city",
-             """
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute(
-            sql, service.to_dict()
-        )
-        conn.commit()
 
     def save(self, user_service):
-        sql = """INSERT into services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
+        sql = """INSERT OR REPLACE INTO services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
             :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city
         ) """
         conn = self.create_conn()

@@ -162,11 +162,36 @@ Respuesta_13=[
     }
 ]
 
-# respuesta_12=[
-#           {'code': 'category_1', 'name':'Mudanzas'},
-#           {'code': 'category_2', 'name':'Limpiezas'},
-#           {'code': 'category_3', 'name':'Cuidados'},
-#     ]
+Respuesta_14=[
+{
+        "id": "service_1",
+        "cat_id": "category_1",
+        "user_name": "vincen",
+        "text": "Mudanzas",
+        "intro": "Realizamos mudanzas en toda españa",
+        "price": "por 5$ la hora",
+        "text_pictures": "foto",
+        "textarea": " profesionales en el sector de las Mudanzas",
+        "phone": "024-679-2574",
+        "email": "reinabes@vince.com",
+        "city": "españa",
+    }
+]
+
+Respuesta_15={
+        "id": "service_1",
+        "cat_id": "category_1",
+        "user_name": "vincen",
+        "text": "Mudanzas",
+        "intro": "Realizamos mudanzas en toda españa",
+        "price": "por 5$ la hora",
+        "text_pictures": "foto",
+        "textarea": " profesionales en el sector de las Mudanzas",
+        "phone": "024-679-2574",
+        "email": "reinabes@vince.com",
+        "city": "españa",
+    }
+
 
 # {
 #     'id': user_service.id,
