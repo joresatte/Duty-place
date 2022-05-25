@@ -11,7 +11,10 @@
       <p class="intro">{{index.intro}}</p>
       <h4 class="price">{{index.price}}</h4>
       <p class="textarea">{{index.textarea}}</p>
-      <button class="btn-remove" @click="remove(index.cat_id)">Remove</button>
+      <div class=" edit_remove">
+        <button class="btn-remove" @click="remove(index.id, index.cat_id)">Remove</button><br>
+        <button class="btn-edit" @click="editService(index.id, index.cat_id, index.text)">Edit service</button>
+      </div>
     </section>
 </div>
 </template>
@@ -25,7 +28,7 @@ export default {
             required: true
         }
     },
-    emits:['remove', 'removeService'],
+    emits:['removeService', 'editService'],
     data(){
       return{
       }
@@ -34,8 +37,25 @@ export default {
       remove(event){
         console.log(this.remove)
         console.log(event)
-        this.$emit('removeService', event)
+        this.$emit('removeService', {event})
       },
+      editService(eventId, eventCatId, eventText){
+        console.log(eventId, eventCatId, eventText)
+        localStorage.setItem('eventId', eventId)
+        localStorage.setItem('eventCatId', eventCatId)
+        localStorage.setItem('eventText', eventText)
+        this.$router.push(
+          {
+            path: '/services/user_services/:id/:category_id/:text',
+            name: 'editPage',
+            params:{
+              id: eventId,
+              cat_id: eventCatId,
+              text: eventText
+            }
+          }
+        )
+      }
     }
 }
 </script>
@@ -67,4 +87,9 @@ export default {
   color: #53d9ed;
   text-shadow:  2px 2px 4px #f10889;
 }
+.edit_remove{
+  display: flex;
+  flex-direction: flex start;
+}
+
 </style>

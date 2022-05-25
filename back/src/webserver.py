@@ -1,3 +1,4 @@
+from cgitb import text
 from pyparsing import Regex
 from flask import Flask, request
 from flask_cors import CORS
@@ -44,7 +45,12 @@ def create_app(repositories):
     def get_user_services_by_id(id):
         services = repositories["services"].get_user_services_by_id(id)
         return object_to_json(services)
-
+    
+    @app.route("/api/services/user_services/<id>/<cat_id>/<text>", methods=["GET"])
+    def get_services(id, cat_id, text):
+        user_services = repositories["services"].get_service(id, cat_id, text)
+        return object_to_json(user_services)
+    
     @app.route("/api/services/user_services", methods=["POST"])
     def post_user_services():
         data= request.json
@@ -142,14 +148,12 @@ def create_app(repositories):
         service = repositories["services"].delete_services(id, cat_id)
         return "", 200
  
-    @app.route("/api/services/by-category/<id>/<cat_id>", methods=["PUT"])
-    def modify_category_service(id, cat_id):
+    @app.route("/api/services/by-category/<id>/<cat_id>/<text>", methods=["PUT"])
+    def modify_category_service(id, cat_id, text):
         data = request.json
-        data['id']= id
-        data['id']= cat_id
-        if id!=data["id"] and cat_id!= data["cat_id"]:
+        if id!=data["id"] and cat_id!= data["cat_id"] and text!= data["text"]:
             return '', 403
-        services_by_category = Category_services(
+        category_services = Category_services(
         id= data["id"],
         cat_id= data["cat_id"],
         user_name= data["user_name"],
@@ -162,15 +166,13 @@ def create_app(repositories):
         email= data["email"],
         city= data["city"],
         )
-        repositories["categories_services"].save(services_by_category)
+        repositories["categories_services"].update_category_service(id , cat_id , text, category_services)
         return '', 200
 
-    @app.route("/api/services/user_services/<id>/<cat_id>", methods=["PUT"])
-    def modify_user_services(id, cat_id):
+    @app.route("/api/services/user_services/<id>/<cat_id>/<text>", methods=["PUT"])
+    def modify_user_services(id, cat_id, text):
         data = request.json
-        data['id']= id
-        data['id']= cat_id
-        if id!=data["id"] and cat_id!= data["cat_id"]:
+        if id!=data["id"] and cat_id!= data["cat_id"] and text!= data["text"]:
             return '', 403
         user_services = Services(
         id= data["id"],
@@ -185,7 +187,7 @@ def create_app(repositories):
         email= data["email"],
         city= data["city"],
         )
-        repositories["services"].save(user_services)
+        repositories["services"].update_service(id , cat_id , text, user_services)
         return '', 200
 
     # @app.route("/api/contact/<id>", methods=["GET"])

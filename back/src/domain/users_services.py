@@ -122,6 +122,52 @@ class ServicesRepository:
         )
         conn.commit()
 
+    def update_service(self, id, cat_id, text, user_service):
+        sql = """ UPDATE services
+                    SET 
+                    id= :id,
+                    cat_id= :cat_id,
+                    user_name= :user_name,
+                    text= :text,
+                    intro= :intro,
+                    price= :price,
+                    text_pictures= :text_pictures,
+                    textarea= :textarea,
+                    phone= :phone,
+                    email= :email,
+                    city= :city
+                    WHERE id = :id and cat_id = :cat_id and text= :text """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        params = user_service.to_dict()
+        params["id"] = id
+        params["cat_id"] = cat_id
+        params["text"] = text
+        cursor.execute(sql, params  )
+        conn.commit()
+
+    def get_service(self, id, cat_id, text):
+        sql = """SELECT * FROM services 
+                 WHERE id = :id and cat_id = :cat_id and text = :text
+              """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(
+            sql, 
+            {
+                "id": id,
+                "cat_id": cat_id,
+                "text": text
+            }
+        )
+        data = cursor.fetchone()
+        if data is not None:
+             user_service = Services(**data)
+        else:
+            user_service = None
+
+        return user_service
+
     def save(self, user_service):
         sql = """INSERT OR REPLACE INTO services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
             :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city

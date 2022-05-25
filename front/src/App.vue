@@ -340,6 +340,21 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
   text-decoration: none;
   padding: 0.2em;
 }
+.btn-edit{
+  margin-left: auto;
+  background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
+              rgba(11,11,157,0.33703903924851186) 28%,
+              rgba(26,47,51,0.8076272745426296) 55%);
+  position: relative;
+  top: auto;
+  right: auto;
+  width: 10em
+  color: white;
+  font-size: 1em;
+  border-radius: 2px;
+  text-decoration: none;
+  padding: 0.2em;
+}
 .page{
   margin: 0.5em;
   font-size: 2em;

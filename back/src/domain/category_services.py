@@ -123,8 +123,33 @@ class CategoryServicesRepository:
             }
         )
         conn.commit()
+
+    def update_category_service(self, id, cat_id, text, category_service):
+        sql = """ UPDATE categories_services
+                    SET 
+                    id= :id,
+                    cat_id= :cat_id,
+                    user_name= :user_name,
+                    text= :text,
+                    intro= :intro,
+                    price= :price,
+                    text_pictures= :text_pictures,
+                    textarea= :textarea,
+                    phone= :phone,
+                    email= :email,
+                    city= :city
+                    WHERE id = :id and cat_id = :cat_id and text= :text """
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        params = category_service.to_dict()
+        params["id"] = id
+        params["cat_id"] = cat_id
+        params["text"] = text
+        cursor.execute(sql, params)
+        conn.commit()
+
     
-    def save(self, user_service):
+    def save(self, category_service):
         sql = """INSERT OR REPLACE INTO categories_services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
             :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city
         ) """
@@ -132,6 +157,7 @@ class CategoryServicesRepository:
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            user_service.to_dict(),
+            category_service.to_dict(),
         )
         conn.commit()
+        

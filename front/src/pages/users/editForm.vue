@@ -14,7 +14,7 @@
           <input type="file" 
                   accept="image/png, image/jpeg"
                   required 
-                  :value="uploadPicture" 
+                  :value="formPicture" 
                   @input="upload"
                   title="Select file"
                 >
@@ -65,24 +65,14 @@
                   placeholder="describe your services"
                  ></textarea>                            
        </section>
-       <section class="ObjCategorymodal-body">
-          select category services!
-          <section>
-          <select class="select" @change="selectedOption" v-model="selectedCategory">
-          <option value="">select Category service</option>
-          <option v-for="index in CategoryObj" :key="index.code" :value="index">
-          {{index.name}}
-          </option>
-          </select>
-           </section>
-       </section>
+       
       <footer class="modal-footer">
         <slot name="footer">
         </slot>
         <button
           type="button"
           class="btn-green"
-          @click="handleClick"
+          @click="handleEditModalClick"
         >
           Save services
         </button>
@@ -90,7 +80,7 @@
         <button
           type="button"
           class="btn-green"
-          @click="closeModal"
+          @click="closeEditModal"
         >
           Close Modal
         </button>
@@ -100,11 +90,11 @@
 </template>
 <script>
   export default {
-    name: 'PublishServicesFormModal',
+    name: 'editForm',
     emits:[
-      'change', 'changedPasswordEmail', 
-      'changedObjServices', 'closeModal', 
-      'uploaded','changedObj', 'handleClick',
+      'change', 
+      'changedObjServices', 'closeEditModal', 
+      'uploaded', 'handleEditModalClick',
       'input'
     ],
     props:{
@@ -112,24 +102,20 @@
         type:Object,
         required: true
       },
-      // uploadPicture:{
-      //   type: String,
-      //   required: true
-      // },
-      CategoryObj:{
-        type: Array,
-       required: true
+      uploadPicture:{
+        type: String,
+        required: true
       }
     },
     data(){
       return{
         selectedCategory:'',
-        uploadPicture: '',
+        formPicture: '',
       }
     },
     methods: {
-      closeModal() {
-        this.$emit('closeModal');
+      closeEditModal() {
+        this.$emit('closeEditModal');
       },
       upload(event){
         console.log('image',  event.target.value)
@@ -137,17 +123,11 @@
         const reader= new FileReader()
         reader.readAsDataURL(event.target.files[0])
         reader.onload= (e)=>{
-          this.uploadPicture= e.target.result
-          localStorage.setItem('upload', this.uploadPicture)
-          console.log('onload',this.uploadPicture)
-          // this.$emit('uploaded', event.target.value)
+          this.formPicture= e.target.result
+          localStorage.setItem('upload', this.formPicture)
+          console.log('onload',this.formPicture)
+          this.$emit('uploaded', event.target.value)
         }
-      },
-      selectedOption(event){
-        console.log(event.target.value)
-        this.$emit('changedObj', event.target.value)
-        localStorage.setItem('cat_name', JSON.stringify(this.selectedCategory))
-        console.log(this.selectedCategory)
       },
       onServices(event){
         console.log(event.target.value)
@@ -233,13 +213,9 @@
           intro: this.ObjServices.intro,
         })
       },
-      handleClick(){
-        console.log(this.handleClick)
-        this.$emit('handleClick')
-        this.$router.resolve({
-        path: '/user/:id',
-        name: 'usersPage',
-      })
+      handleEditModalClick(){
+        console.log(this.handleEditModalClick)
+        this.$emit('handleEditModalClick')
       },
     },
   };
