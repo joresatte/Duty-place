@@ -180,8 +180,18 @@ export default {
         this.password='';
       }
       },
-      onModalOnclicked(){this.showLogin = true},
-      clickedToSwitchOnModal(){this.showRegist = true},
+      onModalOnclicked(){
+        this.showLogin = true
+         if (this.showLogin==true){
+          this.showRegist= false
+        }
+        },
+      clickedToSwitchOnModal(){
+        this.showRegist = true
+        if (this.showRegist==true){
+          this.showLogin= false
+        }
+        },
       closeLoginModal(){
         this.showLogin= false
       },
