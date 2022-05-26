@@ -11,12 +11,14 @@
       <p class="intro">{{index.intro}}</p>
       <h4 class="price">{{index.price}}</h4>
       <p class="textarea">{{index.textarea}}</p>
-      <button class="btn-remove" @click="remove(index.cat_id)">Remove</button>
+      <button class="btn-remove" @click="remove(index.id ,index.cat_id)">Remove</button>
     </section>
 </div>
 </template>
 
 <script>
+import { deleteService } from '../apiservices/deleteService'
+// import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
 export default {
     nam:'userForm',
     props:{
@@ -31,10 +33,11 @@ export default {
       }
     },
     methods:{
-      remove(event){
+      async remove(serviceId, userCatId){
         console.log(this.remove)
-        console.log(event)
-        this.$emit('removeService', event)
+        // const serviceId= getCurrentUser()
+        await deleteService(serviceId, userCatId)
+        console.log(serviceId, userCatId)
       },
     }
 }
