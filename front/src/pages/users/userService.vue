@@ -11,7 +11,14 @@
       <p class="intro">{{index.intro}}</p>
       <h4 class="price">{{index.price}}</h4>
       <p class="textarea">{{index.textarea}}</p>
+<<<<<<< HEAD:front/src/pages/users/userServiceForm.vue
       <button class="btn-remove" @click="remove(index.id ,index.cat_id)">Remove</button>
+=======
+      <div class=" edit_remove">
+        <button class="btn-remove" @click="remove(index.id, index.cat_id)">Remove</button><br>
+        <button class="btn-edit" @click="editService(index.id, index.cat_id, index.text)">Edit service</button>
+      </div>
+>>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea:front/src/pages/users/userService.vue
     </section>
 </div>
 </template>
@@ -27,7 +34,7 @@ export default {
             required: true
         }
     },
-    emits:['remove', 'removeService'],
+    emits:['removeService', 'editService'],
     data(){
       return{
       }
@@ -35,10 +42,32 @@ export default {
     methods:{
       async remove(serviceId, userCatId){
         console.log(this.remove)
+<<<<<<< HEAD:front/src/pages/users/userServiceForm.vue
         // const serviceId= getCurrentUser()
         await deleteService(serviceId, userCatId)
         console.log(serviceId, userCatId)
+=======
+        console.log(event)
+        this.$emit('removeService', {event})
+>>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea:front/src/pages/users/userService.vue
       },
+      editService(eventId, eventCatId, eventText){
+        console.log(eventId, eventCatId, eventText)
+        localStorage.setItem('eventId', eventId)
+        localStorage.setItem('eventCatId', eventCatId)
+        localStorage.setItem('eventText', eventText)
+        this.$router.push(
+          {
+            path: '/services/user_services/:id/:category_id/:text',
+            name: 'editPage',
+            params:{
+              id: eventId,
+              cat_id: eventCatId,
+              text: eventText
+            }
+          }
+        )
+      }
     }
 }
 </script>
@@ -70,4 +99,9 @@ export default {
   color: #53d9ed;
   text-shadow:  2px 2px 4px #f10889;
 }
+.edit_remove{
+  display: flex;
+  flex-direction: flex start;
+}
+
 </style>

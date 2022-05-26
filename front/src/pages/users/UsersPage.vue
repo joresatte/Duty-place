@@ -9,33 +9,53 @@
     </button>
     <publish-services-form-modal 
     :ObjServices="UserServices" 
-    :uploadPicture="text_pictures"
     :CategoryObj="categoryId"
     @closeModal='shutDown'
     v-show="displayingModal"
     @changedObjServices='onObjServicesChanged'
-    @uploaded="text_pictures= $event"
     @changedObj="cat_id= $event"
     @handleClick="handleClick"/>
     </div>
 <br><br>
+<<<<<<< HEAD
 <userServiceForm :User="users" @removeService="remove(userCatId)"/>
+=======
+<userService :User="users" @removeService="remove" />
+
+<!-- <editForm @editService= 'editService' 
+          :ObjServices="UserServices" 
+          :uploadPicture="text_pictures"
+          :CategoryObj="categoryId" 
+          v-show="displayingEditModal"
+          @changedObjServices='onObjServicesChanged'
+          @uploaded="text_pictures= $event"
+          @changedObj="cat_id= $event"/> -->
+
+>>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea
 </template>
 
 <script>
 import PublishServicesFormModal from './PublishServicesForm.vue'
 import loginFetch from '@/pages/apiservices/loginFetch.js'
-import PublishServices from '@/pages/apiservices/PublishServicesPost.js'
+import publishServices from '@/pages/apiservices/publishServicesPost.js'
 import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
+<<<<<<< HEAD
 import userServiceForm from './userServiceForm.vue'
 
+=======
+import userService from './userService.vue'
+import { deleteService } from '../apiservices/deleteService'
+import editForm from './editForm.vue'
+>>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea
 export default {
   props:['id'],
   name: 'userPage',
-  components:{userServiceForm, PublishServicesFormModal},
+  components:{userService, PublishServicesFormModal, editForm},
   data(){
+   
     return{
       displayingModal: false,
+      // displayingEditModal: false,
       users:[ ],
       text_pictures: '',
       categoryId:[
@@ -61,6 +81,18 @@ export default {
     this.loadData();
   },
   methods:{
+<<<<<<< HEAD
+=======
+    // editService(){
+    //   this.displayingEditModal= true
+    //   console.log(this.displayingEditModal)
+    //   console.log(this.editService)
+    // },
+    async remove(eventId, eventCatId ){
+      console.log(this.remove)
+      await deleteService(eventId, eventCatId)
+    },
+>>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea
     async loadData(){
       console.log(this.loadData)
       this.users= await loginFetch()
@@ -75,6 +107,9 @@ export default {
     closeModal() {
         this.displayingModal = false;
     },
+    // closeEditModal(){
+    //   this.displayingEditModal= false
+    // },
     onObjServicesChanged(UserServicesValues){
       console.table(UserServicesValues)
       this.UserServices= UserServicesValues
@@ -91,7 +126,7 @@ export default {
     },
     async handleClick(){
       console.log(this.handleClick)
-      await PublishServices(
+      await publishServices(
         this.UserServices.id= getCurrentUser(), 
         this.cat_id= this.getCategoryID(),
         this.UserServices.user_name,
@@ -105,10 +140,6 @@ export default {
         this.UserServices.city
       )
       this.displayingModal= false
-      this.$router.resolve({
-        path: '/user/:id',
-        name: 'usersPage',
-      })
     },
   }
 }

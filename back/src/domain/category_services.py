@@ -116,44 +116,48 @@ class CategoryServicesRepository:
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
-            sql, {"id": id,
-                  "cat_id": cat_id,
-                  }
+            sql, 
+            {
+                "id": id,
+                "cat_id": cat_id,
+            }
         )
         conn.commit()
-    
-    def modify_category_service(self, category_service):
+
+    def update_category_service(self, id, cat_id, text, category_service):
         sql = """ UPDATE categories_services
-                    SET
+                    SET 
                     id= :id,
-                    cat_id= item["cat_id"],
-                    user_name= "user_name",
-                    text= "text",
-                    intro= "intro",
-                    price= "price",
-                    text_pictures= "text_pictures",
-                    textarea= 'textarea',
-                    phone= "phone",
-                    email= "email",
-                    city= "city",
-             """
+                    cat_id= :cat_id,
+                    user_name= :user_name,
+                    text= :text,
+                    intro= :intro,
+                    price= :price,
+                    text_pictures= :text_pictures,
+                    textarea= :textarea,
+                    phone= :phone,
+                    email= :email,
+                    city= :city
+                    WHERE id = :id and cat_id = :cat_id and text= :text """
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(
-            sql, category_service.to_dict()
-        )
+        params = category_service.to_dict()
+        params["id"] = id
+        params["cat_id"] = cat_id
+        params["text"] = text
+        cursor.execute(sql, params)
         conn.commit()
 
-
-
-    def save(self, user_service):
-        sql = """INSERT into categories_services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
+    
+    def save(self, category_service):
+        sql = """INSERT OR REPLACE INTO categories_services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
             :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city
         ) """
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            user_service.to_dict(),
+            category_service.to_dict(),
         )
         conn.commit()
+        

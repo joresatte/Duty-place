@@ -54,25 +54,25 @@ regist_repository.save(regist_1)
 
 category_1 = Categories(
         cat_id= "category_1",
-        text= "Mudanzas",
+        text= "Servicios de Mudanzas",
         text_pictures= mudanzas,
        
     )
 category_2 = Categories(
     cat_id= "category_2",
-    text= "Limpiezas",
+    text= "Servicios de Limpiezas",
     text_pictures= limpiezas,
     
     )
 category_3 = Categories(
         cat_id= "category_3",
-        text= "Cuidados",
+        text= "Servicios de Cuidados",
         text_pictures= cuidados,
        
     )
 category_4 = Categories(
         cat_id= "category_4",
-        text= "Mantenimientos",
+        text= "Servicios de Mantenimientos",
         text_pictures= mantemientos,
        
     )

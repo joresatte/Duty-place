@@ -9,5 +9,5 @@ export async function deleteService(serviceId, serviceCatId){
       };
     return await fetch(`${config.userService_Path}/user_services/${serviceId}/${serviceCatId}`, settings, {method: "DELETE"}),
            await fetch(`${config.userService_Path}/by-category/${serviceId}/${serviceCatId}`, settings, {method: "DELETE"})
-      .catch(err=> console.log(err.message))
+   
 }

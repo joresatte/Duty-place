@@ -1,3 +1,4 @@
+from cgitb import text
 from pyparsing import Regex
 from flask import Flask, request
 from flask_cors import CORS
@@ -44,7 +45,12 @@ def create_app(repositories):
     def get_user_services_by_id(id):
         services = repositories["services"].get_user_services_by_id(id)
         return object_to_json(services)
-
+    
+    @app.route("/api/services/user_services/<id>/<cat_id>/<text>", methods=["GET"])
+    def get_services(id, cat_id, text):
+        user_services = repositories["services"].get_service(id, cat_id, text)
+        return object_to_json(user_services)
+    
     @app.route("/api/services/user_services", methods=["POST"])
     def post_user_services():
         data= request.json
@@ -141,21 +147,49 @@ def create_app(repositories):
     def delete_service(id, cat_id):
         service = repositories["services"].delete_services(id, cat_id)
         return "", 200
+ 
+    @app.route("/api/services/by-category/<id>/<cat_id>/<text>", methods=["PUT"])
+    def modify_category_service(id, cat_id, text):
+        data = request.json
+        if id!=data["id"] and cat_id!= data["cat_id"] and text!= data["text"]:
+            return '', 403
+        category_services = Category_services(
+        id= data["id"],
+        cat_id= data["cat_id"],
+        user_name= data["user_name"],
+        text= data["text"],
+        intro= data["intro"],
+        price= data["price"],
+        text_pictures= data["text_pictures"],
+        textarea= data['textarea'],
+        phone= data["phone"],
+        email= data["email"],
+        city= data["city"],
+        )
+        repositories["categories_services"].update_category_service(id , cat_id , text, category_services)
+        return '', 200
 
-    # @app.route("/api/services/by-category/<id>", methods=["GET"])
-    # def get_user_in_services_by_category_by_id(id):
-    #     user_services = repositories["categories_services"].get_user_services_by_id(id)
-    #     print(user_services)
-    #     return object_to_json(user_services)
+    @app.route("/api/services/user_services/<id>/<cat_id>/<text>", methods=["PUT"])
+    def modify_user_services(id, cat_id, text):
+        data = request.json
+        if id!=data["id"] and cat_id!= data["cat_id"] and text!= data["text"]:
+            return '', 403
+        user_services = Services(
+        id= data["id"],
+        cat_id= data["cat_id"],
+        user_name= data["user_name"],
+        text= data["text"],
+        intro= data["intro"],
+        price= data["price"],
+        text_pictures= data["text_pictures"],
+        textarea= data['textarea'],
+        phone= data["phone"],
+        email= data["email"],
+        city= data["city"],
+        )
+        repositories["services"].update_service(id , cat_id , text, user_services)
+        return '', 200
 
-    # @app.route("/api/contact", methods=["POST"])
-    # def contact_posted():
-    #     user_id= request.headers.get("Authorization")
-    #     data = request.json
-    #     contact = Contact(**data)
-    #     repositories["contact"].save(contact)
-    #     return ''   
-    
     # @app.route("/api/contact/<id>", methods=["GET"])
     # def get_contact_by_id(id):
     #     user_id= request.headers.get("Authorization")
@@ -165,11 +199,6 @@ def create_app(repositories):
     #     else:
     #         return '', 403
 
-    # @app.route("/api/contact/<id>", methods=["DELETE"])
-    # def delete_contact_by_id(id):
-    #     user_id= request.headers.get("Authorization")
-    #     contact_removed = repositories["contact"].delete_contact_by_id(id)
-    #     return ""
 
     # @app.route("/api/users", methods=["GET"])
     # def get_all_users():
@@ -177,26 +206,12 @@ def create_app(repositories):
     #     users = repositories["users"].get_all_users()
     #     return object_to_json(users)
 
-    # @app.route("/api/contact/<id>", methods=["PUT"])
-    # def modify_contact_by_id(id):
-    #     user_id= request.headers.get("Authorization")
-    #     data = request.json
+   
     
     #     is_my_contact= user_id== data["user_id"]
     #     if not is_my_contact:
     #         return "", 403
 
-    #     data['id']= id
-    #     contact = Contact(
-    #         id=data["id"],
-    #         user_id=data["user_id"],
-    #         first_name=data["first_name"],
-    #         last_name=data["last_name"],
-    #         email=data["email"],
-    #         phone=data["phone"],
-
-    #     )
-    #     repositories["contact"].modify_contact_by_id(contact)
-    #     return '', 200
+    #     
 
     return app
