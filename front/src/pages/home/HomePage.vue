@@ -1,5 +1,5 @@
 <template>
-<input class="filteredCategory" type="text" v-model="filteredCategory"/>
+<input class="filteredCategory" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?"/>
 <section class="page">
     {{welcome}}
   </section>
@@ -96,6 +96,7 @@ export default {
 }
 </script>
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
  .category_button{
   border: 2px solid #FFE600;
   border-radius: 10px;
@@ -104,6 +105,18 @@ export default {
   padding: 1em ;
   border-radius:10px;
   box-shadow:  2px 2px 4px #0D0A96;
+}
+.filteredCategory{
+  width: 70%;
+  height: 3em;
+  position: relative;
+  top: -4em;
+}
+::placeholder{
+  font-size: 2em;
+  margin-left: 1em;
+  padding: 1em;
+  color: rgb(138, 150, 138);
 }
 .categories{
   display: grid;

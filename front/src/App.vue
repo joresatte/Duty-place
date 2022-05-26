@@ -24,7 +24,7 @@
     >
       Sign Up
     </button>
-    <button  @click="clickedToSwitchOffModal" v-show="showRegist">
+    <button  @click="clickedToSwitchOffModal" v-if="showRegist">
         <div class="modal-backdrop">
     <div class="modal">
       <header class="modal-header">
@@ -62,7 +62,7 @@
     >
       Log In
     </button>
-    <button  @click="offModalOnclicked" v-show="showLogin">
+    <button  @click="offModalOnclicked" v-if="showLogin">
         <div class="modal-backdrop">
     <div class="modal">
       <header class="modal-header">
@@ -296,6 +296,7 @@ img {
   padding:10px;
   text-shadow:3px 3px 3px yellow;
   margin-top: 2em;
+  height: 2em
 }
 .btn-logout{
   background: linear-gradient(90deg, rgba(4,15,38,1) 0%,

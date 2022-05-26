@@ -11,7 +11,7 @@
                               accept="image/png, image/jpeg"
                               required
                               :value="service.upload"
-                              @input="service.upload"
+                              @input="text_pictures"
                               title="Select file"
                             >
            </section>
