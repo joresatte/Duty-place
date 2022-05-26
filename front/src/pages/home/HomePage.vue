@@ -1,4 +1,5 @@
 <template>
+<input class="filteredCategory" type="text" v-model="filteredCategory">
 <section class="page">
     {{welcome}}
   </section>
@@ -54,6 +55,7 @@ export default {
     return{
       welcome:"welcome to Services",
       categories:{},
+      filteredCategory:'',
      
     }
   },
@@ -71,7 +73,11 @@ export default {
   //     }      
   //   },
  computed:{
-  
+   categoryFiltered(){
+     const categories= this.categories
+     const filtered= this.filteredCategory
+     return categories.filter()
+   }
  },
   methods:{
     async loadData(){

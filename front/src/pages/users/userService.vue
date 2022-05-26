@@ -11,14 +11,10 @@
       <p class="intro">{{index.intro}}</p>
       <h4 class="price">{{index.price}}</h4>
       <p class="textarea">{{index.textarea}}</p>
-<<<<<<< HEAD:front/src/pages/users/userServiceForm.vue
-      <button class="btn-remove" @click="remove(index.id ,index.cat_id)">Remove</button>
-=======
       <div class=" edit_remove">
         <button class="btn-remove" @click="remove(index.id, index.cat_id)">Remove</button><br>
         <button class="btn-edit" @click="editService(index.id, index.cat_id, index.text)">Edit service</button>
       </div>
->>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea:front/src/pages/users/userService.vue
     </section>
 </div>
 </template>
@@ -42,19 +38,11 @@ export default {
     methods:{
       async remove(serviceId, userCatId){
         console.log(this.remove)
-<<<<<<< HEAD:front/src/pages/users/userServiceForm.vue
-        // const serviceId= getCurrentUser()
-        await deleteService(serviceId, userCatId)
         console.log(serviceId, userCatId)
-=======
-        console.log(event)
-        this.$emit('removeService', {event})
->>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea:front/src/pages/users/userService.vue
+        this.$emit('removeService', {serviceId, userCatId})
       },
       editService(eventId, eventCatId, eventText){
         console.log(eventId, eventCatId, eventText)
-        localStorage.setItem('eventId', eventId)
-        localStorage.setItem('eventCatId', eventCatId)
         localStorage.setItem('eventText', eventText)
         this.$router.push(
           {

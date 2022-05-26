@@ -421,4 +421,11 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
   border: 1px solid #4AAE9B;
   border-radius: 2px;
 }
+.btn-handleEditClick {
+  color: white;
+  background: #4AAE9B;
+  border: 1px solid #4AAE9B;
+  border-radius: 2px;
+  height: 2em
+}
 </style>

@@ -6,6 +6,7 @@
             <img class="img-to-edit" :src="service.text_pictures" alt="">
         </section>
            <section >
+               <label class="uploadPicture" for="uploadPicture">Cambiar imagen</label>
                <input type="file"
                               accept="image/png, image/jpeg"
                               required
@@ -55,8 +56,8 @@
         
                 <button
                   type="button"
-                  class="btn-green"
-                  @click="handleEditModalClick"
+                  class="btn-handleEditClick"
+                  @click="handleEditClick"
                 >
                   Save services
                 </button>
@@ -75,9 +76,9 @@ export default {
     data(){
         return{
             service:{
-                "id": " ",
-                "cat_id": " ",
-                "user_name": " ",
+                "id": '',
+                "cat_id":'', 
+                "user_name": '',
                 "text": "",
                 "intro": " ",
                 "price": " ",
@@ -95,17 +96,18 @@ export default {
     methods:{
         async loadData(){
             console.log(this.loadData)
-            const id = localStorage.getItem('eventId')
-            const catId = localStorage.getItem('eventCatId') 
-            const text = localStorage.getItem('eventText')
-            this.service= await getServiceToEdit(id, catId, text)
+            // const id = localStorage.getItem('eventId')
+            // const catId = localStorage.getItem('eventCatId') 
+            const text = localStorage.getItem('eventText') 
+            console.log(text)
+            this.service= await getServiceToEdit(this.id, this.cat_id, text)
             console.log(this.service)
         },
-        async handleEditModalClick(){
-            console.log(this.handleEditModalClick)
+        async handleEditClick(){
+            console.log(this.handleEditClick)
             await postServiceEdited(
-                this.service.id= localStorage.getItem('eventId'),
-                this.service.cat_id= localStorage.getItem('eventCatId') ,
+                this.service.id= this.id,
+                this.service.cat_id= this.cat_id ,
                 this.service.user_name,
                 this.service.text= localStorage.getItem('eventText'),
                 this.service.intro,
@@ -142,6 +144,9 @@ export default {
 }
 .edit_page{
   min-height: 100vh;
+}
+.uploadPicture{
+    margin-right: 0.3em;
 }
 .edit-page{
   display: grid;

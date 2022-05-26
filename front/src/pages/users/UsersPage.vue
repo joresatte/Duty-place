@@ -17,21 +17,7 @@
     @handleClick="handleClick"/>
     </div>
 <br><br>
-<<<<<<< HEAD
-<userServiceForm :User="users" @removeService="remove(userCatId)"/>
-=======
-<userService :User="users" @removeService="remove" />
-
-<!-- <editForm @editService= 'editService' 
-          :ObjServices="UserServices" 
-          :uploadPicture="text_pictures"
-          :CategoryObj="categoryId" 
-          v-show="displayingEditModal"
-          @changedObjServices='onObjServicesChanged'
-          @uploaded="text_pictures= $event"
-          @changedObj="cat_id= $event"/> -->
-
->>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea
+<userService :User="users" @removeService="remove(userCatId)"/>
 </template>
 
 <script>
@@ -39,14 +25,9 @@ import PublishServicesFormModal from './PublishServicesForm.vue'
 import loginFetch from '@/pages/apiservices/loginFetch.js'
 import publishServices from '@/pages/apiservices/publishServicesPost.js'
 import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
-<<<<<<< HEAD
-import userServiceForm from './userServiceForm.vue'
-
-=======
 import userService from './userService.vue'
 import { deleteService } from '../apiservices/deleteService'
 import editForm from './editForm.vue'
->>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea
 export default {
   props:['id'],
   name: 'userPage',
@@ -81,8 +62,6 @@ export default {
     this.loadData();
   },
   methods:{
-<<<<<<< HEAD
-=======
     // editService(){
     //   this.displayingEditModal= true
     //   console.log(this.displayingEditModal)
@@ -92,7 +71,6 @@ export default {
       console.log(this.remove)
       await deleteService(eventId, eventCatId)
     },
->>>>>>> 916c21c370d16ab8b8b3af166042ba24a57891ea
     async loadData(){
       console.log(this.loadData)
       this.users= await loginFetch()

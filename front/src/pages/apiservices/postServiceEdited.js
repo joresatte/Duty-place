@@ -35,6 +35,5 @@ async function postServiceEdited(
     return await fetch(`${config.userService_Path}/by-category/${id}/${cat_id}/${text}`, settings),
            await fetch(`${config.userService_Path}/user_services/${id}/${cat_id}/${text}`, settings)
            .catch(err=> console.log(err.message))
-     
   }
   export default postServiceEdited
