@@ -439,4 +439,16 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
   border-radius: 2px;
   height: 2em
 }
+.filteredCategory{
+  width: 70%;
+  height: 3em;
+  position: relative;
+  top: -4em;
+}
+::placeholder{
+  font-size: 2em;
+  margin-left: 1em;
+  padding: 1em;
+  color: rgb(138, 150, 138);
+}
 </style>

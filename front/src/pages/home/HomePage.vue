@@ -23,7 +23,7 @@
 </div>
   <br><br> 
   <form @submit.prevent="handledClickOnCatagory" action="">
-  <section class="categories" v-for="category in categoryFiltered()" :key="category.cat_id">
+  <section class="categories" v-for="category in categoryFiltered" :key="category.cat_id">
   <router-link :to="{name: 'ServicesByCategoryPage', params:{category_id: category.cat_id}}" >
     <img :src= "category.text_pictures" alt="" class="image_category"><br>
    <button @click="selectedCategory" class="category_button"><h1>{{category.text}}</h1></button>
@@ -73,7 +73,11 @@ export default {
   //     }      
   //   },
  computed:{
-   
+    categoryFiltered(){
+     const categories= this.categories
+     const filtered= this.filteredCategory
+     return Object.values(categories).filter((service) => service.text.toLowerCase().includes(filtered.toLowerCase()))       
+   }
  },
   methods:{
     async loadData(){
@@ -88,11 +92,6 @@ export default {
         params:{category_id: catId}
       })
     },
-    categoryFiltered(){
-     const categories= this.categories
-     const filtered= this.filteredCategory
-     return Object.values(categories).filter((service) => service.text.toLowerCase().includes(filtered.toLowerCase()))       
-   }
   }
 }
 </script>
@@ -106,18 +105,6 @@ export default {
   padding: 1em ;
   border-radius:10px;
   box-shadow:  2px 2px 4px #0D0A96;
-}
-.filteredCategory{
-  width: 70%;
-  height: 3em;
-  position: relative;
-  top: -4em;
-}
-::placeholder{
-  font-size: 2em;
-  margin-left: 1em;
-  padding: 1em;
-  color: rgb(138, 150, 138);
 }
 .categories{
   display: grid;

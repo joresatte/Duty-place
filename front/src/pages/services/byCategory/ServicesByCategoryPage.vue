@@ -1,7 +1,8 @@
 <template>
+<input class="filteredCategory" type="text" v-model="filteredOption" placeholder="¿Que servicio buscas?"/>
   <h1 class="page">Services By Category Page</h1>
   <!-- <p>{{category_id}} </p> -->
-  <section v-for="index in services" :key="index" class="services">
+  <section v-for="index in filteredOptionService" :key="index" class="services">
   <img :src= "index.text_pictures" alt="" class="image_category"><br>
  <h2>{{index.user_name}}</h2>
   <p><span class="phone">Phone Number:</span><br> {{index.phone}}</p>
@@ -21,10 +22,22 @@ export default {
   data(){
     return{
       services: [],
+      filteredOption:'',
     }
   },
   mounted(){
     this.loadData()
+  },
+  computed:{
+    filteredOptionService(){
+    const services= this.services
+    const filtered= this.filteredOption
+    return Object.values(services).filter((option) => option.user_name.toLowerCase().includes(filtered.toLowerCase()))
+                                  .filter((option) => option.phone.toLowerCase().includes(filtered.toLowerCase()))
+                                  .filter((option) => option.email.toLowerCase().includes(filtered.toLowerCase()))
+                                  .filter((option) => option.city.toLowerCase().includes(filtered.toLowerCase()))
+                                  .filter((option) => option.price.toLowerCase().includes(filtered.toLowerCase()))
+  },
   },
   methods:{
     async loadData(){
@@ -33,7 +46,6 @@ export default {
       this.services= await getCategoriesServices(categoryId)
     }
   },
-
 }
 </script>
 
