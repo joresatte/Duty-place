@@ -1,5 +1,5 @@
 <template>
-<input class="filteredCategory" type="text" v-model="filteredCategory">
+<input class="filteredCategory" type="text" v-model="filteredCategory"/>
 <section class="page">
     {{welcome}}
   </section>
