@@ -3,6 +3,7 @@
 <nav>
 <headerNav/>
 </nav>
+<br>
 <div class="header_nav">
 </div>
 
@@ -296,7 +297,7 @@ img {
   padding:10px;
   text-shadow:3px 3px 3px yellow;
   margin-top: 2em;
-  height: 2em
+  height: 1em
 }
 .btn-logout{
   background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
@@ -441,11 +442,11 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
 }
 .filteredCategory{
   width: 70%;
-  height: 3em;
+  height: 2em;
   position: relative;
-  top: -4em;
+  top: -6em;
 }
-::placeholder{
+.filteredCategory > ::placeholder{
   font-size: 2em;
   margin-left: 1em;
   padding: 1em;
