@@ -46,12 +46,11 @@ export default {
         localStorage.setItem('eventText', eventText)
         this.$router.push(
           {
-            path: '/services/user_services/:id/:category_id/:text',
+            path: '/services/user_services/:id/:category_id/',
             name: 'editPage',
             params:{
               id: eventId,
-              cat_id: eventCatId,
-              text: eventText
+              cat_id: eventCatId
             }
           }
         )

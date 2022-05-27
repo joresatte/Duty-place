@@ -73,10 +73,20 @@ export default {
   //     }      
   //   },
  computed:{
+    objectValues(){
+      const result= []
+      for(const index of this.categories){
+        result.push(index.val)
+      }
+    },
     categoryFiltered(){
      const categories= this.categories
-     const filtered= this.filteredCategory
-     return Object.values(categories).filter((service) => service.text.toLowerCase().includes(filtered.toLowerCase()))       
+     const filtered= this.filteredCategory.toLowerCase()
+     if (!filtered) {
+        return categories;
+      }
+    const result= Object.values(categories).filter((service) => {return service.text.toLowerCase().includes(filtered) })
+    return result
    }
  },
   methods:{

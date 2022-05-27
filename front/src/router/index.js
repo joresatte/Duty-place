@@ -33,7 +33,7 @@ const routes = [
     props: true
   },
   {
-    path: '/services/user_services/:id/:cat_id/:text',
+    path: '/services/user_services/:id/:cat_id',
     name: 'editPage',
     component: editPage,
     props: true

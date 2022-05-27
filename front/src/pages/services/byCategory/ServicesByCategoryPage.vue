@@ -32,12 +32,16 @@ export default {
     filteredOptionService(){
     const services= this.services
     const filtered= this.filteredOption
-    return Object.values(services).filter((option) => option.user_name.toLowerCase().includes(filtered.toLowerCase()))
-                                  .filter((option) => option.phone.toLowerCase().includes(filtered.toLowerCase()))
-                                  .filter((option) => option.email.toLowerCase().includes(filtered.toLowerCase()))
-                                  .filter((option) => option.city.toLowerCase().includes(filtered.toLowerCase()))
-                                  .filter((option) => option.price.toLowerCase().includes(filtered.toLowerCase()))
-  },
+    // if(!filtered){
+    //   return services
+    // }
+    return Object.values(services).filter((option)=>{
+      return option.phone.toLowerCase().includes(filtered.toLowerCase())||
+             option.email.toLowerCase().includes(filtered.toLowerCase())||
+             option.city.toLowerCase().includes(filtered.toLowerCase())||
+             option.price.toLowerCase().includes(filtered.toLowerCase());
+    })
+   }
   },
   methods:{
     async loadData(){
