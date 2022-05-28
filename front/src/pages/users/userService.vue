@@ -86,9 +86,6 @@ export default {
   color: #53d9ed;
   text-shadow:  2px 2px 4px #f10889;
 }
-.edit_remove{
-  display: flex;
-  flex-direction: flex start;
-}
+
 
 </style>

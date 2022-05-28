@@ -90,6 +90,7 @@
   </div>
       </button>
   </div>
+  <section v-show="error">invalid Log In </section>
   <router-view/>
 </template>
 <script>
@@ -117,7 +118,8 @@ export default {
       LogIn:true,
       SignUp: true,
       LoggedOut: false,
-      userId: [],
+      userId: {},
+      error: false,
     }
   },
   mounted(){
@@ -222,47 +224,43 @@ export default {
       },
       handleLogout(){
         localStorage.clear('dataUser')
-        this.$router.push({
-           path: '/',
-           name: 'Home',
-        })
        this.getBackToHome()
       },
       async ClickToLogIn(){
-        if (this.email!='' || this.password!=''){
-          this.userId= await getLoginPost(this.email, this.password)
-          localStorage.setItem('dataUser', JSON.stringify(this.userId))
-          const loginStatusCode= this.getUserId()
-          console.log(loginStatusCode)
-
-          if(loginStatusCode!= this.getUserId()){
-            // alert('invalid login')
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'invalid login!',
-              footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
-            })
-          }else{
-            this.$router.push({
-              name: 'usersPage',
-              params:{id: this.userId},
+         if (this.email!='' || this.password!=''){
+           const response= await getLoginPost(this.email, this.password)
+           console.log('login', this.ClickToLogIn )
+           const loginStatusCode = response.status
+           console.log('response', loginStatusCode)
+            if(loginStatusCode== 401){
+               Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'invalid login!',
+                footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
               })
-              this.getLoggedOut()
-
+            }else{
+                this.userId= await response.json()
+                console.log(this.userId)
+                localStorage.setItem('dataUser', JSON.stringify(this.userId))
+                this.$router.push({
+                  name: 'usersPage',
+                  params:{id: this.userId},
+                  })
+                  this.getLoggedOut()
             }
-          }else{
+         }else{
             // alert('the email and password fields are required')
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
-              text: 'Something went wrong!',
+              text: 'all camps are required!',
               footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
             })
           } 
           this.email= '';
           this.password='';
-      }
+      }, 
   }
 }
 </script>
@@ -451,5 +449,10 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
   margin-left: 1em;
   padding: 1em;
   color: rgb(138, 150, 138);
+}
+.edit_remove{
+  display: flex
+  flex-direction: flex start;
+  margin-top: 3em;
 }
 </style>

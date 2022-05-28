@@ -1,6 +1,6 @@
 import config from "@/config.js";
 
-function getLoginPost (email, password){
+async function getLoginPost (email, password){
     const settings = {
     method: "POST",
     headers: {
@@ -11,9 +11,9 @@ function getLoginPost (email, password){
         password: password,
     }),
   }
-  return fetch(`${config.login_Path}/login/Authenticated`, settings)
-            .then(async response => await response.json())
-            .catch(err=> console.log(err.message))
+  const response= await fetch(`${config.login_Path}/login/Authenticated`, settings)
+        return response
+            
 }
 export default getLoginPost
 

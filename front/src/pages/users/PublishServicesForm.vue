@@ -69,7 +69,7 @@
           select category services!
           <section>
           <select class="select" @change="selectedOption" v-model="selectedCategory">
-          <option value="">select Category service</option>
+          <option class="select-option" value="">Select category service</option>
           <option v-for="index in CategoryObj" :key="index.code" :value="index">
           {{index.name}}
           </option>
@@ -244,7 +244,7 @@
     },
   };
 </script>
-<style>
+<style scoped>
   .modal-backdrop {
     position: fixed;
     top: 0;
@@ -287,6 +287,7 @@
   .modal-body {
     position: relative;
     padding: 2em 2em;
+    color: #5c0bde;
   }
 
   .btn-close {
@@ -309,9 +310,14 @@
     border-radius: 2px;
     height: 2em;
   }
-  /* .select{
-    position: absolute;
-    top: 0em;
-    left: 6em;
-  } */
+  .select{
+    position: relative;
+    bottom: 0em;
+    color: #190f13;
+  }
+  .ObjCategorymodal-body{
+    position: relative;
+    bottom: 1em;
+    color: #5c0bde;
+  }
 </style>

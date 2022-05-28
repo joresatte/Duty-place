@@ -46,16 +46,16 @@ class RegistsRepository:
         cursor.execute(sql)
         conn.commit()
 
-    def get_all_regists(self):
-        sql = """select * from registros"""
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute(sql)
+    # def get_all_regists(self):
+    #     sql = """select * from registros"""
+    #     conn = self.create_conn()
+    #     cursor = conn.cursor()
+    #     cursor.execute(sql)
 
-        data = cursor.fetchall()
+    #     data = cursor.fetchall()
 
-        users = [Regists(**item) for item in data]
-        return users
+    #     users = [Regists(**item) for item in data]
+    #     return users
 
     def get_regist_by_id(self, id):
         sql = """SELECT * FROM registros WHERE id= :id"""

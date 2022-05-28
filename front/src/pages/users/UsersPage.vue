@@ -129,7 +129,7 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
             rgba(10,10,142,0.33703903924851186) 59%, 
             rgba(3,3,25,0.33703903924851186) 79%);
  position: absolute;
- top: 7em;
+ top: 10em;
  right: 0;
  color: white;
  font-size: 1em;
