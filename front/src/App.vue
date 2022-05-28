@@ -6,7 +6,6 @@
 <br>
 <div class="header_nav">
 </div>
-
 <button
     class="btn-logout"
     @click.prevent="handleLogout"
@@ -15,7 +14,6 @@
   >
     Log out
 </button>
-
 <div id="app">
     <button
       type="button"
@@ -33,7 +31,6 @@
           feel all camps to Regist
         </slot>
       </header>
-
       <section class="modal-body">
        <emailForm :newEmail="email" @onEmailChanged="onChangedEmail"/>
        </section>
@@ -52,8 +49,6 @@
   </div>
       </button>
   </div>
-
-
  <div id="app">
     <button
       type="button"
@@ -96,7 +91,6 @@
 <script>
 // import axios from 'axios';
 // import config from "@/config.js";
-import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
 import emailForm from '@/components/RegistEmailForm.vue'
 import passwordForm from '@/components/RegistPasswordForm.vue';
 import LoginEmail from '@/components/LoginEmailForm.vue'
@@ -130,7 +124,6 @@ export default {
        return this.getBackToHome()
      }
     }
-    
   },
   computed: {
   isLoggedOut() {
@@ -181,26 +174,25 @@ export default {
         })
         this.email= '';
         this.password='';
-      }
+        }
       },
       onModalOnclicked(){
         this.showLogin = true
          if (this.showLogin==true){
           this.showRegist= false
         }
-        },
+      },
       clickedToSwitchOnModal(){
         this.showRegist = true
         if (this.showRegist==true){
           this.showLogin= false
         }
-        },
+      },
       closeLoginModal(){
         this.showLogin= false
       },
       closeRegistModal(){
         this.showRegist= false
-      
       },
       getUserId() {
       const userJson = localStorage.getItem("dataUser");
@@ -269,11 +261,9 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
 img {
   width: 100%
-  
 }
 #app
   font-family Avenir, Helvetica, Arial, sans-serif
@@ -394,25 +384,21 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
   padding: 15px;
   display: flex;
 }
-
 .modal-header {
   position: relative;
   border-bottom: 1px solid #eeeeee;
   color: #4AAE9B;
   justify-content: space-between;
 }
-
 .modal-footer {
   border-top: 1px solid #eeeeee;
   flex-direction: column;
   justify-content: flex-end;
 }
-
 .modal-body {
   position: relative;
   padding: 20px 10px;
 }
-
 .btn-regist-login {
   border: 1px solid #4AAE9B;
   font-size: 1.5em;

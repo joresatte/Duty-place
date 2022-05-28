@@ -17,7 +17,7 @@
     @handleClick="handleClick"/>
     </div>
 <br><br>
-<userService :User="users" @removeService="remove(userCatId)"/>
+<userService :User="users"/>
 </template>
 
 <script>
@@ -33,10 +33,8 @@ export default {
   name: 'userPage',
   components:{userService, PublishServicesFormModal, editForm},
   data(){
-   
     return{
       displayingModal: false,
-      // displayingEditModal: false,
       users:[ ],
       text_pictures: '',
       categoryId:[
@@ -62,11 +60,6 @@ export default {
     this.loadData();
   },
   methods:{
-    // editService(){
-    //   this.displayingEditModal= true
-    //   console.log(this.displayingEditModal)
-    //   console.log(this.editService)
-    // },
     async remove(eventId, eventCatId ){
       console.log(this.remove)
       await deleteService(eventId, eventCatId)
@@ -85,9 +78,6 @@ export default {
     closeModal() {
         this.displayingModal = false;
     },
-    // closeEditModal(){
-    //   this.displayingEditModal= false
-    // },
     onObjServicesChanged(UserServicesValues){
       console.table(UserServicesValues)
       this.UserServices= UserServicesValues

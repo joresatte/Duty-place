@@ -21,7 +21,7 @@
 
 <script>
 import { deleteService } from '../apiservices/deleteService'
-// import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
+
 export default {
     nam:'userForm',
     props:{
@@ -30,7 +30,7 @@ export default {
             required: true
         }
     },
-    emits:['removeService', 'editService'],
+    emits:['editService'],
     data(){
       return{
       }
@@ -39,7 +39,7 @@ export default {
       async remove(serviceId, userCatId){
         console.log(this.remove)
         console.log(serviceId, userCatId)
-        this.$emit('removeService', {serviceId, userCatId})
+        await deleteService(serviceId, userCatId)
       },
       editService(eventId, eventCatId, eventText){
         console.log(eventId, eventCatId, eventText)
