@@ -42,7 +42,7 @@ class ServicesRepository:
     def init_tables(self):
         sql = """
             create table if not exists services (
-                id varchar primary key ,
+                id varchar,
                 cat_id varchar,
                 user_name varchar,
                 text varchar,
@@ -90,6 +90,30 @@ class ServicesRepository:
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {"id":id})
+        data = cursor.fetchall()
+        services = []
+        for item in data:
+            user_service = Services(
+                id= item["id"],
+                cat_id= item["cat_id"],
+                user_name= item["user_name"],
+                text= item["text"],
+                intro= item["intro"],
+                price= item["price"],
+                text_pictures= item["text_pictures"],
+                textarea= item['textarea'],
+                phone= item["phone"],
+                email= item["email"],
+                city= item["city"],
+            )
+            services.append(user_service)
+        return services
+
+    def get_user_services_by_cat_id(self, cat_id):
+        sql = """SELECT * FROM services WHERE cat_id= :cat_id"""
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {"cat_id":cat_id})
         data = cursor.fetchall()
         services = []
         for item in data:
@@ -169,7 +193,7 @@ class ServicesRepository:
         return user_service
 
     def save(self, user_service):
-        sql = """INSERT OR REPLACE INTO services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
+        sql = """INSERT INTO services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
             :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city
         ) """
         conn = self.create_conn()

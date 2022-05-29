@@ -3,16 +3,21 @@
   <h1 class="page">user page</h1>
     <!-- <h2>{{id}}</h2> -->
     <section class="services" v-for="index in User" :key="index.id">
-      <img :src= "index.text_pictures" alt="" class="image_category"><br>
-      <h2>{{index.user_name}}</h2>
-      <p><span class="phone">Phone Number:</span><br>{{index.phone}}</p>
-      <p><span class="email">Email:</span><br> {{index.email}}</p>
-      <p><span class="city">City: </span><br>{{index.city}}</p>
-      <p class="intro">{{index.intro}}</p>
-      <h4 class="price">{{index.price}}</h4>
-      <p class="textarea">{{index.textarea}}</p>
+      <div class="user-profile">
+        <div><img :src= "index.text_pictures" alt="" class="image_category"><br></div>
+        <div class="user-info">
+          <h2>{{index.user_name}}</h2>
+          <p><span class="phone">Phone Number:</span><br>{{index.phone}}</p>
+          <p><span class="email">Email:</span><br> {{index.email}}</p>
+          <p><span class="city">City: </span><br>{{index.city}}</p>
+          <p class="intro">{{index.intro}}</p>
+          <h4 class="price">{{index.price}}</h4>
+          <p class="textarea">{{index.textarea}}</p>
+        </div>
+      </div>
       <div class=" edit_remove">
-        <button class="btn-remove" @click="remove(index.id, index.cat_id)">Remove</button><br>
+        <button class="btn-remove" @click="remove(index.id, index.cat_id)">Remove</button>
+        <div></div>
         <button class="btn-edit" @click="editService(index.id, index.cat_id, index.text)">Edit service</button>
       </div>
     </section>
@@ -86,6 +91,4 @@ export default {
   color: #53d9ed;
   text-shadow:  2px 2px 4px #f10889;
 }
-
-
 </style>

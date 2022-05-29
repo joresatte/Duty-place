@@ -7,7 +7,7 @@ const ServicesByCategoryPage = () => import('@/pages/services/byCategory/Service
 const userDetailesPage = () => import('@/pages/services/userByCategory/userByCategoryPage.vue')
 const usersPage = () => import('@/pages/users/UsersPage.vue')
 const editPage =() => import('@/pages/edit/editPage.vue')
-
+const publishServicePage = () => import('@/pages/publishService/publishServicePage.vue')
 const routes = [
   {
     path: '/',
@@ -36,6 +36,12 @@ const routes = [
     path: '/services/user_services/:id/:cat_id',
     name: 'editPage',
     component: editPage,
+    props: true
+  },
+  {
+    path: '/user_services/:id',
+    name: 'publishServicePage',
+    component: publishServicePage,
     props: true
   },
   

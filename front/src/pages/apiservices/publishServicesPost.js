@@ -26,7 +26,7 @@ async function PublishServices(
             text: text,
             intro: intro,
             price: price,
-            text_pictures: text_pictures,
+            text_pictures,
             textarea: textarea,
             phone: phone,
             email: email,

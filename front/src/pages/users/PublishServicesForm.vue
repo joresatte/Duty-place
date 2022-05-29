@@ -1,4 +1,3 @@
-
 <template>
   <div class="modal-backdrop">
     <div class="modal">
@@ -24,51 +23,51 @@
           <input type="text" 
                   required 
                   v-model="ObjServices.user_name" 
-                  @change="onServices"
+                  @changed="onServices"
                   placeholder="User Name"
                  > <br>   
           <input type="text" 
                   required 
                   v-model="ObjServices.intro" 
-                  @change="onServices"
+                  @changed="onServices"
                   placeholder="introduce your service"
                  ><br>
           <input type="text" 
                   required 
                   v-model="ObjServices.price" 
-                  @change="onServices"
+                  @changed="onServices"
                   placeholder="service price by hour"
                  ><br>
           <input type="email" 
                   required 
                   v-model="ObjServices.email" 
-                  @change="onServices"
+                  @changed="onServices"
                   placeholder="Add email"
                  ><br>
           <input type="number" 
                   required 
                   v-model="ObjServices.phone" 
-                  @change="onServices"
+                  @changed="onServices"
                   placeholder="Add phone"
                  ><br>
           <input type="text" 
                   required 
                   v-model="ObjServices.city" 
-                  @change="onServices"
+                  @changed="onServices"
                   placeholder="Add city"
                  >
                  <br><br>
           <textarea name="textarea" 
                   required 
                   v-model="ObjServices.textarea" 
-                  @change="onServices"
+                  @changed="onServices"
                   placeholder="describe your services"
                  ></textarea>                            
        </section>
        <section class="ObjCategorymodal-body">
           select category services!
           <section>
-          <select class="select" @change="selectedOption" v-model="selectedCategory">
+          <select class="select-service-option" @change="selectedOption" v-model="selectedCategory">
           <option class="select-option" value="">Select category service</option>
           <option v-for="index in CategoryObj" :key="index.code" :value="index">
           {{index.name}}
@@ -102,7 +101,7 @@
   export default {
     name: 'PublishServicesFormModal',
     emits:[
-      'change', 'changedPasswordEmail', 
+      'changed', 'changedPasswordEmail', 
       'changedObjServices', 'closeModal', 
       'uploaded','changedObj', 'handleClick',
       'input'
@@ -112,10 +111,6 @@
         type:Object,
         required: true
       },
-      // uploadPicture:{
-      //   type: String,
-      //   required: true
-      // },
       CategoryObj:{
         type: Array,
        required: true
@@ -140,7 +135,6 @@
           this.uploadPicture= e.target.result
           localStorage.setItem('upload', this.uploadPicture)
           console.log('onload',this.uploadPicture)
-          // this.$emit('uploaded', event.target.value)
         }
       },
       selectedOption(event){

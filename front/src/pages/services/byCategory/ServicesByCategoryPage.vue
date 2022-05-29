@@ -3,11 +3,15 @@
   <h1 class="page">Services By Category Page</h1>
   <!-- <p>{{category_id}} </p> -->
   <section v-for="index in filteredOptionService" :key="index" class="services">
-  <img :src= "index.text_pictures" alt="" class="image_category"><br>
- <h2>{{index.user_name}}</h2>
-  <p><span class="phone">Phone Number:</span><br> {{index.phone}}</p>
-  <p><span class="email">Email:</span><br> {{index.email}}</p>
-  <p><span class="city">City: </span><br>{{index.city}}</p>
+  <div class="user-profile">
+    <div><img :src= "index.text_pictures" alt="" class="image_category"></div>
+    <div class="user-info">
+      <h2>{{index.user_name}}</h2>
+      <p><span class="phone">Phone Number:</span><br> {{index.phone}}</p>
+      <p><span class="email">Email:</span><br> {{index.email}}</p>
+      <p><span class="city">City: </span><br>{{index.city}}</p>
+    </div>
+  </div>
   <router-link class="details"  :to="{ name: 'userDetailesPage', params:{id: index.id}}" >details</router-link>
   </section>
 
@@ -79,8 +83,11 @@ export default {
   font-size: 1.5rem;
 }
 .details{
-  color: rgb(37, 137, 231);
-  background: white;
+  margin-left: 3em;
+  color: white;
   padding: 0.2em;
+  background: linear-gradient(90deg, rgba(3,3,27,0.33703903924851186) 14%, 
+            rgba(10,10,142,0.33703903924851186) 23%, 
+            rgba(8,17,37,1) 96%);
 }
 </style>

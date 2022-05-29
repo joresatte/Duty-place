@@ -10,8 +10,7 @@
                <input type="file"
                               accept="image/png, image/jpeg"
                               required
-                              :value="service.upload"
-                              @input="text_pictures"
+                              @input="upload"
                               title="Select file"
                             >
            </section>
@@ -53,7 +52,6 @@
                           placeholder="describe your services"
                          ></textarea>
                </section>
-        
                 <button
                   type="button"
                   class="btn-handleEditClick"
@@ -69,7 +67,6 @@
 <script>
 import {getServiceToEdit} from '@/pages/apiservices/getServiceToEdit'
 import postServiceEdited from '@/pages/apiservices/postServiceEdited'
-
 export default {
     name:'editPage',
     props:['id', 'cat_id', 'text'],
@@ -94,10 +91,17 @@ export default {
         this.loadData()
     },
     methods:{
+        upload(event){
+            console.log('image',  event.target.value)
+            console.table('Image', event.target.files[0])
+            const reader= new FileReader()
+            reader.readAsDataURL(event.target.files[0])
+            reader.onload= (e)=>{
+            this.service.text_pictures= e.target.result
+           }
+        },
         async loadData(){
             console.log(this.loadData)
-            // const id = localStorage.getItem('eventId')
-            // const catId = localStorage.getItem('eventCatId') 
             const text = localStorage.getItem('eventText') 
             console.log(text)
             this.service= await getServiceToEdit(this.id, this.cat_id, text)
@@ -124,15 +128,6 @@ export default {
                     name: 'usersPage',
                 }
             )
-        },
-        input(event){
-            console.log('image',  event.target.value)
-            console.table('Image', event.target.files[0])
-            const reader= new FileReader()
-            reader.readAsDataURL(event.target.files[0])
-            reader.onload= (e)=>{
-            this.service.text_pictures= e.target.result
-        }
         },
     },
 }

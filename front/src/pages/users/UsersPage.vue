@@ -1,59 +1,28 @@
 <template>
-<div id="app">
     <button
       type="button"
       class="btn-publish"
-      @click="clickedToSwitchOnModal"
+      @click="clickToPublish"
     >
       Publish Service
     </button>
-    <publish-services-form-modal 
-    :ObjServices="UserServices" 
-    :CategoryObj="categoryId"
-    @closeModal='shutDown'
-    v-show="displayingModal"
-    @changedObjServices='onObjServicesChanged'
-    @changedObj="cat_id= $event"
-    @handleClick="handleClick"/>
-    </div>
 <br><br>
 <userService :User="users"/>
 </template>
 
 <script>
-import PublishServicesFormModal from './PublishServicesForm.vue'
 import loginFetch from '@/pages/apiservices/loginFetch.js'
 import publishServices from '@/pages/apiservices/publishServicesPost.js'
 import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
 import userService from './userService.vue'
 import { deleteService } from '../apiservices/deleteService'
-import editForm from './editForm.vue'
 export default {
   props:['id'],
   name: 'userPage',
-  components:{userService, PublishServicesFormModal, editForm},
+  components:{userService},
   data(){
     return{
-      displayingModal: false,
       users:[ ],
-      text_pictures: '',
-      categoryId:[
-          {code: 'category_1', name:'Mudanzas'},
-          {code: 'category_2', name:'Limpiezas'},
-          {code: 'category_3', name:'Cuidados'},
-          {code: 'category_4', name:'Mantenimientos'},
-      ],
-      UserServices:{
-        id:'',
-        intro:'',
-        text:'',
-        price:'',
-        textarea:'',
-        email:'',
-        phone:'',
-        city:'',
-        user_name:'',
-      }
     }
   }, 
   mounted(){
@@ -69,15 +38,6 @@ export default {
       this.users= await loginFetch()
       console.log(this.users)
     },
-    shutDown() {
-        this.displayingModal = false;
-    },
-    clickedToSwitchOnModal(){
-      this.displayingModal = true;
-    },
-    closeModal() {
-        this.displayingModal = false;
-    },
     onObjServicesChanged(UserServicesValues){
       console.table(UserServicesValues)
       this.UserServices= UserServicesValues
@@ -91,6 +51,17 @@ export default {
       const categoryNameJson = localStorage.getItem("cat_name");
       const categoryName = JSON.parse(categoryNameJson);
       return categoryName.name;
+    },
+    clickToPublish(){
+      this.$router.push(
+        {
+          path: '/user_services/:id',
+          name: 'publishServicePage',
+          params:{
+            id:getCurrentUser()
+          }
+        }
+      )
     },
     async handleClick(){
       console.log(this.handleClick)
@@ -107,7 +78,7 @@ export default {
         this.UserServices.email,
         this.UserServices.city
       )
-      this.displayingModal= false
+      this.clickedToSwitchOnModal
     },
   }
 }

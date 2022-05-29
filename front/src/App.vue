@@ -262,9 +262,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-img {
-  width: 100%
-}
+
 #app
   font-family Avenir, Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
@@ -327,33 +325,40 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
   padding: 0.2em;
 }
 .btn-remove{
+  margin-left: 3.5em 
   background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
               rgba(11,11,157,0.33703903924851186) 28%,
               rgba(26,47,51,0.8076272745426296) 55%);
   position: relative;
   top: auto;
   right: auto;
-  width: 10em
+  width: 8em
   color: white;
   font-size: 1em;
   border-radius: 2px;
   text-decoration: none;
   padding: 0.2em;
 }
-.btn-edit{
-  margin-left: auto;
+.btn-edit{ 
   background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
               rgba(11,11,157,0.33703903924851186) 28%,
               rgba(26,47,51,0.8076272745426296) 55%);
   position: relative;
   top: auto;
   right: auto;
-  width: 10em
+  width: 8em
   color: white;
   font-size: 1em;
   border-radius: 2px;
   text-decoration: none;
   padding: 0.2em;
+}
+.edit_remove{
+  display: flex
+  flex-flow: nowrap
+  justify-content: space-between
+  margin-top: 3em;
+  align-items: center;
 }
 .page{
   margin: 0.5em;
@@ -413,7 +418,9 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
 }
 .btn-green {
   color: white;
-  background: #4AAE9B;
+background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
+              rgba(11,11,157,0.33703903924851186) 28%,
+              rgba(26,47,51,0.8076272745426296) 55%);
   border: 1px solid #4AAE9B;
   border-radius: 2px;
 }
@@ -436,9 +443,15 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
   padding: 1em;
   color: rgb(138, 150, 138);
 }
-.edit_remove{
-  display: flex
+.user-profile{
+  display: flex;
   flex-direction: flex start;
-  margin-top: 3em;
+}
+.image_category{
+  width:65%;
+  border-radius: 5px;
+}
+.user-info{
+  margin-left: -1em;
 }
 </style>

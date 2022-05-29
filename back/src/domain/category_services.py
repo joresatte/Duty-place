@@ -42,7 +42,7 @@ class CategoryServicesRepository:
     def init_tables(self):
         sql = """
             create table if not exists categories_services (
-               id varchar primary key ,
+               id varchar ,
                 cat_id varchar,
                 user_name varchar,
                 text varchar,
@@ -150,7 +150,7 @@ class CategoryServicesRepository:
 
     
     def save(self, category_service):
-        sql = """INSERT OR REPLACE INTO categories_services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
+        sql = """INSERT INTO categories_services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
             :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city
         ) """
         conn = self.create_conn()
