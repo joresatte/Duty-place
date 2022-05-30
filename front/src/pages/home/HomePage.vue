@@ -54,7 +54,7 @@ export default {
   data(){
     return{
       welcome:"welcome to Services",
-      categories:{},
+      categories:[],
       filteredCategory:'',
      
     }
@@ -73,20 +73,25 @@ export default {
   //     }      
   //   },
  computed:{
-    objectValues(){
-      const result= []
-      for(const index of this.categories){
-        result.push(index.val)
+    isValidFilter(){
+      for (const category of this.categories){
+        if(category.text.toLowerCase().includes(this.filteredCategory.toLowerCase())){
+          return true
+        }else{
+          return false
+        }
       }
     },
-    categoryFiltered(filtered){
-     const categories= this.categories
-     filtered= this.filteredCategory.toLowerCase()
-     if (!filtered) {
-        return categories;
+    categoryFiltered(){
+      const categories= this.categories
+      const filtered= this.filteredCategory
+      console.log(filtered)
+      console.log(this.isValidFilter)
+     if (!this.isValidFilter){
+       return categories;
+      }else{
+        return categories.filter((service) => {return service.text.toLowerCase().includes(filtered.toLowerCase()) })
       }
-    const result= Object.values(categories).filter((service) => {return service.text.toLowerCase().includes(filtered) })
-    return result
    }
  },
   methods:{

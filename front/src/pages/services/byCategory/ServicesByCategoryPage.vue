@@ -33,18 +33,36 @@ export default {
     this.loadData()
   },
   computed:{
+    isValidFilter(){
+      for (const category of this.services){
+        if(
+          category.phone.toLowerCase().includes(this.filteredOption.toLowerCase())||
+          category.email.toLowerCase().includes(this.filteredOption.toLowerCase())||
+          category.city.toLowerCase().includes(this.filteredOption.toLowerCase())||
+          category.price.toLowerCase().includes(this.filteredOption.toLowerCase())||
+          category.user_name.toLowerCase().includes(this.filteredOption.toLowerCase())
+          ){
+          return true
+        }else{
+          return false
+        }
+      }
+    },
     filteredOptionService(){
-    const services= this.services
-    const filtered= this.filteredOption
-    // if(!filtered){
-    //   return services
-    // }
-    return Object.values(services).filter((option)=>{
-      return option.phone.toLowerCase().includes(filtered.toLowerCase())||
-             option.email.toLowerCase().includes(filtered.toLowerCase())||
-             option.city.toLowerCase().includes(filtered.toLowerCase())||
-             option.price.toLowerCase().includes(filtered.toLowerCase());
-    })
+      const services= this.services
+      const filtered= this.filteredOption
+      if(!this.isValidFilter){
+        return services
+      }else{
+        return Object.values(services).filter((option)=>{
+          return option.phone.toLowerCase().includes(filtered.toLowerCase())||
+                option.email.toLowerCase().includes(filtered.toLowerCase())||
+                option.city.toLowerCase().includes(filtered.toLowerCase())||
+                option.price.toLowerCase().includes(filtered.toLowerCase())||
+                option.user_name.toLowerCase().includes(filtered.toLowerCase());
+       })
+      }
+      
    }
   },
   methods:{
