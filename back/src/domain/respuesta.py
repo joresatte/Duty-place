@@ -1,4 +1,4 @@
-Respuesta_1 = [{
+Respuesta_user_service = [{
          "id": "service_1",
         "cat_id": "category_1",
         "user_name": "vince",
@@ -41,7 +41,7 @@ Respuesta_1 = [{
     }
     ]
 
-Respuesta_2= [
+Respuesta_get_service= [
     {
          "id": "service_1",
         "cat_id": "category_1",
@@ -118,7 +118,7 @@ Respuesta_10= {
     "password": "password50",
     }
 
-Respuesta_11={
+data_service={
         "id": "service_1",
         "cat_id": "category_1",
         "user_name": "vince",

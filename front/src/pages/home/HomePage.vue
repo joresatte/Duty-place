@@ -23,7 +23,7 @@
 </div>
   <br><br> 
   <form @submit.prevent="handledClickOnCatagory" action="">
-  <section class="categories" v-for="category in categoryFiltered" :key="category.cat_id">
+  <section class="categories" v-for="category of categoryFiltered" :key="category.cat_id">
   <router-link :to="{name: 'ServicesByCategoryPage', params:{category_id: category.cat_id}}" >
     <img :src= "category.text_pictures" alt="" class="image_category"><br>
    <button @click="selectedCategory" class="category_button"><h1>{{category.text}}</h1></button>
@@ -79,9 +79,9 @@ export default {
         result.push(index.val)
       }
     },
-    categoryFiltered(){
+    categoryFiltered(filtered){
      const categories= this.categories
-     const filtered= this.filteredCategory.toLowerCase()
+     filtered= this.filteredCategory.toLowerCase()
      if (!filtered) {
         return categories;
       }

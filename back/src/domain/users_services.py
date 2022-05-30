@@ -93,20 +93,23 @@ class ServicesRepository:
         data = cursor.fetchall()
         services = []
         for item in data:
-            user_service = Services(
-                id= item["id"],
-                cat_id= item["cat_id"],
-                user_name= item["user_name"],
-                text= item["text"],
-                intro= item["intro"],
-                price= item["price"],
-                text_pictures= item["text_pictures"],
-                textarea= item['textarea'],
-                phone= item["phone"],
-                email= item["email"],
-                city= item["city"],
-            )
-            services.append(user_service)
+            if data is None:
+                user_service = None
+            else:
+                user_service = Services(
+                    id= item["id"],
+                    cat_id= item["cat_id"],
+                    user_name= item["user_name"],
+                    text= item["text"],
+                    intro= item["intro"],
+                    price= item["price"],
+                    text_pictures= item["text_pictures"],
+                    textarea= item['textarea'],
+                    phone= item["phone"],
+                    email= item["email"],
+                    city= item["city"],
+                )
+                services.append(user_service)
         return services
 
     def get_user_services_by_cat_id(self, cat_id):

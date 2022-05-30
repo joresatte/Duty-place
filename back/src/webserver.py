@@ -45,6 +45,11 @@ def create_app(repositories):
     def get_user_services_by_id(id):
         services = repositories["services"].get_user_services_by_id(id)
         return object_to_json(services)
+
+    @app.route("/api/services/user_services/<category_id>", methods=["GET"])
+    def get_user_services_by_cat_id(id):
+        services = repositories["services"].get_user_services_by_cat_id(id)
+        return object_to_json(services)
     
     @app.route("/api/services/user_services/<id>/<cat_id>/<text>", methods=["GET"])
     def get_services(id, cat_id, text):
