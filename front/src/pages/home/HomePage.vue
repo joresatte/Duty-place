@@ -77,8 +77,6 @@ export default {
       for (const category of this.categories){
         if(category.text.toLowerCase().includes(this.filteredCategory.toLowerCase())){
           return true
-        }else{
-          return false
         }
       }
     },
@@ -87,13 +85,13 @@ export default {
       const filtered= this.filteredCategory
       console.log(filtered)
       console.log(this.isValidFilter)
-     if (!this.isValidFilter){
+      if (!this.isValidFilter){
        return categories;
       }else{
         return categories.filter((service) => {return service.text.toLowerCase().includes(filtered.toLowerCase()) })
       }
-   }
- },
+    }
+  },
   methods:{
     async loadData(){
       console.log("loadData")

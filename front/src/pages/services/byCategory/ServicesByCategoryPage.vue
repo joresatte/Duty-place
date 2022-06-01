@@ -43,8 +43,6 @@ export default {
           category.user_name.toLowerCase().includes(this.filteredOption.toLowerCase())
           ){
           return true
-        }else{
-          return false
         }
       }
     },
