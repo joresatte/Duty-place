@@ -118,6 +118,9 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
         console.table('Image', event.target.files[0])
         const reader= new FileReader()
         reader.readAsDataURL(event.target.files[0])
+        if(!event.target.files[0]){
+          return;
+        }
         reader.onload= (e)=>{
           this.text_pictures= e.target.result
           localStorage.setItem('upload', this.uploadPicture)
