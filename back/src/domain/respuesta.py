@@ -1,4 +1,4 @@
-Respuesta_user_service = [{
+response_user_service = [{
          "id": "service_1",
         "cat_id": "category_1",
         "user_name": "vince",
@@ -41,7 +41,7 @@ Respuesta_user_service = [{
     }
     ]
 
-Respuesta_get_service= [
+response_get_service= [
     {
          "id": "service_1",
         "cat_id": "category_1",
@@ -132,7 +132,7 @@ data_service={
         "city": "Bilbao",
     }
 
-Respuesta_13=[
+response_service=[
      {
          "id": "service_2",
         "cat_id": "category_2",
@@ -162,7 +162,7 @@ Respuesta_13=[
     }
 ]
 
-Respuesta_14=[
+updated=[
 {
         "id": "service_1",
         "cat_id": "category_1",
@@ -178,7 +178,7 @@ Respuesta_14=[
     }
 ]
 
-Respuesta_15={
+updater={
         "id": "service_1",
         "cat_id": "category_1",
         "user_name": "vincen",

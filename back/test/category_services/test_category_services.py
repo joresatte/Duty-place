@@ -1,5 +1,5 @@
 from src.domain.setup import setup3, setup2
-from src.domain.respuesta import Respuesta_user_service
+from src.domain.respuesta import response_user_service
 
 def test_should_return_empty_services_list_by_category():
     client= setup3()
@@ -10,5 +10,5 @@ def test_should_return_services_list_by_category():
     client= setup2()
     
     response = client.get("/api/services/by-category")
-    assert response.json== Respuesta_user_service
+    assert response.json== response_user_service
     
