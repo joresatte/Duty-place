@@ -1,7 +1,15 @@
 <template>
 <div >
 <!-- <router-link class="h" to="/">Services</router-link> -->
-<button class="h" @click="backToHomePage">Services</button>
+<span class="h">
+   <Button
+      class="p-button-outlined p-button-success"
+      type="button"
+      label="Services"
+      icon="pi pi-home" iconPos="left"
+      @click="backToHomePage">
+   </Button>
+</span>
 </div>
 </template>
 
@@ -23,10 +31,6 @@ export default {
 
 <style scoped>
 .h{
-background: linear-gradient(90deg, rgba(8,17,37,1) 
-            22%, rgba(10,10,142,0.33703903924851186) 
-            51%, rgba(2,2,11,0.33703903924851186) 
-            56%);
  position: absolute;
  top: 0;
  left: 0;

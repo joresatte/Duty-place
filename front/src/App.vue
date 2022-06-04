@@ -6,23 +6,41 @@
 <br>
 <div class="header_nav">
 </div>
-<button
-    class="btn-logout"
-    @click.prevent="handleLogout"
-    :disabled="isLoggedOut"
-    v-if="LoggedOut"
-  >
-    Log out
-</button>
-<div id="app">
-    <button
+<span class="btn-logout">
+  <Button
+      class="p-button-outlined p-button-success"
       type="button"
-      class="btn-regist"
-      @click="clickedToSwitchOnModal"
-      v-if="SignUp"
+      label="Sign Out"
+      icon="pi pi-sign-out" iconPos="right"
+      @click.prevent="handleLogout"
+      :disabled="isLoggedOut"
+      v-if="LoggedOut"
     >
-      Sign Up
-    </button>
+  </Button>
+</span>
+<div id="app">
+    <span class="btn-regist">
+      <Button
+        class="p-button-outlined p-button-success"
+        type="button"
+        label="Sign Up"
+        icon="pi pi-sign-in" iconPos="left"
+        @click="clickedToSwitchOnModal"
+        v-if="SignUp"
+      >
+      </Button>
+    </span>
+    <span class="btn-login">
+      <Button
+        class="p-button-outlined p-button-success"
+        type="button"
+        label="Log In"
+        icon="pi pi-sign-in" iconPos="right"
+        @click="onModalOnclicked"
+        v-if="LogIn"
+      >
+      </Button>
+    </span>
     <button  @click="clickedToSwitchOffModal" v-if="showRegist">
         <div class="modal-backdrop">
     <div class="modal">
@@ -37,11 +55,11 @@
        <section class="modal-body">
         <passwordForm :newPassword="password" @onPasswordChanged="onChangedPassword"/>
        </section>
-      <button class="btn-regist-login" @click="ClickToRegist"> CREATE ACCOUNT</button>
+      <span><Button label="CREATE ACCOUNT" icon="pi pi-check" @click="ClickToRegist"> </Button></span>
       <footer class="modal-footer">
         <slot name="footer">
           <br>
-        <button @click="closeRegistModal">close Modal</button>
+        <span><Button label="close Modal" class="p-button-link" icon="pi pi-times" @click="closeRegistModal"></Button></span>
         </slot>
         
       </footer>
@@ -49,15 +67,6 @@
   </div>
       </button>
   </div>
- <div id="app">
-    <button
-      type="button"
-      class="btn-login"
-      @click="onModalOnclicked"
-      v-if="LogIn"
-    >
-      Log In
-    </button>
     <button  @click="offModalOnclicked" v-if="showLogin">
         <div class="modal-backdrop">
     <div class="modal">
@@ -73,18 +82,17 @@
        <section class="modal-body">
         <LoginPassword :renewPassword="password" @ChangedPassword="onPasswordChanged"/>
        </section>
-      <button class="btn-regist-login" @click="ClickToLogIn">Log In</button>
+      <span ><Button label="Log In" icon="pi pi-sign-in"  @click="ClickToLogIn"></Button></span>
       <footer class="modal-footer">
         <slot name="footer">
           <br>
-          <button @click="closeLoginModal">close Modal</button>
+          <span><Button class="p-button-link" icon="pi pi-times" label="close modal" @click="closeLoginModal"></Button></span>
         </slot>
         
       </footer>
     </div>
   </div>
       </button>
-  </div>
   <section v-show="error">invalid Log In </section>
   <router-view/>
 </template>
@@ -286,9 +294,6 @@ export default {
   height: 1em
 }
 .btn-logout{
-  background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
-              rgba(11,11,157,0.33703903924851186) 28%,
-              rgba(26,47,51,0.8076272745426296) 55%);
   position: absolute;
   top: 0;
   right: 0;
@@ -299,12 +304,9 @@ export default {
   padding: 0.2em;
 }
 .btn-regist{
-background: linear-gradient(90deg, rgba(8,17,37,1) 0%, 
-            rgba(10,10,142,0.33703903924851186) 59%, 
-            rgba(3,3,25,0.33703903924851186) 79%);
  position: absolute;
  top: 0;
- right: 4em;
+ right: 7em;
  color: white;
  font-size: 1em;
  border-radius: 2px;
@@ -312,9 +314,6 @@ background: linear-gradient(90deg, rgba(8,17,37,1) 0%,
  padding: 0.2em;
 }
 .btn-login{
-  background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
-              rgba(11,11,157,0.33703903924851186) 28%,
-              rgba(26,47,51,0.8076272745426296) 55%);
   position: absolute;
   top: 0;
   right: 0;
@@ -431,17 +430,15 @@ background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
   border-radius: 2px;
   height: 2em
 }
-.filteredCategory{
-  width: 70%;
+#filtered_category{
   height: 2em;
   position: relative;
   top: -6em;
 }
-.filteredCategory > ::placeholder{
-  font-size: 2em;
-  margin-left: 1em;
-  padding: 1em;
-  color: rgb(138, 150, 138);
+#filtered_option{
+  height: 2em;
+  position: relative;
+  top: -5em;
 }
 .user-profile{
   display: flex;

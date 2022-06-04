@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     <div class="password">
-      <input
+      <InputText
         type="password"
         placeholder="Password"
         autocomplete="off"

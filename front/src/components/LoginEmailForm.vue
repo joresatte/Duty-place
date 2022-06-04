@@ -2,7 +2,7 @@
   <div class="field">
     <div class="ui left icon input big">
       <i class="email icon"></i>
-      <input
+      <InputText
         type="email"
         placeholder="Email"
         autocomplete="off"
