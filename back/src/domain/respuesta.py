@@ -57,7 +57,7 @@ response_get_service= [
     }
 ]
 
-Respuesta_3= [{
+response_category_list= [{
         "cat_id": "category_1",
         "text": "Mudanzas",
         "text_pictures": "text_pictures",
@@ -70,50 +70,37 @@ Respuesta_3= [{
         
     },
 ]
-
-Respuesta_4= [
-    {
-    "id": "service_1",
-    "email": "reinabo@vince.com",
-    "password": "password1",
-    },
-    {
-    "id": "service_2",
-    "email": "fbadland0@bizjournals.com",
-    "password": "password2",
-    },
-     {
-    "id": "service_50",
-    "email": "wglenister1@latimes.com",
-    "password": "password50",
-    }
-]
-Respuesta_5= {
+regist_request= {
     "id": "service_1",
     "email": "reinabo@vince.com",
     "password": "password1",
     }
-Respuesta_6= {
+another_regist_request= {
+    "id": "service_3",
+    "email": "@vince.com",
+    "password": "password1",
+    }
+login_request= {
     "email": "reinabo@vince.com",
     "password": "password1",
     }
 
-Respuesta_7= {
+login_response= {
     "id": "service_1",
     # "email": "reinabo@vince.com",
     }
 
-Respuesta_8= {
+another_login_request= {
     "email": "reinabo@vince.com",
     "password": "password50",
     }
 
-Respuesta_9= {
+regist_response= {
     "id": "service_1",
     # "email": "reinabo@vince.com",
     }
 
-Respuesta_10= {
+another_one_login_request= {
     "email": "fbadland0@bizjournals.com",
     "password": "password50",
     }
@@ -183,6 +170,34 @@ updater={
         "cat_id": "category_1",
         "user_name": "vincen",
         "text": "Mudanzas",
+        "intro": "Realizamos mudanzas en toda españa",
+        "price": "por 5$ la hora",
+        "text_pictures": "foto",
+        "textarea": " profesionales en el sector de las Mudanzas",
+        "phone": "024-679-2574",
+        "email": "reinabes@vince.com",
+        "city": "españa",
+    }
+
+another_updater={
+        "id": "service_2",
+        "cat_id": "category_2",
+        "user_name": "vincen",
+        "text": "Mudanzas",
+        "intro": "Realizamos mudanzas en toda españa",
+        "price": "por 5$ la hora",
+        "text_pictures": "foto",
+        "textarea": " profesionales en el sector de las Mudanzas",
+        "phone": "024-679-2574",
+        "email": "reinabes@vince.com",
+        "city": "españa",
+    }
+
+another_one_updater={
+        "id": "service_1",
+        "cat_id": "category_1",
+        "user_name": "vincen",
+        "text": "Limpiezas",
         "intro": "Realizamos mudanzas en toda españa",
         "price": "por 5$ la hora",
         "text_pictures": "foto",

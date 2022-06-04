@@ -1,22 +1,22 @@
 from src.domain.setup import setup6
-from src.domain.respuesta import Respuesta_10, Respuesta_6, Respuesta_7, Respuesta_8
+from src.domain.respuesta import another_one_login_request, login_request, login_response, another_login_request
 
 def test_should_validate_user():
     client= setup6()
-    Body= Respuesta_6
+    Body= login_request
     response = client.post("/api/login/Authenticated", json= Body)
     assert response.status_code == 200
-    assert response.json== Respuesta_7
+    assert response.json== login_response
 
 def test_should_invalidate_user():
     client= setup6()
-    Body= Respuesta_8
+    Body= another_login_request
     response = client.post("/api/login/Authenticated", json= Body)
     assert response.status_code == 401
 
 def test_should_invalidate_user():
     client= setup6()
-    Body= Respuesta_10
+    Body= another_one_login_request
     response = client.post("/api/login/Authenticated", json= Body)
     assert response.status_code == 401
 

@@ -1,5 +1,5 @@
 from src.domain.setup import setup4, setup5
-from src.domain.respuesta import Respuesta_3
+from src.domain.respuesta import response_category_list
 
 def test_should_return_empty_list_categories():
     client= setup4()
@@ -9,4 +9,4 @@ def test_should_return_empty_list_categories():
 def test_should_return_list_of_categories():
     client= setup5()
     response = client.get("/api/categories")
-    assert response.json == Respuesta_3
+    assert response.json == response_category_list

@@ -10,7 +10,6 @@ from src.lib.utils import object_to_json
 import re
 import json
 
-Regex= r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 re_email= "[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
 # def valid_email(email_addr: str):
 #     # if re.match(re_email, email_addr.lower()):
@@ -43,13 +42,14 @@ def create_app(repositories):
 
     @app.route("/api/services/user_services/<id>", methods=["GET"])
     def get_user_services_by_id(id):
-        services = repositories["services"].get_user_services_by_id(id)
-        return object_to_json(services)
+        service_by_id = repositories["services"].get_user_services_by_id(id)
+        return object_to_json(service_by_id)
 
     @app.route("/api/services/user_services/<category_id>", methods=["GET"])
-    def get_user_services_by_cat_id(id):
-        services = repositories["services"].get_user_services_by_cat_id(id)
-        return object_to_json(services)
+    def get_user_services_by_cat_id(cat_id):
+        print('............', cat_id)
+        service_by_cat_id = repositories["services"].get_user_services_by_cat_id(cat_id)
+        return object_to_json(service_by_cat_id)
     
     @app.route("/api/services/user_services/<id>/<cat_id>/<text>", methods=["GET"])
     def get_services(id, cat_id, text):
@@ -72,8 +72,11 @@ def create_app(repositories):
             email= data["email"],
             city= data["city"],
         )
-        repositories["services"].save(user_services)
-        return '', 200
+        if data['id'] or data["email"]!= '' or re.match(re_email, data["email"]):
+           repositories["services"].save(user_services)
+           return '', 200
+        else:
+            return '', 403
 
     @app.route("/api/services/by-category", methods=["GET"])
     def get_all_services_by_category():
@@ -101,8 +104,11 @@ def create_app(repositories):
             email= data["email"],
             city= data["city"],
         )
-        repositories["categories_services"].save(services_by_category)
-        return '', 200
+        if data["email"]!= '' or re.match(re_email, data["email"]):
+           repositories["categories_services"].save(services_by_category)
+           return '', 200
+        else:
+            return '', 500
 
     @app.route("/api/regists", methods=["POST"])
     def post_regists():
@@ -114,11 +120,14 @@ def create_app(repositories):
             password= data['password']
             )
         print("-----------", user)
-        if (data['id'])!= '' or (data['email'])!= '' or (data['password'])!= '':
-            repositories["regists"].save(user)
-            return '', 200
+        if (data['id'])!= '':
+            if(data['email'])!= '' :
+                if (data['password'])!= '':
+                    if re.match(re_email, data['email']):
+                       repositories["regists"].save(user)
+                       return '', 200
         else:
-            return 'invalid regist', 403
+            return 'invalid regist', 500
 
     @app.route("/api/regists", methods=["GET"])
     def get_all_regists():
@@ -156,44 +165,48 @@ def create_app(repositories):
     @app.route("/api/services/by-category/<id>/<cat_id>/<text>", methods=["PUT"])
     def modify_category_service(id, cat_id, text):
         data = request.json
-        if id!=data["id"] and cat_id!= data["cat_id"] and text!= data["text"]:
+        if id!=data["id"] or cat_id!= data["cat_id"] or text!= data["text"]:
             return '', 403
-        category_services = Category_services(
-        id= data["id"],
-        cat_id= data["cat_id"],
-        user_name= data["user_name"],
-        text= data["text"],
-        intro= data["intro"],
-        price= data["price"],
-        text_pictures= data["text_pictures"],
-        textarea= data['textarea'],
-        phone= data["phone"],
-        email= data["email"],
-        city= data["city"],
-        )
-        repositories["categories_services"].update_category_service(id , cat_id , text, category_services)
-        return '', 200
+        else:
+            category_services = Category_services(
+            id= data["id"],
+            cat_id= data["cat_id"],
+            user_name= data["user_name"],
+            text= data["text"],
+            intro= data["intro"],
+            price= data["price"],
+            text_pictures= data["text_pictures"],
+            textarea= data['textarea'],
+            phone= data["phone"],
+            email= data["email"],
+            city= data["city"],
+            )
+            repositories["categories_services"].update_category_service(id , cat_id , text, category_services)
+            return '', 200
 
     @app.route("/api/services/user_services/<id>/<cat_id>/<text>", methods=["PUT"])
     def modify_user_services(id, cat_id, text):
         data = request.json
-        if id!=data["id"] and cat_id!= data["cat_id"] and text!= data["text"]:
+        print('---------data_request', data)
+        if id!=data["id"] or cat_id!= data["cat_id"] or text!= data["text"]:
             return '', 403
-        user_services = Services(
-        id= data["id"],
-        cat_id= data["cat_id"],
-        user_name= data["user_name"],
-        text= data["text"],
-        intro= data["intro"],
-        price= data["price"],
-        text_pictures= data["text_pictures"],
-        textarea= data['textarea'],
-        phone= data["phone"],
-        email= data["email"],
-        city= data["city"],
-        )
-        repositories["services"].update_service(id , cat_id , text, user_services)
-        return '', 200
+        else:
+            user_services = Services(
+            id= data["id"],
+            cat_id= data["cat_id"],
+            user_name= data["user_name"],
+            text= data["text"],
+            intro= data["intro"],
+            price= data["price"],
+            text_pictures= data["text_pictures"],
+            textarea= data['textarea'],
+            phone= data["phone"],
+            email= data["email"],
+            city= data["city"],
+            )
+            repositories["services"].update_service(id , cat_id , text, user_services)
+            print('-----------user_services')
+            return '', 200
 
     # @app.route("/api/contact/<id>", methods=["GET"])
     # def get_contact_by_id(id):
