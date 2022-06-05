@@ -9,6 +9,7 @@
         @keyup="validateInput"
         @blur="validateInput"
         @change="PasswordChanged"
+        v-tooltip.bottom="'Enter your password'" 
       />
     </div>
     <div class="ui basic label pointing red" v-if="errors.password">

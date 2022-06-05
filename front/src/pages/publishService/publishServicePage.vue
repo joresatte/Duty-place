@@ -4,7 +4,13 @@
       <header class="">
           all camps are required!
       </header>
-      <section class="PService-body">
+       <FileUpload name="demo[]" url="" @input="upload" accept="image/png, image/jpeg">
+            <template #empty>
+                <p v-tooltip.left="'Drag and drop your files here to upload'" >Drag and drop files here to upload.</p>
+            </template>
+        </FileUpload>
+        <br>
+      <!-- <section class="PService-body">
           Upload picture!
           <input type="file"
                   class="upload-file" 
@@ -13,7 +19,7 @@
                   @input="upload"
                   title="Select file"
                 >
-       </section>
+       </section> -->
        <section class="">
           <input type="text" 
                   required 
@@ -65,20 +71,23 @@
        </section>
        <br>
         <footer class="modal-footer">
-          <button
-            type="button"
-            class="btn-green"
-            @click="handleClick"
-          >
-            Publish services
-          </button><br><br>
-          <button
-            type="button"
-            class="btn-green"
-            @click="getBack"
-          >
-            Get back to previous page
-          </button>
+          <span >
+            <Button
+              label="Publish services"
+              type="button"
+              @click="handleClick"
+            >
+            </Button>
+          </span>
+          <br><br>
+          <span >
+            <Button
+              label="Get back to previous page"
+              type="button" 
+              @click="getBack"
+            >
+            </Button>
+          </span>
         </footer>
     </div>
   </main>
@@ -124,7 +133,7 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
         reader.onload= (e)=>{
           this.text_pictures= e.target.result
           localStorage.setItem('upload', this.uploadPicture)
-          console.log('onload',this.uploadPicture)
+          console.log('onload',this.text_pictures)
         }
       },
       selectedOption(event){
@@ -214,7 +223,7 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
   display: grid;
   grid-auto-columns: auto;
   justify-content: space-around;
-  height: 30em;
+  height: 50%;
   padding: 2em;
   color: white;
   text-align:center;
@@ -226,5 +235,13 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
             rgba(10,10,142,0.33703903924851186) 23%, 
             rgba(8,17,37,1) 96%);
   
+}
+.btnGreen {
+  color: white;
+  background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
+              rgba(11,11,157,0.33703903924851186) 28%,
+              rgba(26,47,51,0.8076272745426296) 55%);
+  border: 1px solid #4AAE9B;
+  border-radius: 2px;
 }
 </style>

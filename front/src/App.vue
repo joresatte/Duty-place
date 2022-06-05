@@ -417,7 +417,7 @@ export default {
 }
 .btn-green {
   color: white;
-background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
+  background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
               rgba(11,11,157,0.33703903924851186) 28%,
               rgba(26,47,51,0.8076272745426296) 55%);
   border: 1px solid #4AAE9B;
