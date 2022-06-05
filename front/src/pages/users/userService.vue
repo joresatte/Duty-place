@@ -4,7 +4,8 @@
     <!-- <h2>{{id}}</h2> -->
     <section class="services" v-for="index in User" :key="index.id">
       <div class="user-profile">
-        <div><img :src= "index.text_pictures" alt="" class="image_category"><br></div>
+        <div>
+          <img :src= "index.text_pictures" alt="" class="image_category"><br></div>
         <div class="user-info">
           <h2>{{index.user_name}}</h2>
           <p><span class="phone">Phone Number:</span><br>{{index.phone}}</p>
@@ -26,7 +27,6 @@
 
 <script>
 import { deleteService } from '../apiservices/deleteService'
-
 export default {
     nam:'userForm',
     props:{

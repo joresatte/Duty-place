@@ -6,67 +6,80 @@
       </header>
        <FileUpload name="demo[]" url="" @input="upload" accept="image/png, image/jpeg">
             <template #empty>
-                <p v-tooltip.left="'Drag and drop your files here to upload'" >Drag and drop files here to upload.</p>
+                <p v-tooltip.left="'Drag and drop your files here to upload'" >
+                <i class="pi pi-cloud-upload" />
+                Drag and drop files here to upload.
+                </p>
             </template>
         </FileUpload>
         <br>
-      <!-- <section class="PService-body">
-          Upload picture!
-          <input type="file"
-                  class="upload-file" 
-                  accept="image/png, image/jpeg"
-                  required  
-                  @input="upload"
-                  title="Select file"
-                >
-       </section> -->
        <section class="">
-          <input type="text" 
-                  required 
-                  v-model="ObjServices.user_name" 
-                  placeholder="User Name"
-                 > <br>   
-          <input type="text" 
-                  required 
-                  v-model="ObjServices.intro" 
-                  placeholder="introduce your service"
-                 ><br>
-          <input type="text" 
-                  required 
-                  v-model="ObjServices.price" 
-                  placeholder="service price by hour"
-                 ><br>
-          <input type="email" 
-                  required 
-                  v-model="ObjServices.email" 
-                  placeholder="Add email"
-                 ><br>
-          <input type="number" 
-                  required 
-                  v-model="ObjServices.phone" 
-                  placeholder="Add phone"
-                 ><br>
-          <input type="text" 
+          <div class="p-float-label p-input-icon-right">
+            <i class="pi pi-user" />
+            <InputText type="text"
+                    required
+                    v-model="ObjServices.user_name"
+                    placeholder="User Name"
+                   />
+          </div> <br><br>   
+          <div class="p-float-label p-input-icon-right">
+            <i class="pi pi-user-plus" />
+            <InputText type="text"
+                    required
+                    v-model="ObjServices.intro"
+                    placeholder="introduce your service"
+                   />
+          </div><br><br>
+          <div class="p-float-label p-input-icon-right">
+            <i class="pi pi-euro" />
+            <InputText type="text"
+                    required
+                    v-model="ObjServices.price"
+                    placeholder="service price by hour"
+                   />
+          </div><br><br>
+          <div class="p-float-label p-input-icon-right">
+            <i class="pi pi-envelope" />
+            <InputText type="email"
+                    required
+                    v-model="ObjServices.email"
+                    placeholder="Add email"
+                   />
+          </div><br><br>
+          <div class="p-float-label p-input-icon-right">
+            <i class="pi pi-phone" />
+            <InputText type="number"
+                    required
+                    v-model="ObjServices.phone"
+                    placeholder="Add phone"
+                   />
+          </div><br><br>
+          <InputText type="text" 
                   required 
                   v-model="ObjServices.city" 
                   placeholder="Add city"
-                 >
+                 />
                  <br><br>
-          <textarea name="textarea" 
+          <Textarea name="textarea" 
+                  rows="5" cols="30" 
                   required 
                   v-model="ObjServices.textarea" 
                   placeholder="describe your services"
-                 ></textarea>                            
+                 />                            
        </section>
        <section class="">
-          select category services!
-          <section>
-          <select class="select-service-option" @change="selectedOption" v-model="selectedCategory">
+          <section v-tooltip.left="'select services'">
+            <Dropdown v-model="selectedCategory" @change="selectedOption"   :options="categoryId" optionLabel="name" placeholder="Select category service" :filter="true">
+            <template>
+                <div v-for="index in categoryId" :key="index.code" :value="index">{{index.name}}</div>
+            </template>
+        </Dropdown>
+          <!-- <select class="select-service-option" @change="selectedOption" v-model="selectedCategory">
           <option class="select-service-option" value="">Select category service</option>
           <option v-for="index in categoryId" :key="index.code" :value="index">
           {{index.name}}
           </option>
-          </select>
+          </select> -->
            </section>
        </section>
        <br>
@@ -91,6 +104,7 @@
         </footer>
     </div>
   </main>
+  {{ObjServices.text}}
 </template>
 <script>
 import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
@@ -137,7 +151,7 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
         }
       },
       selectedOption(event){
-        console.log(event.target.value)
+        console.log(event)
         localStorage.setItem('cat_name', JSON.stringify(this.selectedCategory))
         console.log(this.selectedCategory)
       },
@@ -154,8 +168,10 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
           console.log(getCurrentUser())
       },
       getCategoryName() {
+        console.log(this.getCategoryName)
           const categoryNameJson = localStorage.getItem("cat_name");
           const categoryName = JSON.parse(categoryNameJson);
+          console.log(categoryName.name)
           return categoryName.name;
       },
       getCategoryID() {

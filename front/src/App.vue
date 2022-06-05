@@ -1,14 +1,22 @@
 <template>
-<br>
-<nav>
-<headerNav/>
-</nav>
-<br>
+ <Toolbar style="height: 6em;" class="toolbar">
+  <template #start>
+    <nav><headerNav/></nav><br><br>
+    <div style="margin-top: 2em; margin-left: 0;" class="sideBar">
+    <Button icon="pi pi-arrow-right" @click="visibleLeft = true" class="mt-6" />
+    <Sidebar v-model:visible="visibleLeft" >
+    <h3>DashBord</h3>
+    <Menu :model="items" />
+    </Sidebar>
+    </div>
+  </template>
+</Toolbar>
 <div class="header_nav">
 </div>
 <span class="btn-logout">
   <Button
       class="p-button-outlined p-button-success"
+      style="color:aliceblue;"
       type="button"
       label="Sign Out"
       icon="pi pi-sign-out" iconPos="right"
@@ -21,6 +29,7 @@
 <div id="app">
     <span class="btn-regist">
       <Button
+        style="color:aliceblue;"
         class="p-button-outlined p-button-success"
         type="button"
         label="Sign Up"
@@ -32,6 +41,7 @@
     </span>
     <span class="btn-login">
       <Button
+        style="color:aliceblue;"
         class="p-button-outlined p-button-success"
         type="button"
         label="Log In"
@@ -122,6 +132,18 @@ export default {
       LoggedOut: false,
       userId: {},
       error: false,
+      visibleLeft: false,
+      items:[
+        {
+          label: 'Options',
+           items:[
+             {
+               label: 'Update',
+                        icon: 'pi pi-refresh',
+             }
+           ]
+        }
+      ],
     }
   },
   mounted(){
@@ -293,6 +315,12 @@ export default {
   margin-top: 2em;
   height: 1em
 }
+.sideBar{
+  background: linear-gradient(90deg, 
+              rgba(10,10,142,0.33703903924851186) 22%, 
+              rgba(8,17,37,1) 49%, 
+              rgba(2,2,11,0.33703903924851186) 77%);
+}
 .btn-logout{
   position: absolute;
   top: 0;
@@ -337,6 +365,11 @@ export default {
   border-radius: 2px;
   text-decoration: none;
   padding: 0.2em;
+}
+.toolbar{
+  background: linear-gradient(90deg, rgba(4,15,38,1) 0%,
+            rgba(11,11,157,0.33703903924851186) 28%,
+            rgba(26,47,51,0.8076272745426296) 55%);
 }
 .btn-edit{ 
   background: linear-gradient(90deg, rgba(4,15,38,1) 0%,

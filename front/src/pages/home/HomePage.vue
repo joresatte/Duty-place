@@ -1,6 +1,6 @@
 <template>
-<span >
-  <InputText style="width: 50%" id="filtered_category" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?" />
+<span>
+  <InputText class="pi pi-search" style="width: 50%" id="filtered_category" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?" />
 </span>
 <!-- <InputText type="text" class="filteredCategory" v-model="filteredCategory" placeholder="¿Que servicio buscas?"  /> -->
 <!-- <input class="filteredCategory" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?"/> -->

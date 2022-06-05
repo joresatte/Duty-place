@@ -1,7 +1,6 @@
 <template>
 <span id="filtered_option">
   <InputText style="width: 50%" type="text" v-model="filteredOption" placeholder="¿Que servicio buscas?"/>
-  <i class="pi pi-search" />
 </span>
   <h1 class="page">Services By Category Page</h1>
   <!-- <p>{{category_id}} </p> -->
