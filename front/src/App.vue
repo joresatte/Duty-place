@@ -2,9 +2,9 @@
  <Toolbar style="height: 6em;" class="toolbar">
   <template #start>
     <nav><headerNav/></nav><br><br>
-    <div style="margin-top: 2em; margin-left: 0;" class="sideBar">
+    <div style="margin-top: 2em; margin-left: 0;">
     <Button icon="pi pi-arrow-right" @click="visibleLeft = true" class="mt-6" />
-    <Sidebar v-model:visible="visibleLeft" >
+    <Sidebar v-model:visible="visibleLeft" style="background-color: #B7E9F3;">
     <h3>DashBord</h3>
     <Menu :model="items" />
     </Sidebar>
