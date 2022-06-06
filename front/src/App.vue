@@ -140,7 +140,19 @@ export default {
              {
                label: 'Update',
                         icon: 'pi pi-refresh',
-             }
+             },
+             {
+               label: 'Sign Up',
+                        icon: 'pi pi-sign-in',
+             },
+             {
+               label: 'Login In',
+                        icon: 'pi pi-sign-in',
+             },
+             {
+               label: 'Publish Service',
+                        icon: 'pi pi-save',
+             },
            ]
         }
       ],
