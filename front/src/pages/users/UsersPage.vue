@@ -33,13 +33,7 @@ export default {
       console.log(eventId)
       console.log(eventCatId)
       await deleteService(eventId, eventCatId)
-      this.$router.push({
-          path: '/user/:id',
-          name: 'usersPage',
-          params:{
-            id:getCurrentUser()
-          }
-      })
+      this.loadData()
     },
     async loadData(){
       console.log(this.loadData)
