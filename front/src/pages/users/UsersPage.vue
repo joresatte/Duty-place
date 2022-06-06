@@ -7,7 +7,7 @@
       Publish Service
     </button>
 <br><br>
-<userService :User="users"/>
+<userService :User="users" @removeService= "removeService" />
 </template>
 
 <script>
@@ -29,9 +29,17 @@ export default {
     this.loadData();
   },
   methods:{
-    async remove(eventId, eventCatId ){
-      console.log(this.remove)
+    async removeService(eventId, eventCatId ){
+      console.log(eventId)
+      console.log(eventCatId)
       await deleteService(eventId, eventCatId)
+      this.$router.push({
+          path: '/user/:id',
+          name: 'usersPage',
+          params:{
+            id:getCurrentUser()
+          }
+      })
     },
     async loadData(){
       console.log(this.loadData)

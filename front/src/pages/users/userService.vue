@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import { deleteService } from '../apiservices/deleteService'
 export default {
     nam:'userForm',
     props:{
@@ -35,16 +34,15 @@ export default {
             required: true
         }
     },
-    emits:['editService'],
+    emits:['editService', 'removeService'],
     data(){
       return{
       }
     },
     methods:{
       async remove(serviceId, userCatId){
-        console.log(this.remove)
         console.log(serviceId, userCatId)
-        await deleteService(serviceId, userCatId)
+        this.$emit('removeService', serviceId, userCatId)
       },
       editService(eventId, eventCatId, eventText){
         console.log(eventId, eventCatId, eventText)
