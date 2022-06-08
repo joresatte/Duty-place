@@ -1,6 +1,7 @@
 <template>
 <span>
-  <InputText class="pi pi-search" style="width: 50%" id="filtered_category" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?" />
+  <i class="pi pi-search" @click="onClicked" style="position: absolute; top: 8em; right: 39%; "/>
+  <InputText v-show="displayInput" class="pi pi-search" style="width: 20%" id="filtered_category" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?" />
 </span>
 <!-- <InputText type="text" class="filteredCategory" v-model="filteredCategory" placeholder="¿Que servicio buscas?"  /> -->
 <!-- <input class="filteredCategory" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?"/> -->
@@ -60,6 +61,7 @@ export default {
       welcome:"welcome to Services",
       categories:[],
       filteredCategory:'',
+      displayInput: false,
      
     }
   },
@@ -92,7 +94,9 @@ export default {
       if (!this.isValidFilter){
        return categories;
       }else{
-        return categories.filter((service) => {return service.text.toLowerCase().includes(filtered.toLowerCase()) })
+        return categories.filter((service) => {
+          return service.text.toLowerCase().includes(filtered.toLowerCase()) 
+          })
       }
     }
   },
@@ -108,6 +112,9 @@ export default {
         name: 'ServicesByCategoryPage',
         params:{category_id: catId}
       })
+    },
+    onClicked(){
+      this.displayInput=! this.displayInput
     },
   }
 }

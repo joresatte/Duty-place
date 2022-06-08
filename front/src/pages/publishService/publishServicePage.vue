@@ -54,11 +54,14 @@
                     placeholder="Add phone"
                    />
           </div><br><br>
-          <InputText type="text" 
-                  required 
-                  v-model="ObjServices.city" 
-                  placeholder="Add city"
-                 />
+          <div class="p-float-label p-input-icon-right">
+            <i class="pi pi-map-marker"/>
+            <InputText type="text"
+                    required
+                    v-model="ObjServices.city"
+                    placeholder="Add city"
+                   />
+          </div>
                  <br><br>
           <Textarea name="textarea" 
                   rows="5" cols="30" 
@@ -74,18 +77,13 @@
                 <div v-for="index in categoryId" :key="index.code" :value="index">{{index.name}}</div>
             </template>
         </Dropdown>
-          <!-- <select class="select-service-option" @change="selectedOption" v-model="selectedCategory">
-          <option class="select-service-option" value="">Select category service</option>
-          <option v-for="index in categoryId" :key="index.code" :value="index">
-          {{index.name}}
-          </option>
-          </select> -->
            </section>
        </section>
        <br>
         <footer class="modal-footer">
           <span >
             <Button
+              icon="pi pi-check"
               label="Publish services"
               type="button"
               @click="handleClick"
@@ -95,6 +93,7 @@
           <br><br>
           <span >
             <Button
+              icon="pi pi-step-backward"
               label="Get back to previous page"
               type="button" 
               @click="getBack"
@@ -181,7 +180,20 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
       },
       async handleClick(){
         console.log(this.handleClick)
-        await publishServices(
+         if(
+                this.service.id!= '' ||
+                this.service.cat_id!= ''||
+                this.service.user_name!= ''||
+                this.service.text!= ''||
+                this.service.price!= ''||
+                this.service.text_pictures!= ''||
+                this.service.textarea!= ''||
+                this.service.phone!= ''&& this.service.phone.length == 9 ||
+                this.service.email!= '' && re_email.match(this.service.email)||
+                this.service.city!= ''
+
+            ){
+              await publishServices(
           this.ObjServices.id= getCurrentUser(), 
           this.cat_id= this.getCategoryID(),
           this.ObjServices.user_name,
@@ -193,7 +205,7 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
           this.ObjServices.phone,
           this.ObjServices.email,
           this.ObjServices.city
-      )
+            )
         this.$router.push(
               {
                 path: '/user/:id',
@@ -202,9 +214,17 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
                     id: getCurrentUser()
                 }
               }
-          )
+             )
+                }else{
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
+              })
+            }
+        },
      },
-    },
   };
 </script>
 <style scoped>

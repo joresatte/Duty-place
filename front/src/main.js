@@ -20,6 +20,7 @@ import MultiSelect from 'primevue/multiselect';
 import Textarea from 'primevue/textarea';
 import Dropdown from 'primevue/dropdown';
 import Menu from 'primevue/menu';
+import Rating from 'primevue/rating';
 
 const app= createApp(App);
 app.use(ToastService);
@@ -39,5 +40,6 @@ app.component('MultiSelect', MultiSelect)
 app.component('Textarea', Textarea)
 app.component('Dropdown', Dropdown)
 app.component('Menu', Menu)
+app.component('Rating', Rating)
 
 app.mount('#app')

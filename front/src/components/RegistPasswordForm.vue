@@ -9,7 +9,7 @@
         @keyup="validateInput"
         @blur="validateInput"
         @change="onChangedPassword"
-        v-tooltip.bottom="'Enter your password is required'" 
+        v-tooltip.bottom="'password is required not less than 7 characters'" 
       />
     </div>
     <div class="ui basic label pointing red" v-if="errors.password">

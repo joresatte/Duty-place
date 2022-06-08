@@ -1,6 +1,7 @@
 <template>
 <span id="filtered_option">
-  <InputText style="width: 50%" type="text" v-model="filteredOption" placeholder="¿Que servicio buscas?"/>
+  <i class="pi pi-search" @click="handleClick"/>
+  <InputText v-show="displayInput" style="width: 20%" type="text" v-model="filteredOption" placeholder="¿Que servicio buscas?"/>
 </span>
   <h1 class="page">Services By Category Page</h1>
   <!-- <p>{{category_id}} </p> -->
@@ -9,9 +10,9 @@
     <div><img :src= "index.text_pictures" alt="" class="image_category"></div>
     <div class="user-info">
       <h2>{{index.user_name}}</h2>
-      <p><span class="phone">Phone Number:</span><br> {{index.phone}}</p>
-      <p><span class="email">Email:</span><br> {{index.email}}</p>
-      <p><span class="city">City: </span><br>{{index.city}}</p>
+      <p><span class="phone"><i class="pi pi-phone" /></span><br> {{index.phone}}</p>
+      <p><span class="email"><i class="pi pi-envelope"/></span><br> {{index.email}}</p>
+      <p><span class="city"><i class="pi pi-map-marker"/></span><br>{{index.city}}</p>
     </div>
   </div>
   <router-link class="details"  :to="{ name: 'userDetailesPage', params:{id: index.id}}" >details</router-link>
@@ -29,6 +30,7 @@ export default {
     return{
       services: [],
       filteredOption:'',
+      displayInput: false,
     }
   },
   mounted(){
@@ -70,8 +72,12 @@ export default {
       console.log("loadData-services")
       let categoryId = this.category_id;
       this.services= await getCategoriesServices(categoryId)
-    }
+    },
+    handleClick(){
+      this.displayInput=! this.displayInput
+    },
   },
+  
 }
 </script>
 

@@ -30,7 +30,7 @@
     <span class="btn-regist">
       <Button
         style="color:aliceblue;"
-        class="p-button-outlined p-button-success"
+        class="p-button-outlined p-button-success p-xl-none"
         type="button"
         label="Sign Up"
         icon="pi pi-sign-in" iconPos="left"
@@ -116,6 +116,7 @@ import LoginPassword from '@/components/LoginPasswordForm.vue';
 import getRegistPost from '@/pages/apiservices/getRegistPost.js'
 import getLoginPost from '@/pages/apiservices/getLoginPost.js'
 import headerNav from '@/components/headerNavForm.vue'
+import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
 import Swal from 'sweetalert2'
 export default {
   name: 'app',
@@ -144,14 +145,53 @@ export default {
              {
                label: 'Sign Up',
                         icon: 'pi pi-sign-in',
+                        command: ()=>{
+                          if(window.localStorage){
+                            if(
+                              localStorage.getItem('dataUser')!== undefined && localStorage.getItem('dataUser')
+                              ){
+                              this.showRegist= false
+                            }else{
+                            this.showRegist= true
+                            
+                            }
+                          }
+                        }
              },
              {
                label: 'Login In',
                         icon: 'pi pi-sign-in',
+                        command: ()=>{
+                          if(window.localStorage){
+                            if(
+                              localStorage.getItem('dataUser')!== undefined && localStorage.getItem('dataUser')
+                              ){
+                              this.showLogin= false
+                            }else{
+                            this.showLogin= true
+                            
+                            }
+                          }
+                        }
              },
              {
                label: 'Publish Service',
                         icon: 'pi pi-save',
+                        command: ()=>{
+                          if(window.localStorage){
+                            if(
+                              localStorage.getItem('dataUser')!== undefined && localStorage.getItem('dataUser')
+                              ){
+                              this.$router.push({
+                                 path: '/user_services/:id',
+                                 name: 'publishServicePage',
+                                 params:{id: getCurrentUser()}
+                              })
+                            }else{
+                            alert('you must log in first')
+                            }
+                          }
+                        }
              },
            ]
         }
@@ -195,7 +235,11 @@ export default {
       },
     async ClickToRegist (){
       console.log(this.ClickToRegist)
-      if (this.email!='' || this.password!=''){
+      const re_email= "[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
+
+      if (
+        this.email!='' && re_email.match( this.email) || 
+        this.password!='' && this.password.lenghth >=7){
         await getRegistPost()
         Swal.fire(
           'success',
@@ -214,9 +258,9 @@ export default {
           text: 'Something went wrong!',
           footer: '<a href="http://localhost:8080/">the email and password fields are required</a>'
         })
+        }
         this.email= '';
         this.password='';
-        }
       },
       onModalOnclicked(){
         this.showLogin = true

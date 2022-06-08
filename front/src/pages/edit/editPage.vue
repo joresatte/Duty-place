@@ -109,7 +109,22 @@ export default {
         },
         async handleEditClick(){
             console.log(this.handleEditClick)
-            await postServiceEdited(
+            const re_email= "[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
+
+            if(
+                this.service.id!= '' ||
+                this.service.cat_id!= ''||
+                this.service.user_name!= ''||
+                this.service.text!= ''||
+                this.service.price!= ''||
+                this.service.text_pictures!= ''||
+                this.service.textarea!= ''||
+                this.service.phone!= ''||
+                this.service.email!= '' && re_email.match(this.service.email)||
+                this.service.city!= ''
+
+                ){
+                    await postServiceEdited(
                 this.service.id= this.id,
                 this.service.cat_id= this.cat_id ,
                 this.service.user_name,
@@ -121,13 +136,22 @@ export default {
                 this.service.phone,
                 this.service.email,
                 this.service.city,
-            )
+                )
             this.$router.push(
-                {
-                    path: '/user/:id',
-                    name: 'usersPage',
-                }
-            )
+                    {
+                        path: '/user/:id',
+                        name: 'usersPage',
+                    }
+                )
+            }else{
+               Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                    footer: '<a href="http://localhost:8080/"> all the fields are required</a>'
+                })
+            }
+            
         },
     },
 }

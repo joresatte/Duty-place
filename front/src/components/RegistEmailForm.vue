@@ -10,7 +10,7 @@
         @keyup="validateInput"
         @blur="validateInput"
         @change="onNewEmailChanged"
-        v-tooltip.bottom="'Enter your email is required'" 
+        v-tooltip.bottom="'email is required and should be like exemple@exemple.es'" 
       />
     </div>
     <div class="ui basic label pointing red" v-if="errors.email">

@@ -7,9 +7,9 @@
       <div><img :src= "user.text_pictures" alt="" class="image_category"><br></div>
       <div class="user-info">
         <h2>{{user.user_name}}</h2>
-        <p><span class="phone">Phone Number:</span><br>{{user.phone}}</p>
-        <p><span class="email">Email:</span><br> {{user.email}}</p>
-        <p><span class="city">City: </span><br>{{user.city}}</p>
+        <p><span class="phone"><i class="pi pi-phone" /></span><br>{{user.phone}}</p>
+        <p><span class="email"><i class="pi pi-envelope"/></span><br> {{user.email}}</p>
+        <p><span class="city"><i class="pi pi-map-marker"/></span><br>{{user.city}}</p>
         <p class="intro">{{user.intro}}</p>
         <h4 class="price">{{user.price}}</h4>
         <p class="textarea">{{user.textarea}}</p>
