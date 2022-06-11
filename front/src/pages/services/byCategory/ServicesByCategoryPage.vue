@@ -1,7 +1,10 @@
 <template>
-<span id="filtered_option">
-  <i class="pi pi-search" @click="handleClick"/>
-  <InputText v-show="displayInput" style="width: 20%" type="text" v-model="filteredOption" placeholder="¿Que servicio buscas?"/>
+<span class="p-input-icon-left" style="position: absolute; top: 10em; left: 0em; " v-show="displayInput">
+            <i class="pi pi-search" style="color: blue;"/>
+            <InputText 
+            type="text" v-model="filteredOption" 
+            placeholder="Search" 
+            style="width: 8em; color: blue;"/>
 </span>
   <h1 class="page">Services By Category Page</h1>
   <!-- <p>{{category_id}} </p> -->
@@ -10,9 +13,9 @@
     <div><img :src= "index.text_pictures" alt="" class="image_category"></div>
     <div class="user-info">
       <h2>{{index.user_name}}</h2>
-      <p><span class="phone"><i class="pi pi-phone" /></span><br> {{index.phone}}</p>
-      <p><span class="email"><i class="pi pi-envelope"/></span><br> {{index.email}}</p>
-      <p><span class="city"><i class="pi pi-map-marker"/></span><br>{{index.city}}</p>
+      <p><span class="phone"><i class="pi pi-phone" style="color: black;"/></span><br> {{index.phone}}</p>
+      <p><span class="email"><i class="pi pi-envelope" style="color: yellow;"/></span><br> {{index.email}}</p>
+      <p><span class="city"><i class="pi pi-map-marker" style="color: red;"/></span><br>{{index.city}}</p>
     </div>
   </div>
   <router-link class="details"  :to="{ name: 'userDetailesPage', params:{id: index.id}}" >details</router-link>
@@ -22,7 +25,6 @@
 
 <script>
 import {getCategoriesServices} from "@/pages/apiservices/api.js";
-
 export default {
   name: 'ServicesByCategoryPage',
   props:['category_id'],
@@ -30,7 +32,7 @@ export default {
     return{
       services: [],
       filteredOption:'',
-      displayInput: false,
+      displayInput: true,
     }
   },
   mounted(){

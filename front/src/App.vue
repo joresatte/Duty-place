@@ -1,5 +1,5 @@
 <template>
- <Toolbar style="height: 6em;" class="toolbar">
+ <Toolbar style="height: 9em;" class="toolbar">
   <template #start>
     <nav><headerNav/></nav><br><br>
     <div style="margin-top: 2em; margin-left: 0;">
@@ -379,7 +379,7 @@ export default {
 }
 .btn-logout{
   position: absolute;
-  top: 0;
+  top: 0em;
   right: 0;
   color: white;
   font-size: 1em;
@@ -389,7 +389,7 @@ export default {
 }
 .btn-regist{
  position: absolute;
- top: 0;
+ top: 0em;
  right: 7em;
  color: white;
  font-size: 1em;
@@ -399,7 +399,7 @@ export default {
 }
 .btn-login{
   position: absolute;
-  top: 0;
+  top: 0em;
   right: 0;
   color: white;
   font-size: 1em;
@@ -462,7 +462,7 @@ export default {
     right: 0;
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
   }
 .modal {

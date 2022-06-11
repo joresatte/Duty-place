@@ -1,7 +1,10 @@
 <template>
-<span>
-  <i class="pi pi-search" @click="onClicked" style="position: absolute; top: 8em; right: 39%; "/>
-  <InputText v-show="displayInput" class="pi pi-search" style="width: 20%" id="filtered_category" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?" />
+<span class="p-input-icon-left " style="position: absolute; top: 10em; left:0em; ">
+            <i class="pi pi-search " style="color: blue;"/>
+            <InputText 
+            type="text" v-model="filteredCategory" 
+            placeholder="Search" 
+            style="width: 8em; color: blue;"/>
 </span>
 <!-- <InputText type="text" class="filteredCategory" v-model="filteredCategory" placeholder="¿Que servicio buscas?"  /> -->
 <!-- <input class="filteredCategory" type="text" v-model="filteredCategory" placeholder="¿Que servicio buscas?"/> -->
@@ -120,7 +123,10 @@ export default {
 }
 </script>
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+/* *{
+  margin: 0;
+  padding: 0;
+} */
  .category_button{
   border: 2px solid #FFE600;
   border-radius: 10px;
@@ -187,7 +193,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-span{
+/* span{
   font-size: 1.5em;
   display: block;
   text-align: center;
@@ -195,6 +201,6 @@ span{
   line-height: 2.6;
   color: #2fa8ba;
   text-shadow:  1px 1px 3px #f10889;
-}
+} */
 
 </style>
