@@ -153,7 +153,7 @@ export default {
                               this.showRegist= false
                             }else{
                             this.showRegist= true
-                            
+                            this.visibleLeft= false
                             }
                           }
                         }
@@ -168,8 +168,8 @@ export default {
                               ){
                               this.showLogin= false
                             }else{
-                            this.showLogin= true
-                            
+                              this.showLogin= true
+                              this.visibleLeft= false
                             }
                           }
                         }
@@ -182,11 +182,12 @@ export default {
                             if(
                               localStorage.getItem('dataUser')!== undefined && localStorage.getItem('dataUser')
                               ){
-                              this.$router.push({
-                                 path: '/user_services/:id',
-                                 name: 'publishServicePage',
-                                 params:{id: getCurrentUser()}
-                              })
+                                this.visibleLeft= false
+                                this.$router.push({
+                                  path: '/user_services/:id',
+                                  name: 'publishServicePage',
+                                  params:{id: getCurrentUser()}
+                                })
                             }else{
                             alert('you must log in first')
                             }
