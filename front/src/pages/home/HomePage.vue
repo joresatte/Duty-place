@@ -13,19 +13,19 @@
   </section>
 <div class="container">
   <div class="box">
-    <span>Cuidados</span>
+    <span class="category_span">Cuidados</span>
     <img @click="onClick('category_3')" src="@/assets/images/cuidadoMa.jpg">
   </div>
   <div class="box">
-    <span>Mantenimientos</span>
+    <span class="category_span">Mantenimientos</span>
     <img @click="onClick('category_4')" src="@/assets/images/images1.jpg">
   </div>
   <div class="box">
-    <span>Limpiezas</span>
+    <span class="category_span">Limpiezas</span>
     <img @click="onClick('category_2')" src="@/assets/images/images4.jpg">
   </div>
   <div class="box">
-    <span>Mudanzas</span>
+    <span class="category_span">Mudanzas</span>
     <img @click="onClick('category_1')" src="@/assets/images/images.png">
   </div>
 </div>
@@ -71,16 +71,7 @@ export default {
   mounted(){
    this.loadData()
   },
-  // watch: { 
-  //   newCategories: {        
-  //       handler (newData) {
-  //         const currentObject = JSON.stringify(newData)
-  //         this.firstCategory= Json.parse(currentObject)    
-  //         localStorage.getItem('current', currentObject)      
-  //       },
-  //       deep: true
-  //     }      
-  //   },
+ 
  computed:{
     isValidFilter(){
       for (const category of this.categories){
@@ -193,7 +184,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-/* span{
+.category_span{
   font-size: 1.5em;
   display: block;
   text-align: center;
@@ -201,6 +192,6 @@ export default {
   line-height: 2.6;
   color: #2fa8ba;
   text-shadow:  1px 1px 3px #f10889;
-} */
+}
 
 </style>
