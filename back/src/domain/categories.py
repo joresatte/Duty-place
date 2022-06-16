@@ -80,7 +80,6 @@ class CategoriesRepository:
         cursor.execute(
             sql,
             {"cat_id": category.cat_id, "text": category.text, "text_pictures": category.text_pictures}
-            # { **user.to_dict(), 'password': user.password}
         )
         conn.commit()
 

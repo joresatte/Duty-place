@@ -10,7 +10,6 @@ class Regists:
     def to_dict(self):
         return {
             "id": self.id,
-            # "email": self.email,
         }
 
 
@@ -45,17 +44,6 @@ class RegistsRepository:
         cursor = conn.cursor()
         cursor.execute(sql)
         conn.commit()
-
-    # def get_all_regists(self):
-    #     sql = """select * from registros"""
-    #     conn = self.create_conn()
-    #     cursor = conn.cursor()
-    #     cursor.execute(sql)
-
-    #     data = cursor.fetchall()
-
-    #     users = [Regists(**item) for item in data]
-    #     return users
 
     def get_regist_by_id(self, id):
         sql = """SELECT * FROM registros WHERE id= :id"""
@@ -102,7 +90,6 @@ class RegistsRepository:
         cursor.execute(
             sql,
             {"id": user.id, "email": user.email, "password": user.password}
-            # { **user.to_dict(), 'password': user.password}
         )
         conn.commit()
 

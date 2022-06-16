@@ -11,11 +11,6 @@ import re
 import json
 
 re_email= "[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
-# def valid_email(email_addr: str):
-#     # if re.match(re_email, email_addr.lower()):
-#     #   return True
-#     # else:
-#     #    return False
 
 def create_app(repositories):
     app = Flask(__name__)
@@ -143,10 +138,7 @@ def create_app(repositories):
     @app.route("/api/login/Authenticated", methods=["POST"])
     def get_login():
         data= request.json
-        # print("----aqui va el data:", data)
         user= repositories["regists"].get_by_email_and_password(data['email'], data ['password'])
-        # print("------aqui va el user:", user)
-        # print('----aqui va el user password:', data['password'])
         if user is None or (data['password']) != user.password or (data['email']) != user.email:
             return 'invalid log In', 401
         else:
@@ -207,29 +199,5 @@ def create_app(repositories):
             repositories["services"].update_service(id , cat_id , text, user_services)
             print('-----------user_services')
             return '', 200
-
-    # @app.route("/api/contact/<id>", methods=["GET"])
-    # def get_contact_by_id(id):
-    #     user_id= request.headers.get("Authorization")
-    #     contact = repositories["contact"].get_by_id(id)
-    #     if user_id == contact.user_id:
-    #        return object_to_json(contact), 200
-    #     else:
-    #         return '', 403
-
-
-    # @app.route("/api/users", methods=["GET"])
-    # def get_all_users():
-    #     user_id= request.headers.get("Authorization")
-    #     users = repositories["users"].get_all_users()
-    #     return object_to_json(users)
-
-   
-    
-    #     is_my_contact= user_id== data["user_id"]
-    #     if not is_my_contact:
-    #         return "", 403
-
-    #     
 
     return app

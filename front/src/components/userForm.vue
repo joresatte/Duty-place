@@ -1,7 +1,6 @@
 <template>
   <div class="service-detail-page">
   <h1 class="page">user page</h1>
-    <!-- <h2>{{id}}</h2> -->
     <section class="services" v-for="user in users" :key="user">
     <div class="user-profile">
       <div><img :src= "user.text_pictures" alt="" class="image_category"><br></div>

@@ -18,11 +18,9 @@ export default {
         
         const onChangedEmail= (newEmail)=>{
             console.log(newEmail)
-            // email.value = newEmail
         }
         const onChangedPassword=(newPassword)=>{
             console.log(newPassword )
-            //  password.value= newPassword
         }
         const saveClicked= async ()=> {
             await getRegistPost()

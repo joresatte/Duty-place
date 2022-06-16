@@ -285,9 +285,4 @@
     border-radius: 2px;
     height: 2em;
   }
-  /* .select{
-    position: absolute;
-    top: 0em;
-    left: 6em;
-  } */
 </style>

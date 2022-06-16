@@ -87,7 +87,7 @@ login_request= {
 
 login_response= {
     "id": "service_1",
-    # "email": "reinabo@vince.com",
+
     }
 
 another_login_request= {
@@ -97,7 +97,7 @@ another_login_request= {
 
 regist_response= {
     "id": "service_1",
-    # "email": "reinabo@vince.com",
+
     }
 
 another_one_login_request= {
@@ -206,44 +206,3 @@ another_one_updater={
         "email": "reinabes@vince.com",
         "city": "españa",
     }
-
-
-# {
-#     'id': user_service.id,
-#     'cat_id': user_service.cat_id,
-#     'user_name': user_service.user_name,
-#     'text': user_service.text,
-#     'intro': user_service.intro,
-#     'price': user_service.price,
-#     'text_pictures': user_service.text_pictures,
-#     'textarea': user_service.textarea,
-#     'phone': user_service.phone,
-#     'email': user_service.email,
-#     'city': user_service.city
-# },
-
-#  json.loads( 
-#                 cat_id= item["cat_id"],
-#                 user_name= item["user_name"],
-#                 text= item["text"],
-#                 intro= item["intro"],
-#                 price= item["price"],
-#                 text_pictures= item["text_pictures"],
-#                 textarea= item['textarea'],
-#                 phone= item["phone"],
-#                 email= item["email"],
-#                 city= item["city"],)
-#             )
-
-#  {
-#                 'cat_id': json.dumps(user_service['cat_id']),
-#                 'user_name': json.dumps(user_service['user_name']),
-#                 'text': json.dumps(user_service['text']),
-#                 'intro': json.dumps(user_service['intro']),
-#                 'price': json.dumps(user_service['price']),
-#                 'text_pictures': json.dumps(user_service['text_pictures']),
-#                 'textarea': json.dumps(user_service['textarea']),
-#                 'phone': json.dumps(user_service['phone']),
-#                 'email': json.dumps(user_service['email']),
-#                 'city': json.dumps(user_service['city'])
-# },

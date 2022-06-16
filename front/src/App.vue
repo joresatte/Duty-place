@@ -107,8 +107,6 @@
   <router-view/>
 </template>
 <script>
-// import axios from 'axios';
-// import config from "@/config.js";
 import emailForm from '@/components/RegistEmailForm.vue'
 import passwordForm from '@/components/RegistPasswordForm.vue';
 import LoginEmail from '@/components/LoginEmailForm.vue'
@@ -329,7 +327,6 @@ export default {
                   this.getLoggedOut()
             }
          }else{
-            // alert('the email and password fields are required')
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
