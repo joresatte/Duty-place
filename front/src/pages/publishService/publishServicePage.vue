@@ -181,16 +181,16 @@ import publishServices from '@/pages/apiservices/publishServicesPost.js'
       async handleClick(){
         console.log(this.handleClick)
          if(
-                this.service.id!= '' ||
-                this.service.cat_id!= ''||
-                this.service.user_name!= ''||
-                this.service.text!= ''||
-                this.service.price!= ''||
-                this.service.text_pictures!= ''||
-                this.service.textarea!= ''||
-                this.service.phone!= ''&& this.service.phone.length == 9 ||
-                this.service.email!= '' && re_email.match(this.service.email)||
-                this.service.city!= ''
+                this.ObjServices.id!= '' ||
+                this.ObjServices.cat_id!= ''||
+                this.ObjServices.user_name!= ''||
+                this.ObjServices.text!= ''||
+                this.ObjServices.price!= ''||
+                this.text_pictures!= ''||
+                this.ObjServices.textarea!= ''||
+                this.ObjServices.phone!= ''&& this.service.phone.length == 9 ||
+                this.ObjServices.email!= '' && re_email.match(this.service.email)||
+                this.ObjServices.city!= ''
 
             ){
               await publishServices(
