@@ -234,10 +234,8 @@ export default {
       },
     async ClickToRegist (){
       console.log(this.ClickToRegist)
-      const re_email= "[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
-
       if (
-        this.email!='' && re_email.match( this.email) || 
+        this.email!='' || 
         this.password!='' && this.password.lenghth >=7){
         await getRegistPost()
         Swal.fire(
