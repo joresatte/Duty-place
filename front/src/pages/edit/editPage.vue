@@ -7,58 +7,86 @@
         </section>
            <section >
                <label class="uploadPicture" for="uploadPicture">Cambiar imagen</label>
-               <input type="file"
+               <FileUpload type="file"
+                              mode="basic"
+                              name="demo[]"
+                              url=""
+                              :auto="true" 
+                              chooseLabel="New Picture"
                               accept="image/png, image/jpeg"
                               required
                               @input="upload"
                               title="Select file"
-                            >
+                            ></FileUpload>
            </section>
                <section class="modal-body">
-                  <input type="text"
-                          required
-                          v-model="service.user_name"
-                          placeholder="User Name"
-                         > <br>
-                  <input type="text"
-                          required
-                          v-model="service.intro"
-                          placeholder="introduce your service"
-                         ><br>
-                  <input type="text"
-                          required
-                          v-model="service.price"
-                          placeholder="service price by hour"
-                         ><br>
-                  <input type="email"
-                          required
-                          v-model="service.email"
-                          placeholder="Add email"
-                         ><br>
-                  <input type="text"
-                          required
-                          v-model="service.phone"
-                          placeholder="Add phone"
-                         ><br>
-                  <input type="text"
-                          required
-                          v-model="service.city"
-                          placeholder="Add city"
-                         >
+                  <div class="p-float-label p-input-icon-right">
+                      <i class="pi pi-user" />
+                      <InputText type="text"
+                              required
+                              v-model="service.user_name"
+                              placeholder="User Name"
+                             />
+                  </div><br>
+                  <div class="p-float-label p-input-icon-right">
+                      <i class="pi pi-user-plus" />
+                      <InputText type="text"
+                              required
+                              v-model="service.intro"
+                              placeholder="introduce your service"
+                             />
+                  </div><br>
+                  <div class="p-float-label p-input-icon-right">
+                      <i class="pi pi-euro" />
+                      <InputText type="text"
+                              required
+                              v-model="service.price"
+                              placeholder="service price by hour"
+                             />
+                  </div><br>
+                  <div class="p-float-label p-input-icon-right">
+                      <i class="pi pi-envelope" />
+                      <InputText type="email"
+                              required
+                              v-model="service.email"
+                              placeholder="Add email"
+                             />
+                  </div><br>
+                  <div class="p-float-label p-input-icon-right">
+                      <i class="pi pi-phone" />
+                      <InputText type="text"
+                              required
+                              v-model="service.phone"
+                              placeholder="Add phone"
+                             />
+                  </div>
+                  <br>
+                  <div class="p-float-label p-input-icon-right">
+                      <i class="pi pi-map-marker"/>
+                      <InputText type="text"
+                              required
+                              v-model="service.city"
+                              placeholder="Add city"
+                             />
+                  </div>
                          <br><br>
-                  <textarea name="textarea"
-                          required
-                          v-model="service.textarea"
-                          placeholder="describe your services"
-                         ></textarea>
+                  <div>
+                      <Textarea name="textarea"
+                              rows="5" cols="30"
+                              required
+                              v-model="service.textarea"
+                              placeholder="describe your services"
+                             />
+                  </div>
                </section>
-                <button
+                <Button
+                  icon="pi pi-check"
+                  label="Save services"
                   type="button"
                   class="btn-handleEditClick"
                   @click="handleEditClick"
                 >
-                  Save services
-                </button>
+                </Button>
     </div>
 </main>
         <br>
@@ -109,8 +137,7 @@ export default {
         },
         async handleEditClick(){
             console.log(this.handleEditClick)
-            const re_email= "[a-zA-Z0-9!#$%&'*_+-]([\.]?[a-zA-Z0-9!#$%&'*_+-])+@[a-zA-Z0-9]([^@&%$\/()=?¿!.,:;]|\d)+[a-zA-Z0-9][\.][a-zA-Z]{2,4}([\.][a-zA-Z]{2})?"
-
+            
             if(
                 this.service.id!= '' ||
                 this.service.cat_id!= ''||
@@ -120,7 +147,7 @@ export default {
                 this.service.text_pictures!= ''||
                 this.service.textarea!= ''||
                 this.service.phone!= ''||
-                this.service.email!= '' && re_email.match(this.service.email)||
+                this.service.email!= ''||
                 this.service.city!= ''
 
                 ){

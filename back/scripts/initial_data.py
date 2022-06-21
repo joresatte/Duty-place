@@ -4,8 +4,7 @@ import sys
 from py import code
 
 sys.path.insert(0, "")
-# from src.domain.respuesta import respuesta_11, respuesta_12
-# from src.domain.object import ObjectServicesRepository, Object
+
 from src.domain.regists import RegistsRepository, Regists
 from src.domain.categories import CategoriesRepository, Categories
 from src.domain.category_services import CategoryServicesRepository, Category_services
@@ -28,20 +27,6 @@ from src.domain.userDataPictures import(
 
 database_path = "data/database.db"
 
-# obj_services= Object(
-#     text_pictures= '',
-#         intro='',
-#         price='',
-#         textarea='',
-#         email='',
-#         phone='',
-#         city='',
-#         user_name='',
-#         cat_id= respuesta_11,
-#         text= respuesta_12
-# )
-# obj_services_repository= ObjectServicesRepository(database_path)
-# obj_services_repository.save(obj_services)
 
 regist_1= Regists(
     id= "service_1",
