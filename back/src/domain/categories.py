@@ -82,6 +82,3 @@ class CategoriesRepository:
             {"cat_id": category.cat_id, "text": category.text, "text_pictures": category.text_pictures}
         )
         conn.commit()
-
-
-

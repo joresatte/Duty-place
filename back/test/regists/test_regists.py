@@ -1,8 +1,8 @@
-from src.domain.setup import setup6
+from src.domain.setup import setupForAuthentication
 from src.domain.respuesta import regist_request, regist_response, another_regist_request
 
 def test_should_return_status_code_200_for_regist_post():
-    client= setup6()
+    client= setupForAuthentication()
     Body= regist_request
     response = client.post("/api/regists", json= Body)
     assert response.status_code == 200
@@ -10,7 +10,7 @@ def test_should_return_status_code_200_for_regist_post():
     assert response.json== regist_response
 
 def test_should_return_access_not_allowed():
-    client= setup6()
+    client= setupForAuthentication()
     Body= another_regist_request
     response = client.post("/api/regists", json= Body)
     assert response.status_code == 500

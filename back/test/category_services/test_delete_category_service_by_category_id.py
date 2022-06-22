@@ -1,8 +1,8 @@
-from src.domain.setup import setup2
+from src.domain.setup import setupForGeneralCategoryServices
 from src.domain.respuesta import response_service
 
 def test_should_return_one_user_services_by_id():
-    client= setup2()
+    client= setupForGeneralCategoryServices()
    
     response = client.delete("/api/services/by-category/service_1/category_1")
     assert response.status == '200 OK'

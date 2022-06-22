@@ -5,7 +5,7 @@ from src.domain.category_services import CategoryServicesRepository, Category_se
 from src.domain.categories import CategoriesRepository, Categories
 from src.domain.regists import RegistsRepository, Regists
 
-def setup1():
+def setupForGeneralServices():
     services_repository = ServicesRepository(temp_file())
     app = create_app(repositories={"services": services_repository})
     client = app.test_client()
@@ -56,7 +56,7 @@ def setup1():
 
     return client
 
-def setup2():
+def setupForGeneralCategoryServices():
     services_repository = CategoryServicesRepository(temp_file())
     app = create_app(repositories={"categories_services": services_repository})
     client = app.test_client()
@@ -107,19 +107,19 @@ def setup2():
 
     return client
 
-def setup3():
+def setupForCategoryServices():
     services_repository = CategoryServicesRepository(temp_file())
     app = create_app(repositories={"categories_services": services_repository})
     client = app.test_client()
     return client
 
-def setup4():
+def setup():
     Categories_Repository = CategoriesRepository(temp_file())
     app = create_app(repositories={"categories": Categories_Repository})
     client = app.test_client()
     return client
 
-def setup5():
+def setupForCategory():
     categories_repository = CategoriesRepository(temp_file())
     app = create_app(repositories={"categories": categories_repository})
     client = app.test_client()
@@ -141,7 +141,7 @@ def setup5():
 
     return client
 
-def setup6():
+def setupForAuthentication():
     regists_repository = RegistsRepository(temp_file())
     app = create_app(repositories={"regists": regists_repository})
     client = app.test_client()
@@ -154,19 +154,19 @@ def setup6():
     regists_repository.save(user1)
     return client
 
-def setup7():
+def setupForPostedRequest():
     services_repository = ServicesRepository(temp_file())
     app = create_app(repositories={"services": services_repository})
     client = app.test_client()
     return client
 
-def setup8():
+def setupForPostedCategoryServices():
     services_repository = CategoryServicesRepository(temp_file())
     app = create_app(repositories={"categories_services": services_repository})
     client = app.test_client()
     return client
 
-def setup9():
+def setupForUpdatedCategoryServices():
     services_repository = CategoryServicesRepository(temp_file())
     app = create_app(repositories={"categories_services": services_repository})
     client = app.test_client()
@@ -187,7 +187,7 @@ def setup9():
     services_repository.save(user_1)
     return client
 
-def setup10():
+def setupForUpDatedRequest():
     services_repository = ServicesRepository(temp_file())
     app = create_app(repositories={"services": services_repository})
     client = app.test_client()
