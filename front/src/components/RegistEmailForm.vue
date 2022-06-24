@@ -7,7 +7,6 @@
         placeholder="Email"
         autocomplete="off"
         :value="newEmail"
-        @keyup="validateInput"
         @blur="validateInput"
         @change="onNewEmailChanged"
         v-tooltip.bottom="'email is required and should be like exemple@exemple.es'" 

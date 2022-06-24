@@ -77,6 +77,7 @@
   </div>
       </button>
   </div>
+  
     <button  @click="offModalOnclicked" v-if="showLogin">
         <div class="modal-backdrop">
     <div class="modal">
@@ -236,7 +237,7 @@ export default {
       console.log(this.ClickToRegist)
       if (
         this.email!='' || 
-        this.password!='' && this.password.lenghth >=7){
+        this.password!=''){
         await getRegistPost()
         Swal.fire(
           'success',
