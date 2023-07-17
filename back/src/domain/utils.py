@@ -57,6 +57,20 @@ class Utils:
     def dynamicSaveQuery(sel, string, iterator):
         return string+ iterator
     
-    def getFullSaveDynamicQuery(self, tableName, tables_variables):
-        pass
-
+    def getFullSaveDynamicQuery(self, tableName, table_variables):
+        query_parts = []
+        queryParts = []
+        requiredInsertString = 'insert or replace into'
+        query= ''
+        requiredString='values'  
+        if len(table_variables) > 0:
+            query+= requiredInsertString+' '+ tableName+ '('
+            query_parts.extend([ i for i in table_variables])
+            query+= ', '.join(query_parts)
+            query+= ')'
+            query+= ' '+ requiredString+ '('
+            queryParts.extend([':'+ i for i in table_variables])
+            query+= ', '.join(queryParts)
+            query+= ')'
+        print(query)
+        return query

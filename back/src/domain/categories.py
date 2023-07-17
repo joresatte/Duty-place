@@ -55,9 +55,7 @@ class CategoriesRepository:
         return user
 
     def save(self, category):
-        sql = """insert into categories (cat_id, text,text_pictures) values (
-            :cat_id, :text, :text_pictures
-        ) """
+        sql = Utils.getFullSaveDynamicQuery(self, table_variables= ['cat_id ', 'text', 'text_pictures'], tableName= "categories")
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

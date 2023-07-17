@@ -29,9 +29,7 @@ class RequestRepository:
         conn.commit()
 
     def save(self, request):
-        sql = """insert or replace into requestables (id, name, subject, comments) values (
-            :id, :name, :subject, :comments
-        ) """
+        sql= Utils.getFullSaveDynamicQuery(self, table_variables= ['id', 'name', 'subject', 'comments'], tableName= "requestables")
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

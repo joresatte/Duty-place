@@ -192,9 +192,18 @@ class ServicesRepository:
         return user_service
 
     def save(self, user_service):
-        sql = """INSERT INTO services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
-            :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city
-        ) """
+        sql= Utils.getFullSaveDynamicQuery(self, table_variables= ['id', 
+                                    'cat_id', 
+                                    'user_name', 
+                                    'text', 
+                                    'intro', 
+                                    'price',
+                                    'text_pictures',
+                                    'textarea',
+                                    'phone',
+                                    'email',
+                                    'city'], tableName= "services")
+       
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

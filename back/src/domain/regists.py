@@ -64,9 +64,8 @@ class RegistsRepository:
         return user
 
     def save(self, user):
-        sql = """insert or replace into registros (id, email, password) values (
-            :id, :email, :password
-        ) """
+        sql= Utils.getFullSaveDynamicQuery(self, table_variables= ['id', 'email', 'password'], tableName= "registros")
+        
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

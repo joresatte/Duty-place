@@ -146,9 +146,18 @@ class CategoryServicesRepository:
 
     
     def save(self, category_service):
-        sql = """INSERT INTO categories_services (id, cat_id, user_name, text, intro, price, text_pictures, textarea, phone, email, city) values (
-            :id, :cat_id, :user_name, :text, :intro, :price, :text_pictures, :textarea, :phone, :email, :city
-        ) """
+        sql= Utils.getFullSaveDynamicQuery(self, table_variables= ['id', 
+                                    'cat_id', 
+                                    'user_name', 
+                                    'text', 
+                                    'intro', 
+                                    'price',
+                                    'text_pictures',
+                                    'textarea',
+                                    'phone',
+                                    'email',
+                                    'city'], tableName= "categories_services")
+        
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
