@@ -48,8 +48,31 @@
        en menos de 1 horas.
     </p>
   </section>
+  <div class="card flex justify-content-center">
+      <Toast position="bottom-left" group="bl"/>
+  </div>
+  <!-- <div class="card" v-show="showResponse">
+        <InlineMessage :style="{  border: 'solid #696cff', borderWidth: '0 0 0 6px', color: '#696cff' }"
+                severity="info" class="border-primary w-full justify-content-start">
+            <div class="flex align-items-center">
+                <div class="ml-2">{{response}}</div>
+            </div>
+        </InlineMessage>
+  </div> -->
+  <!-- <v-alert
+    v-show="showResponse"
+    type="success"
+    title="Alert title"
+    text={{response}}
+  ></v-alert> -->
+  <!-- <span v-show="showResponse"></span> -->
   <footer class="footer_style">
-    <div>contact us</div>
+    <Button label="contact us" icon="pi pi-info-circle" class="request_Btn" severity="info" text raised @click="displayRequestForm" />
+    <requestForm :userRequest="userRequest" 
+                 @onChangedRequest="onChangedRequest" 
+                 @onCancelBtnClicked="CloseActualModal" 
+                 @sendRequest="sendRequest" 
+                 v-show="showRequestForm"/>
     <div></div>
   </footer>
 
@@ -57,15 +80,28 @@
 
 <script>
 import {getCategories} from "@/pages/apiservices/api.js";
+import requestForm from './requestPage.vue';
+import postRequest from '@/pages/apiservices/postRequest';
+import Swal from 'sweetalert2';
+
 export default {
   name: 'Home',
+  components:{requestForm},
   data(){
     return{
       welcome:"welcome to Services",
       categories:[],
       filteredCategory:'',
       displayInput: false,
-     
+      showRequestForm: false,
+      showResponse: false,
+      userRequest: {
+        id:'',
+        name:'',
+        subject:'',
+        comments:'',
+      },
+      response:'successfully sent',
     }
   },
   mounted(){
@@ -110,6 +146,52 @@ export default {
     onClicked(){
       this.displayInput=! this.displayInput
     },
+    displayRequestForm(){
+      this.showRequestForm= true
+    },
+    displayResponse(){
+      setTimeout(() => {
+        this.showResponse= false;
+      }, 2000);
+    },
+    CloseActualModal(){
+      console.log('close modal', this.CloseActualModal)
+      this.showRequestForm= false
+    },
+    async sendRequest(){
+      console.log('sending the request now', this.sendRequest)
+      setTimeout(() => {
+          this.showRequestForm= false;
+      }, 2300);
+      if (
+        this.userRequest.id!=''&&
+        this.userRequest.name!=''&&
+        this.userRequest.subject!=''&&
+        this.userRequest.comments!='') 
+      {
+        const resquestToSend= await postRequest(
+          this.userRequest.id,
+          this.userRequest.name,
+          this.userRequest.subject,
+          this.userRequest.comments)
+          const requestStatusCode = resquestToSend.status
+          console.log('request Status Code ', requestStatusCode)
+          if (requestStatusCode== 401) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'something went wrong with your request!',
+                footer: '<a href="http://localhost:8080/">Must fill weel all the fields</a>'
+              })
+          }else{
+              this.response= await response
+              // this.showResponse= true
+              // this.displayResponse()
+              this.$toast.add({ severity: 'Success', summary: 'Success', detail: this.response, life: 2000 });
+              
+          }
+      }
+    }
   }
 }
 </script>
@@ -122,6 +204,18 @@ export default {
   border: 2px solid #FFE600;
   border-radius: 10px;
   text-align:center;
+  margin: 1em;
+  padding: 1em ;
+  border-radius:10px;
+  box-shadow:  2px 2px 4px #0D0A96;
+}
+.request_Btn{
+  border: 2px solid #4800ffea;
+  border-radius: 10px;
+  text-align:center;
+  color:black;
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 1em;
   padding: 1em ;
   border-radius:10px;

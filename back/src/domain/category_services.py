@@ -1,4 +1,4 @@
-import sqlite3
+from src.domain.utils import Utils
 
 class Category_services:
     def __init__(self, id, cat_id, user_name, text, intro, price, text_pictures, textarea, email, phone, city):
@@ -35,26 +35,22 @@ class CategoryServicesRepository:
         self.init_tables()
 
     def create_conn(self):
-        conn = sqlite3.connect(self.database_path)
-        conn.row_factory = sqlite3.Row
+        conn = Utils.create_conn(self.database_path)
         return conn
 
     def init_tables(self):
-        sql = """
-            create table if not exists categories_services (
-               id varchar ,
-                cat_id varchar,
-                user_name varchar,
-                text varchar,
-                intro varchar,
-                price varchar,
-                text_pictures varchar,
-                textarea varchar,
-                phone varchar,
-                email varchar,
-                city varchar  
-            )
-        """
+        sql = sql = Utils.createTable(self, 
+                tables_variables= ['id', 
+                                   'cat_id', 
+                                   'user_name', 
+                                   'text', 
+                                   'intro', 
+                                   'price',
+                                   'text_pictures',
+                                   'textarea',
+                                   'phone',
+                                   'email',
+                                   'city'], tableName= "categories_services")
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)

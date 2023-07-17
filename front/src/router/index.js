@@ -5,6 +5,7 @@ const userDetailesPage = () => import('@/pages/services/userByCategory/userByCat
 const usersPage = () => import('@/pages/users/UsersPage.vue')
 const editPage =() => import('@/pages/edit/editPage.vue')
 const publishServicePage = () => import('@/pages/publishService/publishServicePage.vue')
+// const requestPage = ()=> import('@/pages/users/requestPage.vue') 
 const routes = [
   {
     path: '/',
@@ -41,6 +42,11 @@ const routes = [
     component: publishServicePage,
     props: true
   },
+  // {
+  //   path: '/request',
+  //   name: 'requestPage',
+  //   component: requestPage,
+  // },
   
 ]
 

@@ -1,6 +1,4 @@
-import email
-import sqlite3
-
+from src.domain.utils import Utils
 class Regists:
     def __init__(self, id, email, password):
         self.id = id
@@ -19,27 +17,11 @@ class RegistsRepository:
         self.init_tables()
 
     def create_conn(self):
-        conn = sqlite3.connect(self.database_path)
-        conn.row_factory = sqlite3.Row
+        conn = Utils.create_conn(self.database_path)
         return conn
 
-    def drop_tables(self):
-        sql = """
-            DROP TABLE IF EXISTS registros
-        """
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute(sql)
-        conn.commit()
-
     def init_tables(self):
-        sql = """
-            create table if not exists registros (
-                id varchar primary key,
-                email varchar,
-                password varchar
-            )
-        """
+        sql = Utils.createTable(self, tables_variables= ['id', 'email', 'password'], tableName= "registros")
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)

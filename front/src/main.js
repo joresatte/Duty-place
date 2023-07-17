@@ -4,9 +4,10 @@ import router from './router'
 import PrimeVue from 'primevue/config';
 
 import Button from 'primevue/button';
-import 'primevue/resources/themes/saga-blue/theme.css'
-import 'primevue/resources/primevue.min.css'                
-import 'primeicons/primeicons.css'
+// import 'primevue/resources/themes/saga-blue/theme.css';
+import "primevue/resources/themes/lara-light-indigo/theme.css";
+import 'primevue/resources/primevue.min.css';                
+import 'primeicons/primeicons.css';
 import InputText from 'primevue/inputtext';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
@@ -21,6 +22,7 @@ import Textarea from 'primevue/textarea';
 import Dropdown from 'primevue/dropdown';
 import Menu from 'primevue/menu';
 import Rating from 'primevue/rating';
+import InlineMessage from 'primevue/inlinemessage';
 
 const app= createApp(App);
 app.use(ToastService);
@@ -41,5 +43,7 @@ app.component('Textarea', Textarea)
 app.component('Dropdown', Dropdown)
 app.component('Menu', Menu)
 app.component('Rating', Rating)
+app.component('InlineMessage', InlineMessage)
+
 
 app.mount('#app')

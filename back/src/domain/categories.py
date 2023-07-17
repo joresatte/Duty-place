@@ -1,4 +1,4 @@
-import sqlite3
+from src.domain.utils import Utils
 
 class Categories:
     def __init__(self, cat_id, text, text_pictures):
@@ -13,34 +13,17 @@ class Categories:
             "text_pictures": self.text_pictures,
         }
 
-
 class CategoriesRepository:
     def __init__(self, database_path):
         self.database_path = database_path
         self.init_tables()
 
     def create_conn(self):
-        conn = sqlite3.connect(self.database_path)
-        conn.row_factory = sqlite3.Row
+        conn= Utils.create_conn(self.database_path)
         return conn
 
-    def drop_tables(self):
-        sql = """
-            DROP TABLE IF EXISTS categories
-        """
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute(sql)
-        conn.commit()
-
     def init_tables(self):
-        sql = """
-            create table if not exists categories (
-                cat_id varchar primary key,
-                text varchar,
-                text_pictures varchar
-            )
-        """
+        sql = Utils.TableTocreate(self, tableName= "categories", tables_variables= ['cat_id ', 'text', 'text_pictures'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)

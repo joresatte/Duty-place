@@ -5,7 +5,7 @@
     <div style="margin-top: 2em; margin-left: 0;">
     <Button icon="pi pi-arrow-right" @click="visibleLeft = true" class="mt-6" />
     <Sidebar v-model:visible="visibleLeft" style="background-color: #B7E9F3;">
-    <h3>DashBord</h3>
+    <h3>Menu</h3>
     <Menu :model="items" />
     </Sidebar>
     </div>
@@ -114,9 +114,9 @@ import LoginEmail from '@/components/LoginEmailForm.vue'
 import LoginPassword from '@/components/LoginPasswordForm.vue';
 import getRegistPost from '@/pages/apiservices/getRegistPost.js'
 import getLoginPost from '@/pages/apiservices/getLoginPost.js'
-import headerNav from '@/components/headerNavForm.vue'
-import getCurrentUser from '@/pages/apiservices/getCurrentUser.js'
-import Swal from 'sweetalert2'
+import headerNav from '@/components/headerNavForm.vue';
+import getCurrentUser from '@/pages/apiservices/getCurrentUser.js';
+import Swal from 'sweetalert2';
 export default {
   name: 'app',
   components:{emailForm, passwordForm, headerNav, LoginEmail, LoginPassword},
