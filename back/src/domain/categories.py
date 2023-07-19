@@ -30,7 +30,7 @@ class CategoriesRepository:
         conn.commit()
 
     def get_all(self):
-        sql = """select * from categories"""
+        sql = Utils.fullGetDynamicQuery(self, fields= ['*'], tableName= "categories", listConditions=[])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -39,20 +39,6 @@ class CategoriesRepository:
 
         users = [Categories(**item) for item in data]
         return users
-
-    def get_by_id(self, cat_id):
-        sql = """SELECT * FROM users WHERE cat_id=: cat_id"""
-        conn = self.create_conn()
-        cursor = conn.cursor()
-        cursor.execute(sql, {"cat_id": cat_id})
-
-        data = cursor.fetchone()
-        if data is None:
-            return None
-        else:
-            user = Categories(**data)
-
-        return user
 
     def save(self, category):
         sql = Utils.getFullSaveDynamicQuery(self, table_variables= ['cat_id ', 'text', 'text_pictures'], tableName= "categories")

@@ -57,7 +57,7 @@ class ServicesRepository:
         conn.commit()
 
     def get_all_services(self):
-        sql = """select * from services"""
+        sql= Utils.fullGetDynamicQuery(self, fields=['*'], tableName='services', listConditions=[])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -82,7 +82,7 @@ class ServicesRepository:
         return services
 
     def get_user_services_by_id(self, id):
-        sql = """SELECT * FROM services WHERE id= :id"""
+        sql= Utils.fullGetDynamicQuery(self, fields=['*'], tableName='services', listConditions=['id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {"id":id})
@@ -109,7 +109,7 @@ class ServicesRepository:
         return services
 
     def get_user_services_by_cat_id(self, cat_id):
-        sql = """SELECT * FROM services WHERE cat_id= :cat_id"""
+        sql= Utils.fullGetDynamicQuery(self, fields=['*'], tableName='services', listConditions=['cat_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {"cat_id":cat_id})
@@ -133,9 +133,7 @@ class ServicesRepository:
         return services
 
     def delete_services(self, id, cat_id):
-        sql = """ DELETE FROM services
-                  WHERE id = :id and cat_id = :cat_id 
-              """
+        sql= Utils.fullDeleteDynamicQuery(self, tableName='services', listConditions=['id' ,'cat_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
@@ -146,20 +144,18 @@ class ServicesRepository:
         conn.commit()
 
     def update_service(self, id, cat_id, text, user_service):
-        sql = """ UPDATE services
-                    SET 
-                    id= :id,
-                    cat_id= :cat_id,
-                    user_name= :user_name,
-                    text= :text,
-                    intro= :intro,
-                    price= :price,
-                    text_pictures= :text_pictures,
-                    textarea= :textarea,
-                    phone= :phone,
-                    email= :email,
-                    city= :city
-                    WHERE id = :id and cat_id = :cat_id and text= :text """
+        sql= Utils.getFullUpdateDynamicQuery(self, table_variables= ['id', 
+                                    'cat_id', 
+                                    'user_name', 
+                                    'text', 
+                                    'intro', 
+                                    'price',
+                                    'text_pictures',
+                                    'textarea',
+                                    'phone',
+                                    'email',
+                                    'city'], tableName= "services", listConditions= ['id', 'cat_id', 'text',])
+
         conn = self.create_conn()
         cursor = conn.cursor()
         params = user_service.to_dict()
@@ -170,9 +166,7 @@ class ServicesRepository:
         conn.commit()
 
     def get_service(self, id, cat_id, text):
-        sql = """SELECT * FROM services 
-                 WHERE id = :id and cat_id = :cat_id and text = :text
-              """
+        sql= Utils.fullGetDynamicQuery(self, fields=['*'], tableName='services', listConditions=['id' ,'cat_id', 'text'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

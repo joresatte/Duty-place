@@ -57,7 +57,7 @@ class CategoryServicesRepository:
         conn.commit()
 
     def get_all_services_by_category(self):
-        sql = """select * from categories_services"""
+        sql= Utils.fullGetDynamicQuery(self, fields=['*'], tableName='categories_services', listConditions=[])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -82,7 +82,7 @@ class CategoryServicesRepository:
         return services
 
     def get_category_services_by_cat_id(self, category_id):
-        sql = """SELECT * FROM categories_services WHERE cat_id= :cat_id"""
+        sql= Utils.fullGetDynamicQuery(self, fields=['*'], tableName='categories_services', listConditions=['cat_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {"cat_id": category_id})
@@ -106,9 +106,7 @@ class CategoryServicesRepository:
         return services
 
     def delete_category_services(self, id, cat_id):
-        sql = """ DELETE FROM categories_services
-                  WHERE id = :id and cat_id = :cat_id 
-              """
+        sql= Utils.fullDeleteDynamicQuery(self, tableName='categories_services', listConditions=['id' ,'cat_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
@@ -121,20 +119,18 @@ class CategoryServicesRepository:
         conn.commit()
 
     def update_category_service(self, id, cat_id, text, category_service):
-        sql = """ UPDATE categories_services
-                    SET 
-                    id= :id,
-                    cat_id= :cat_id,
-                    user_name= :user_name,
-                    text= :text,
-                    intro= :intro,
-                    price= :price,
-                    text_pictures= :text_pictures,
-                    textarea= :textarea,
-                    phone= :phone,
-                    email= :email,
-                    city= :city
-                    WHERE id = :id and cat_id = :cat_id and text= :text """
+        sql= Utils.getFullUpdateDynamicQuery(self, table_variables= ['id', 
+                                    'cat_id', 
+                                    'user_name', 
+                                    'text', 
+                                    'intro', 
+                                    'price',
+                                    'text_pictures',
+                                    'textarea',
+                                    'phone',
+                                    'email',
+                                    'city'], tableName= "categories_services", listConditions= ['id', 'cat_id', 'text',])
+        
         conn = self.create_conn()
         cursor = conn.cursor()
         params = category_service.to_dict()

@@ -3,6 +3,7 @@ from pyparsing import Regex
 from flask import Flask, request
 from flask_cors import CORS
 
+from src.domain.requestFunction import Request
 from src.domain.category_services import  Category_services
 from src.domain.users_services import  Services
 from src.domain.regists import  Regists
@@ -199,5 +200,22 @@ def create_app(repositories):
             repositories["services"].update_service(id , cat_id , text, user_services)
             print('-----------user_services')
             return '', 200
-
+        
+    @app.route("/api/request", methods=["POST"])
+    def post_request():
+        data= request.json
+        user_request = Request(
+            id=data['id'],
+            name=data['name'],
+            email=data['email'],
+            subject=data['subject'],
+            comments=data["comments"]
+        )
+        print(user_request)
+        if data['id']!= '' or data['name']!= '' or data['email']!= '' or data['comments']!= '':
+            repositories["request"].save(user_request)
+            return '', 200
+        else:
+            raise Exception ('Should verify the required fields')
+        
     return app

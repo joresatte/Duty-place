@@ -12,11 +12,7 @@ class Utils:
         conn = sqlite3.connect(self)
         conn.row_factory = sqlite3.Row
         return conn
-    
-    # def getParameters(self, parameters, tableName):
-    #     if parameters!= '' and tableName!= '':
-    #         return parameters
-	
+
     def createTable(self, tables_variables, tableName):
         requiredCeateString= 'create table if not exists'
         query= " "
@@ -31,7 +27,6 @@ class Utils:
                 if i!= 'id':
                     query+= i + ' ' + 'varchar, '
         Query= query[:-2]+ ')'
-        print('the query is:', Query)
         return Query
     
     def TableTocreate(self, tableName, tables_variables):
@@ -48,7 +43,6 @@ class Utils:
                 if 'id' not in i:
                     query+= i + ' ' + 'varchar, '
         Query= query[:-2]+ ')'
-        print('the query is:', Query)
         return Query
     
     def dynamicSaveQuery(self):
@@ -69,8 +63,63 @@ class Utils:
             query+= ', '.join(query_parts)
             query+= ')'
             query+= ' '+ requiredString+ '('
-            queryParts.extend([':'+ i for i in table_variables])
+            x= lambda a: ':'+ a
+            queryParts.extend([x(i) for i in table_variables])
             query+= ', '.join(queryParts)
             query+= ')'
-        print(query)
+        return query
+    
+    def getFullUpdateDynamicQuery(self, table_variables, tableName, listConditions):
+        query_parts = []
+        queryParts = []
+        requiredInsertString = 'UPDATE'
+        query= ""
+        requiredString='SET'  
+        if len(table_variables) > 0:
+            query+= requiredInsertString+' '+ tableName+ ' '
+            query+= requiredString +' '
+            query_parts.extend([ table_variables[i]+'=:'+table_variables[i]  for i in range(len(table_variables))])
+            query+= ', '.join(query_parts)
+            query+= ' '+'where'+ ' '
+            x= lambda a: a +'=:'+ a
+            queryParts.extend([x(listConditions[i]) for i in range(len(listConditions))])
+            query+= ' and '.join(queryParts)
+        return query
+    
+    def fullGetDynamicQuery(self, fields, tableName, listConditions):
+        queryParts = []
+        requiredInsertString = 'SELECT'
+        query= ""
+        requiredString='FROM'  
+        if len(fields) > 0:
+            query+= requiredInsertString+' '
+            query+=', '.join(fields)+' '
+            query+= requiredString +' '+ tableName
+        if len(listConditions)>0:
+            query+= ' '+'where'+ ' '
+            x= lambda a: a +'=:'+ a
+            queryParts.extend([x(listConditions[i]) for i in range(len(listConditions))])
+            query+= ' and '.join(queryParts)
+        else:
+            return query
+        return query
+    
+    def fullDeleteDynamicQuery(self, tableName, listConditions):
+        queryParts = []
+        requiredInsertString = 'DELETE'
+        query= ""
+        requiredString='FROM' 
+        try:
+            if len(listConditions)>0:
+                query+= requiredInsertString+' '
+                query+= requiredString +' '+ tableName
+                query+= ' '+'where'+ ' '
+                x= lambda a: a +'=:'+ a
+                queryParts.extend([x(listConditions[i]) for i in range(len(listConditions))])
+                query+= ' and '.join(queryParts)
+            else:
+                raise Exception('The conditions list can not be empty')
+        except Exception as  error:
+            return (error.args)
+    
         return query

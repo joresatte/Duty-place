@@ -206,3 +206,11 @@ another_one_updater={
         "email": "reinabes@vince.com",
         "city": "españa",
     }
+
+request_data={
+        "id": "request_1",
+        "name": "vince",
+        "email": "reinabo@vince.com",
+        "subject": "Test request",
+        "comments": "Solicitud de informacion"
+    }

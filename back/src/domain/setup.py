@@ -4,6 +4,7 @@ from src.domain.users_services import ServicesRepository, Services
 from src.domain.category_services import CategoryServicesRepository, Category_services
 from src.domain.categories import CategoriesRepository, Categories
 from src.domain.regists import RegistsRepository, Regists
+from src.domain.requestFunction import RequestRepository, Request
 
 def setupForGeneralServices():
     services_repository = ServicesRepository(temp_file())
@@ -207,4 +208,11 @@ def setupForUpDatedRequest():
     )
     services_repository.save(user_1)
     return client
+
+def setupForPostedRequestData():
+    request_repository = RequestRepository(temp_file())
+    app = create_app(repositories={"request": request_repository})
+    client = app.test_client()
+    return client
+
 
