@@ -48,9 +48,6 @@
        en menos de 1 horas.
     </p>
   </section>
-  <div class="card flex justify-content-center">
-      <Toast position="bottom-left" group="bl"/>
-  </div>
   <!-- <div class="card" v-show="showResponse">
         <InlineMessage :style="{  border: 'solid #696cff', borderWidth: '0 0 0 6px', color: '#696cff' }"
                 severity="info" class="border-primary w-full justify-content-start">
@@ -59,21 +56,14 @@
             </div>
         </InlineMessage>
   </div> -->
-  <!-- <v-alert
-    v-show="showResponse"
-    type="success"
-    title="Alert title"
-    text={{response}}
-  ></v-alert> -->
-  <!-- <span v-show="showResponse"></span> -->
   <footer class="footer_style">
     <Button label="contact us" icon="pi pi-info-circle" class="request_Btn" severity="info" text raised @click="displayRequestForm" />
+    <Toast position="bottom-left" group="bl" />
     <requestForm :userRequest="userRequest" 
                  @onChangedRequest="onChangedRequest" 
                  @onCancelBtnClicked="CloseActualModal" 
                  @sendRequest="sendRequest" 
                  v-show="showRequestForm"/>
-    <div></div>
   </footer>
 
 </template>
@@ -82,7 +72,6 @@
 import {getCategories} from "@/pages/apiservices/api.js";
 import requestForm from './requestPage.vue';
 import postRequest from '@/pages/apiservices/postRequest';
-import Swal from 'sweetalert2';
 
 export default {
   name: 'Home',
@@ -98,10 +87,11 @@ export default {
       userRequest: {
         id:'',
         name:'',
+        email:'',
         subject:'',
-        comments:'',
+        comments:''
       },
-      response:'successfully sent',
+      response:'Your request has been successfully received, we will in the shortest time possible contact you.',
     }
   },
   mounted(){
@@ -158,38 +148,43 @@ export default {
       console.log('close modal', this.CloseActualModal)
       this.showRequestForm= false
     },
-    async sendRequest(){
-      console.log('sending the request now', this.sendRequest)
+    onChangedRequest(event){
+      console.log(event)
+      this.userRequest= event
+    },
+    async sendRequest() {
+      
       setTimeout(() => {
-          this.showRequestForm= false;
+        this.showRequestForm= false;
+        this.userRequest.name='';
+        this.userRequest.subject='';
+        this.userRequest.email='';
+        this.userRequest.comments='';
       }, 2300);
       if (
-        this.userRequest.id!=''&&
         this.userRequest.name!=''&&
-        this.userRequest.subject!=''&&
+        this.userRequest.email!=''&&
         this.userRequest.comments!='') 
-      {
-        const resquestToSend= await postRequest(
-          this.userRequest.id,
+        {
+        
+          const resquestToSend= await postRequest(
           this.userRequest.name,
           this.userRequest.subject,
+          this.userRequest.email,
           this.userRequest.comments)
           const requestStatusCode = resquestToSend.status
           console.log('request Status Code ', requestStatusCode)
-          if (requestStatusCode== 401) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'something went wrong with your request!',
-                footer: '<a href="http://localhost:8080/">Must fill weel all the fields</a>'
-              })
+          if (requestStatusCode== 200) {
+            setTimeout(() => {
+              this.$toast.add({ severity: 'success', summary: 'success Message', detail: 'Message Content', group: 'bl', life: 3000 });
+          }, 2400);
+          
           }else{
-              this.response= await response
-              // this.showResponse= true
-              // this.displayResponse()
-              this.$toast.add({ severity: 'Success', summary: 'Success', detail: this.response, life: 2000 });
-              
+            return
           }
+      }
+      else{
+          this.$toast.add({ severity: 'error', summary: 'error Message', detail: 'Must fill all the fields', group: 'bl', life: 3000 });
       }
     }
   }

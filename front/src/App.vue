@@ -11,6 +11,7 @@
     </div>
   </template>
 </Toolbar>
+<Toast position="top-right" group="tr" />
 <div class="header_nav">
 </div>
 <span class="btn-logout">
@@ -106,6 +107,12 @@
       </button>
   <section v-show="error">invalid Log In </section>
   <router-view/>
+  <Toast position="bottom-left" group="bl" />
+  <requestForm v-if="showRequestForm"
+                :userRequest="userRequest" 
+                 @onChangedRequest="onChangedRequest" 
+                 @onCancelBtnClicked="CloseActualModal" 
+                 @sendRequest="sendRequest"/> 
 </template>
 <script>
 import emailForm from '@/components/RegistEmailForm.vue'
@@ -116,10 +123,12 @@ import getRegistPost from '@/pages/apiservices/getRegistPost.js'
 import getLoginPost from '@/pages/apiservices/getLoginPost.js'
 import headerNav from '@/components/headerNavForm.vue';
 import getCurrentUser from '@/pages/apiservices/getCurrentUser.js';
+import requestForm from '@/pages/home/requestPage.vue';
+import postRequest from '@/pages/apiservices/postRequest.js';
 import Swal from 'sweetalert2';
 export default {
   name: 'app',
-  components:{emailForm, passwordForm, headerNav, LoginEmail, LoginPassword},
+  components:{emailForm, passwordForm, headerNav, LoginEmail, LoginPassword, requestForm},
   data(){
     return{
       reset:false,
@@ -133,6 +142,14 @@ export default {
       userId: {},
       error: false,
       visibleLeft: false,
+      showRequestForm: false,
+      userRequest: {
+        id:'',
+        name:'',
+        email:'',
+        subject:'',
+        comments:''
+      },
       items:[
         {
           label: 'Options',
@@ -140,6 +157,9 @@ export default {
              {
                label: 'Update',
                         icon: 'pi pi-refresh',
+                        command: ()=>{
+                          location.reload()
+                        }
              },
              {
                label: 'Sign Up',
@@ -174,6 +194,14 @@ export default {
                         }
              },
              {
+               label: 'contact us',
+                        icon: 'pi pi-info-circle',
+                        command: ()=>{
+                          this.showRequestForm= true
+                          this.visibleLeft= false
+                        }
+             },
+             {
                label: 'Publish Service',
                         icon: 'pi pi-save',
                         command: ()=>{
@@ -188,7 +216,7 @@ export default {
                                   params:{id: getCurrentUser()}
                                 })
                             }else{
-                            alert('you must log in first')
+                            this.$toast.add({ severity: 'error', summary: 'error Message', detail: 'you must log in first', group: 'tr', life: 3000 });
                             }
                           }
                         }
@@ -336,6 +364,49 @@ export default {
           this.email= '';
           this.password='';
       }, 
+      onChangedRequest(event){
+        console.log(event)
+        this.userRequest= event
+      },
+      async sendRequest() {
+      
+      setTimeout(() => {
+        this.showRequestForm= false;
+        this.userRequest.name='';
+        this.userRequest.subject='';
+        this.userRequest.email='';
+        this.userRequest.comments='';
+      }, 2300);
+      if (
+        this.userRequest.name!=''&&
+        this.userRequest.email!=''&&
+        this.userRequest.comments!='') 
+        {
+        
+          const resquestToSend= await postRequest(
+          this.userRequest.name,
+          this.userRequest.subject,
+          this.userRequest.email,
+          this.userRequest.comments)
+          const requestStatusCode = resquestToSend.status
+          console.log('request Status Code ', requestStatusCode)
+          if (requestStatusCode== 200) {
+            setTimeout(() => {
+              this.$toast.add({ severity: 'success', summary: 'success Message', detail: 'Message Content', group: 'bl', life: 3000 });
+          }, 2400);
+          
+          }else{
+            return
+          }
+      }
+      else{
+          this.$toast.add({ severity: 'error', summary: 'error Message', detail: 'Must fill all the fields', group: 'bl', life: 3000 });
+      }
+    },
+    CloseActualModal(){
+      console.log('close modal', this.CloseActualModal)
+      this.showRequestForm= false
+    },
   }
 }
 </script>

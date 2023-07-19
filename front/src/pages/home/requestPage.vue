@@ -17,6 +17,17 @@
                                 size="normal" 
                                 placeholder="Please enter your name"
                                 @change="onRequested"
+                                v-tooltip.bottom="'Enter your name'" 
+                                />
+                </span><br><br>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-envelope" />
+                    <InputText v-model="userRequest.email"
+                                required 
+                                type="text" 
+                                size="normal" 
+                                placeholder="Please enter your email"
+                                @change="onRequested"
                                 v-tooltip.bottom="'Enter your email'" 
                                 />
                 </span><br><br>
@@ -28,7 +39,7 @@
                                 size="normal" 
                                 placeholder="Subject"
                                 @change="onRequested"
-                                v-tooltip.bottom="'Enter your email'" 
+                                v-tooltip.bottom="'Enter your subject'" 
                                 />
                 </span><br><br><br>
                 <span class="p-float-label">
@@ -69,6 +80,7 @@ export default{
             console.log('username is: ',event.target.value)
             this.$emit('onChangedRequest', {
             name: event.target.value,
+            email: this.userRequest.email,
             subject: this.userRequest.subject,
             comments: this.userRequest.comments
           })
@@ -77,6 +89,16 @@ export default{
             console.log('the subject is: ',event.target.value)
             this.$emit('onChangedRequest', {
             name: this.userRequest.name,
+            email: event.target.value,
+            subject: this.userRequest.subject,
+            comments: this.userRequest.comments
+          })
+        },
+        onRequested(event){
+            console.log('the subject is: ',event.target.value)
+            this.$emit('onChangedRequest', {
+            name: this.userRequest.name,
+            email: this.userRequest.email,
             subject: event.target.value,
             comments: this.userRequest.comments
           })
@@ -85,6 +107,7 @@ export default{
             console.log('the comments are: ',event.target.value)
             this.$emit('onChangedRequest', {
             name: this.userRequest.name,
+            email: this.userRequest.email,
             subject: this.userRequest.subject,
             comments: event.target.value
           })
