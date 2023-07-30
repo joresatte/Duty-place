@@ -26,7 +26,7 @@ class Utils:
                     query+= i + ' ' + 'varchar primary key, '
                 if i!= 'id':
                     query+= i + ' ' + 'varchar, '
-        Query= query[:-2]+ ')'
+        Query= f"{query[:-2]+ ')'}"
         return Query
     
     def TableTocreate(self, tableName, tables_variables):
@@ -42,7 +42,7 @@ class Utils:
                     query+= i + ' ' + 'varchar primary key, '
                 if 'id' not in i:
                     query+= i + ' ' + 'varchar, '
-        Query= query[:-2]+ ')'
+        Query= f"{query[:-2]+ ')'}"
         return Query
     
     def dynamicSaveQuery(self):
